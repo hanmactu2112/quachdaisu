@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA;;;;;;;;;;;;;;EAcE;ACbM,8EAAsE;AACtE,6EAAqE;ACArE,kCAAS;EACL,KAAK,EAAE,IAAI;;ACFvB,MAAO;EACH,gBAAgB,EAAE,GAAG;;AFFzB,2GAA2G",
+"sources": ["style.scss","content/_home_page_content.scss","base/_header.scss","base/_footer.scss"],
+"names": [],
+"file": "style.css"
+}
