@@ -1,0 +1,230 @@
+// banner
+.banner{
+    &-left{
+        .col(66.6667%);
+        position: relative;
+        .banner-left-inner{
+            height: 100%;
+            padding: 15px 0;
+            box-sizing: border-box;
+            display: flex;
+            img{
+                width: 100%;
+                display: block;
+                height: 100%;
+            }
+            .banner-left-content{
+                position: absolute;
+                top:56%;
+                right: 14%;
+                line-height: 1.2;
+                .tittle-banner{
+                    font-size: 30px;
+                    font-family: "Pacifico";
+                    color: rgb(0, 0, 0);
+                    font-weight: 700;
+                }
+                
+            }
+            .banner-button{
+                top:64%;
+                position: absolute;
+                right: 14%;
+                button{
+                    width: 106px;
+                    height: 40px;
+                    background-color: rgb(130, 98, 181);
+                    a{
+                        font-size: 14px;
+                    font-family: "Montserrat";
+                    color: rgb(255, 255, 255);
+
+                    }
+                }
+            }
+        }
+    }
+    &-right{
+        .col(33.3333%);   
+        .banner-right-item{ 
+                padding: 15px 0;
+                position: relative;
+             .banner-right-inner{
+                
+                img{
+                    width: 100%;
+                    display: block;
+                }
+                .banner-button-right{
+                    top:53%;
+                    left: 12%;
+                    position: absolute;
+                    button{
+                        width: 106px;
+                        height: 40px;
+                        background-color: rgb(130, 98, 181);
+                        a{
+                            font-size: 14px;
+                        font-family: "Montserrat";
+                        color: rgb(255, 255, 255);
+    
+                        }
+                    }
+
+                }
+                .banner-right-content{
+                    position: absolute;
+                    top:36%;
+                    left: 11%;
+                  .right-text1{
+                    font-size: 16px;
+                    font-family: "Montserrat";
+                    color: rgb(97, 97, 97);
+                    line-height: 1.2;
+                    letter-spacing: 0.2em;
+                  }
+                  .right-text2{
+                    font-family: "Montserrat";
+                    text-transform: uppercase;
+                    color: black;
+                    font-weight: 700;
+                    margin-bottom: 15px;
+                    font-size: 20px;
+                    }
+                 }
+             }
+             
+        }
+        .item1{
+            .banner-right-content{
+                top:42% !important;
+                left: 15% !important;
+            }
+        }
+    }
+}
+// end banner
+// selling
+.products-list{
+    margin: 25px 0;
+    .title{
+        margin-top: 25px;
+        &::before{
+            content:'';
+            width: 50px;
+            height: 1px;
+            background-color: @main-color;
+            left:0;
+        }
+        .h2{
+            font-family: 'Montserrat';
+            font-weight: 700;
+            font-size: 24px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            letter-spacing: 0.1em;
+            padding-top: 15px;
+        }
+        .h4{
+            padding-top: 18px;
+            font-family: 'Montserrat';
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: @main-color;
+        }
+        .line{
+            border-bottom: 1px solid @main-color;
+            width: 52px;
+            padding-top: 20px;
+        }
+    }
+    .product{
+        margin-top: 36px;
+        &-items{
+            .col(25%);
+            
+        }
+        &-inner{
+            box-sizing: border-box;
+            .product-image{
+                position: relative;
+                box-sizing: border-box;
+                img{
+                    width: 100%;
+                    display: block;
+                }
+                .btn-cart{
+                    position: absolute;
+                    left:5px;
+                    bottom: 5px;
+                    a{
+                        font-weight: 400;
+                        padding: 13px 16px;
+                        background: #fff;
+                        display: block;
+                        font-size: 12px;
+                        font-family: "Montserrat";
+                        color: rgb(66, 66, 66);
+                        text-transform: uppercase;
+                        line-height: 1.2;
+                        &:hover{
+                            color: @main-color;
+                        }
+                    }
+                }
+            }
+           .product-content{
+               padding-bottom: 12px;
+            .product-title{
+                font-size: 14px;
+                font-family: "Montserrat";
+                color: rgb(0, 0, 0);
+                padding-top:15px;
+                font-weight: 600;
+            }
+            .product-review{
+                display: flex;
+                padding-top:10px;
+                i{
+                    font-size: 12px;
+                    color: #f8ba04;
+                }
+            }
+            .product-price{
+                font-family:'OpenSans';
+                font-size: 16px;
+                line-height: 26px;
+                box-sizing: border-box;
+                display: flex;
+                
+                    padding-top: 8px;
+               
+                &-old{
+                    color:#999;
+                    font-weight: 400;
+                    text-decoration: line-through;
+                    box-sizing: border-box;
+                    padding-right: 10px;
+                }
+                &-sale{
+                    color:@main-color;
+                    font-weight: 700; 
+                }
+            }
+           }
+        }
+    }
+}
+// end selling
+// slider
+.new{
+    .slider-blog{
+        .slider-item{
+            .col(33.3333%);
+            box-sizing:border-box;
+        }
+    }
+}
+// end slider

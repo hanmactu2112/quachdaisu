@@ -1,0 +1,22 @@
+// transform 
+.transformer (@scale) {
+    transform: @scale;
+    -webkit-transform: @scale;
+    -moz-transform: @scale;
+    -ms-transform: @scale;
+    -o-transform: @scale;
+}
+
+.transit (@attr, @sec) {
+    transition: @attr, @sec;
+    -webkit-transition: @attr, @sec;
+    -moz-transition: @attr, @sec;
+    -ms-transition: @attr, @sec;
+    -o-transition: @attr, @sec;
+}
+.col (@width) {
+    width: @width;
+    padding: 0 15px;
+    margin: 15px 0;
+    box-sizing: border-box;
+}

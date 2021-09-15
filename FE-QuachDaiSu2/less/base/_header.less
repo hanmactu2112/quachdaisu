@@ -1,0 +1,96 @@
+.cover {
+    position: fixed;;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0;
+    z-index: -1;
+}
+.cover.active {
+    opacity: 0.6;
+    z-index: 100;
+    .transit(all, .5s);
+}
+.header-top{
+    font-size: 14px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    background-color: @header-bg;
+    &-inner{
+        padding: 15px 0;
+        display: flex;
+        color: @color-text-header ;
+        text-align: center;
+        justify-content: space-between;
+        .top-icon{
+            display: flex;
+            padding: 0 15px;
+            .info-icon{
+                margin-right: 5px;
+                text-align: center;   
+            }
+            .icon-title{
+                font-size: 14px;
+            }   
+        }
+        .icon-right{
+            display: flex;
+        }
+    }
+
+}
+.navbar{
+    border-bottom: 1px solid @color-border;
+    .navbar-bottom{
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Montserrat';
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 14px;
+        text-align: center;
+        align-items: center;
+        padding: 17px 0;
+        
+        .menu{
+            display: flex;
+            ul{
+                
+                li{
+                    padding: 0 27px;
+                }
+            }
+            .navbar-title {
+                display: none;
+            }
+            .menu-toggle{
+                opacity: 0;
+            }
+            button{
+                border:none;
+                background: none;
+            }
+           
+
+        }
+
+        .navbar-center{
+            display: flex;
+            justify-items: center;
+            justify-content: center;
+        }
+        .navbar-right{
+            .items-icon{
+                font-size: 30px;
+                padding: 0 15px;
+            }
+            button{
+                display: none;
+            }
+        }
+        .navbar-left{
+            padding-left:15px;
+            
+        }
+    }
+}
