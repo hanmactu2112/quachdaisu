@@ -12,13 +12,14 @@ class Dispatcher
         $this->request = new Request();
         
         Router::parse($this->request->url, $this->request);
-        
-        $controller = $this->loadController();
-
+        if($this->request->controller == "tasks") {  
+            $controller = $this->loadController1();
+        }else
+            $controller = $this->loadController2();
         call_user_func_array([$controller, $this->request->action], $this->request->params);
     }
 
-    public function loadController()
+    public function loadController1()
     {
         // $name = $this->request->controller . "Controller";
         // $file = ROOT . 'Controllers/' . $name . '.php';
@@ -26,6 +27,12 @@ class Dispatcher
         // $controller = new $name();
         // return $controller;
         $controller =  new \mvc\Controllers\tasksController;
+        return $controller;
+    }
+
+    public function loadController2()
+    {
+        $controller =  new \mvc\Controllers\studentsController;
         return $controller;
     }
 

@@ -13,6 +13,12 @@ class Router
             $request->action = "index";
             $request->params = [];
         }
+        else if ($url == "/mvc/students")
+        {
+            $request->controller = "students";
+            $request->action = "index";
+            $request->params = [];
+        }
         else
         {
             $explode_url = explode('/', $url);
