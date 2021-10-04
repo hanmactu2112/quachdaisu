@@ -13,7 +13,6 @@ class StudentsController extends Controller
     {
         $students = new Student();
         $studentRespository = new StudentRepository();
-
         $d['students'] = $studentRespository->getAll($students);
         $this->set($d);
         $this->render("index");

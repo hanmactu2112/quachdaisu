@@ -17,12 +17,12 @@
         foreach ($students as $student)
         {
             echo '<tr>';
-            echo "<td>" . $student->studentId . "</td>";
+            echo "<td>" . $student->id . "</td>";
             echo "<td>" . $student->name . "</td>";
             echo "<td>" . $student->email . "</td>";
             echo "<td>" . $student->birthday . "</td>";
-            echo "<td>" . $student->sex . "</td>";
-            echo "<td class='text-center'><a class='btn btn-info btn-xs' href='/mvc/students/edit/" . $student->studentId . "' ><span class='glyphicon glyphicon-edit'></span> Edit</a> <a href='/mvc/students/delete/" . $student->studentId . "' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span> Del</a></td>";
+            echo "<td>" . ($student->sex == 1 ? 'Nam' : 'Nữ') . "</td>";
+            echo "<td class='text-center'><a class='btn btn-info btn-xs' href='/mvc/students/edit/" . $student->id . "' ><span class='glyphicon glyphicon-edit'></span> Edit</a> <a href='/mvc/students/delete/" . $student->id . "' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span> Del</a></td>";
             echo "</tr>";
         }
         ?>

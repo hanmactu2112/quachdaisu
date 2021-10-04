@@ -34,7 +34,7 @@ class TasksController extends Controller
             $task->setDes($_POST['description']); 
                    
             if($taskRespository->add($task)){
-                header("location: " . WEBROOT . "Tasks/index");
+                header("location: " . WEBROOT . "tasks/index");
             }
             // if ($task->create($_POST["title"], $_POST["description"]))
             // {
