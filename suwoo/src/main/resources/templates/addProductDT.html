@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+          rel="stylesheet">
+  <!-- Google Web Fonts -->
+  <title>Thêm sản phẩm</title>
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+  <div class="navbar1">
+    <div class="navbar_inner">
+      <div class="logo" id="logo" style="transition-duration: 400ms;">
+        <a th:href="@{/}">
+          <img th:src="@{/images/Logo1.png}" src="../static/images/Logo1.png" alt="SuStores"></a>
+      </div>
+      <div class="navbar_main" id="navbar_main">
+        <div class="navbar_main_inner">
+          <div class="navbar_left">
+            <div class="left_item">
+                                <span class="material-symbols-outlined" onclick="myFunction()">
+                                    menu
+                                </span>
+            </div>
+            <div class="left_item">
+              <input class="left_input" type="text" placeholder="Nhập từ khóa cần tìm...">
+            </div>
+            <div class="left_item">
+                                <span class="material-symbols-outlined">
+                                    search
+                                </span>
+            </div>
+          </div>
+          <div class="navbar_right">
+            <div class="right_item notifications">
+                                <span class="material-symbols-outlined">
+                                    notifications
+                                </span>
+              <span class="badge">3</span>
+            </div>
+            <div class="right_item notifications">
+                                <span class="material-symbols-outlined">
+                                    mark_email_unread
+                                </span>
+              <span class="badge">10</span>
+            </div>
+            <div class="right_item">
+                                <span class="material-symbols-outlined">
+                                    account_circle
+                                </span>
+              <span class="user_name" sec:authentication="principal.ten">
+                                </span>
+              <span class="material-symbols-outlined">
+                                    arrow_drop_down
+                                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content_body">
+    <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+      <div class="menu-inner">
+
+        <div class="dropdow">
+          <div class="dropdow_select active">
+                            <span class="dropdow_selected">
+                                Dashboard
+                            </span>
+            <span class="material-symbols-outlined">
+                                dashboard
+                            </span>
+          </div>
+        </div>
+        <div class="dropdow">
+          <div class="dropdow_select">
+            <a href="#">
+                                <span class="dropdow_selected">
+                                    Người dùng
+                                </span>
+              <span class="material-symbols-outlined">
+                                    arrow_drop_down
+                                </span>
+            </a>
+          </div>
+          <ul class="dropdow_list">
+
+            <li class="dropdow_item">
+              <a th:href="@{/addStaff}"><span class="dropdow_text">
+                                    Thêm tài khoản nhân viên
+                                </span></a>
+              <span class="material-symbols-outlined">
+                                    person_add
+                                </span>
+            </li>
+            <li class="dropdow_item">
+              <a th:href="@{/managerStaff}"><span class="dropdow_text">
+                                    Quản lí tài khoản nhân viên
+                            </span></a>
+              <span class="material-symbols-outlined">
+                                    manage_accounts
+                                </span>
+            </li>
+            <li class="dropdow_item">
+                                <span class="dropdow_selected">
+                                    Quản lí tài khoản khách hàng
+                                </span>
+              <span class="material-symbols-outlined">
+                                    person
+                                </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdow">
+          <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Danh mục
+                            </span>
+            <span class="material-symbols-outlined">
+                                arrow_drop_down
+                            </span>
+
+          </div>
+          <ul class="dropdow_list">
+              <li class="dropdow_item">
+                  <a th:href="@{/addCategory}" ><span class="dropdow_text">
+                                    Thêm danh mục
+                                </span></a>
+                  <span class="material-symbols-outlined">
+                                    category
+                                </span>
+              </li>
+              <li class="dropdow_item">
+                  <a th:href="@{/managerCategory}" > <span class="dropdow_text">
+                                    Sửa/xóa danh mục
+                            </span> </a>
+                  <span class="material-symbols-outlined">
+                                    cached
+                                </span>
+              </li>
+
+          </ul>
+        </div>
+        <div class="dropdow">
+          <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Sản phẩm điện thoại
+                            </span>
+            <span class="material-symbols-outlined">
+                                arrow_drop_down
+                            </span>
+
+          </div>
+          <ul class="dropdow_list">
+            <li class="dropdow_item">
+                <a th:href="@{/addProductDT}"><span class="dropdow_selected">
+                                Thêm sản phẩm
+                            </span></a>
+              <span class="material-symbols-outlined">
+                                    storefront
+                                </span>
+            </li>
+              <li class="dropdow_item">
+                  <a th:href="@{/managerProductDT}" > <span class="dropdow_text">
+                                    Sửa/xóa sản phẩm
+                            </span></a>
+                  <span class="material-symbols-outlined">
+                                    cached
+                                </span>
+              </li>
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Khuyến mại sản phẩm
+                                </span>
+              <span class="material-symbols-outlined">
+                                    sell
+                                </span>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdow">
+          <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Sản phẩm laptop
+                            </span>
+            <span class="material-symbols-outlined">
+                                arrow_drop_down
+                            </span>
+
+          </div>
+          <ul class="dropdow_list">
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Thêm sản phẩm
+                                </span>
+              <span class="material-symbols-outlined">
+                                    storefront
+                                </span>
+            </li>
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Sửa/xóa sản phẩm
+                                </span>
+              <span class="material-symbols-outlined">
+                                    cached
+                                </span>
+            </li>
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Khuyến mại sản phẩm
+                                </span>
+              <span class="material-symbols-outlined">
+                                    sell
+                                </span>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdow">
+          <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Sản phẩm khác
+                            </span>
+            <span class="material-symbols-outlined">
+                                arrow_drop_down
+                            </span>
+
+          </div>
+          <ul class="dropdow_list">
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Thêm sản phẩm
+                                </span>
+              <span class="material-symbols-outlined">
+                                    storefront
+                                </span>
+            </li>
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Sửa/xóa sản phẩm
+                                </span>
+              <span class="material-symbols-outlined">
+                                    cached
+                                </span>
+            </li>
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Khuyến mại sản phẩm
+                                </span>
+              <span class="material-symbols-outlined">
+                                    sell
+                                </span>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdow">
+          <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Đơn hàng
+                            </span>
+            <span class="material-symbols-outlined">
+                                shopping_bag
+                            </span>
+          </div>
+        </div>
+        <div class="dropdow">
+          <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Mã giảm giá
+                            </span>
+            <span class="material-symbols-outlined">
+                                sell
+                            </span>
+          </div>
+          <ul class="dropdow_list">
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Giảm theo phần trăm
+                                </span>
+              <span class="material-symbols-outlined">
+                                    percent
+                                </span>
+            </li>
+            <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Giảm theo số tiền
+                                </span>
+              <span class="material-symbols-outlined">
+                                    attach_money
+                                </span>
+            </li>
+
+          </ul>
+        </div>
+        <div class="dropdow">
+          <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Hóa đơn
+                            </span>
+            <span class="material-symbols-outlined">
+                                receipt_long
+                            </span>
+          </div>
+        </div>
+        <div class="dropdow">
+          <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Slider
+                            </span>
+            <span class="material-symbols-outlined">
+                                slideshow
+                            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="bg_body" id="bgbody">
+      <div class="add_product_body">
+        <div class="add_product_out">
+          <div class="tittle_addProduct">
+            Thêm sản phẩm điện thoại
+          </div>
+          <div class="button_tab">
+            <!-- //TT chinh -->
+            <button class="tablink" onclick="openPage('main', this)" id="defaultOpen"><span
+                    class="material-symbols-outlined">
+                                    display_settings
+                                </span></button>
+            <!-- anh san pham   -->
+            <button class="tablink" onclick="openPage('image_product', this)"><span
+                    class="material-symbols-outlined">
+                                    image
+                                </span></button>
+            <!-- he dieu hanh - cpu -->
+            <button class="tablink" onclick="openPage('cpu_product', this)"><span
+                    class="material-symbols-outlined">
+                                    memory
+                                </span></button>
+            <!-- camera -->
+            <button class="tablink" onclick="openPage('cameratruoc', this)"><span
+                    class="material-symbols-outlined">
+                                    photo_camera
+                                </span></button>
+            <!-- cong nghe man hinh -->
+            <button class="tablink" onclick="openPage('manhinh', this)"><span
+                    class="material-symbols-outlined">
+                                    monitor
+                                </span></button>
+            <!-- bo nho -->
+            <button class="tablink" onclick="openPage('bonho', this)"><span
+                    class="material-symbols-outlined">
+                                    database
+                                </span></button>
+            <!-- tiện ích -->
+            <button class="tablink" onclick="openPage('tienich', this)"><span
+                    class="material-symbols-outlined">
+                                    broadcast_on_home
+                                </span></button>
+            <!-- pin -->
+            <button class="tablink" onclick="openPage('pin', this)"><span
+                    class="material-symbols-outlined">
+                                    fiber_pin
+                                </span></button>
+            <!-- Kết nối -->
+            <button class="tablink" onclick="openPage('ketnoi', this)"><span
+                    class="material-symbols-outlined">
+                                    wifi
+                                </span></button>
+            <!-- Kích thước trọng lượng -->
+            <button class="tablink" onclick="openPage('kichthuoctrongluong', this)"><span
+                    class="material-symbols-outlined">
+                                    straighten
+                                </span></button>
+          </div>
+          <form th:action="@{/addProductDT}" th:object="${dienthoai}" enctype="multipart/form-data" method="post">
+              <input type="text" hidden class="input_product" name="id"  th:field = "*{id}">
+              <div class="product_body_inner" id="main">
+              <div class="product_add_title">
+                Thông tin cơ bản
+              </div>
+
+              <div class="product_field">
+                  <label class="label_product" for="msp"> Mã sản phẩm</label>
+                  <input type="text" class="input_product" name="maSp" th:field = "*{maSp}" id = "msp" placeholder="Mã sản phẩm" />
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="tsp"> Tên sản phẩm</label>
+                <input type="text" class="input_product" name="ten" th:field = "*{ten}" id = "tsp" placeholder="Tên sản phẩm" />
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="gsp"> Giá sản phẩm </label>
+                <input type="text" class="input_product" id="gsp" name="gia" th:field = "*{gia}" placeholder="Giá sản phẩm tính theo VNĐ" />
+              </div>
+              <div class="product_field custom1">
+                <div class="date_staff">
+                  <label class="label_product" for="ms">Màu sắc</label>
+                  <input type="text" class="input_product" name="color" th:field = "*{color}" id="ms" placeholder="Nhập màu sắc" />
+                </div>
+                <div class="date_staff">
+                  <label class="label_product" for="sl">Số lượng</label>
+                  <input type="text" class="input_product" name="soLuong" th:field = "*{soLuong}" id ="sl" placeholder="Nhập số lượng" />
+                </div>
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="nsx">Nhà sản xuất</label>
+                <input type="text" class="input_product" name="hang" th:field = "*{hang}" id="nsx" placeholder="Nhà sản xuất" />
+              </div>
+              <div class="product_field custom1">
+                <!-- ngaysinh-gioitinh -->
+                <div class="date_staff">
+                  <label class="label_product" for="datepicker">Ngày ra mắt</label>
+                  <input type="text" class="input_product" name="ngayRaMat" th:field = "*{ngayRaMat}" id="datepicker" placeholder="Ngày ra mắt"
+                         onclick="myFunction1()" />
+                </div>
+                <div class="date_staff">
+                  <label class="label_product" for="categoryDto">Category</label>
+                  <select name="category" id="categoryDto" class="input_product" aria-hidden="true">
+                      <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.ten}" th:selected = "${categoryDto.id !=null}?${category.id}==${categoryDto.id}:'false'"></option>
+                  </select>
+                </div>
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="cl">Chất liệu</label>
+                <input type="text" class="input_product" name="chatLieu" th:field = "*{chatLieu}" id="cl" placeholder="Chất liệu" />
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="thietke">Thiết kế</label>
+                <input type="text" class="input_product" id="thietke" name="thietKe" th:field = "*{thietKe}" placeholder="Thiết kế" />
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="mta">Mô tả</label>
+                <textarea id="mta" class="input_product" name="moTa" th:field = "*{moTa}"
+                          placeholder="Mô tả sản phẩm"></textarea>
+              </div>
+          </div>
+          <div class="product_body_inner" id="image_product">
+              <div class="product_add_title">
+                Thông tin cơ bản
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="mtanh">Mô tả ảnh</label>
+                <input type="text" class="input_product" th:field = *{imageDto[0].moTa} name="mtanh" id="mtanh" placeholder="Mô tả ảnh" />
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="files">Ảnh sản phẩm</label>
+                <input type="file" id="files" name="listimages" th:field = "${files}"  accept="image/jpeg, image/png, image/jpg" class="input_product" multiple="multiple"/>
+                <output id="result"> </output>
+              </div>
+          </div>
+          <div class="product_body_inner" id="cpu_product">
+              <div class="product_add_title">
+                CPU và Hệ điều hành
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="hdh">Hệ điều hành</label>
+                <input type="text" class="input_product"  id="hdh" name="heDieuHanh" th:field = "*{dtHeDieuHanhCpuDto.heDieuHanh}" placeholder="Hệ điều hành" />
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="cpu">CPU</label>
+                <input type="text" class="input_product" id="cpu" name="cpu" th:field = "*{dtHeDieuHanhCpuDto.cpu}" placeholder="Thông tin cpu" />
+              </div>
+
+              <div class="product_field">
+                <label class="label_product" for="tocdoCPU">Tốc độ CPU</label>
+                <input type="text" class="input_product" id="tocdoCPU" name="tocDoCpu" th:field = "*{dtHeDieuHanhCpuDto.tocDoCpu}" placeholder="Tốc độ cpu">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="gpu">GPU</label>
+                <input type="text" class="input_product" id="gpu" name="gpu" th:field = "*{dtHeDieuHanhCpuDto.gpu}" placeholder="GPU" />
+              </div>
+          </div>
+          <div class="product_body_inner" id="cameratruoc" >
+              <div class="product_add_title" >
+                Camera
+              </div>
+              <div th:each="camera, itemStat : *{cameraDtoList}" >
+                  <div class="product_field" >
+                      <input type="text" class="input_product"  th:field="*{cameraDtoList[__${itemStat.index}__].loai}" readonly>
+                  </div>
+                  <div class="product_field" >
+                      <label class="label_product" for="camerat" >Camera</label>
+                      <input type="text" class="input_product" name="doPhanGiaiCamera" id="camerat" th:field="*{cameraDtoList[__${itemStat.index}__].doPhanGiaiCamera}" placeholder="Độ phân giải camera">
+                  </div>
+                  <div class="product_field" >
+                      <label class="label_product" for="tnct">Tính năng</label>
+                      <textarea id="tnct" class="input_product" name="tinhNang" th:field="*{cameraDtoList[__${itemStat.index}__].tinhNang}"
+                                placeholder="Tính năng camera"></textarea>
+                  </div>
+<!--                  <div class="product_field">-->
+<!--                      <label class="label_product" for="camerasau">Camera sau</label>-->
+<!--                      <input type="text" class="input_product" id="camerasau" name="doPhanGiai" th:field="*{cameraDtoList[1].getDoPhanGiaiCamera()}" placeholder="Nhà sản xuất">-->
+<!--                  </div>-->
+<!--                  <div class="product_field">-->
+<!--                      <label class="label_product" for="tncamerasau">Tính năng</label>-->
+<!--                      <textarea id="tncamerasau" class="input_product" name="tinhNang" th:field="*{cameraDtoList[1].getTinhNang()}"-->
+<!--                                placeholder="Tính năng camera sau"></textarea>-->
+<!--                  </div>-->
+              </div>
+          </div>
+          <div class="product_body_inner" id="manhinh">
+              <div class="product_add_title">
+                Màn hình
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="cnmh">Công nghệ màn hình</label>
+                <input type="text" class="input_product" id="cnmh" name="congNgheManHinh" th:field = "*{manHinhDto.congNgheManHinh}" placeholder="Công nghệ màn hình">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="dpg">Độ phân giải</label>
+                <input type="text" class="input_product" id="dpg" name="doPhanGiai" th:field = "*{manHinhDto.doPhanGiai}" placeholder="Độ phân giải màn hình">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="ktmh">Kích thước màn hình</label>
+                <input type="text" class="input_product" id="ktmh" name="kichThuoc" th:field = "*{manHinhDto.kichThuoc}" placeholder="Kích thước tính theo inch">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="dstd">Độ sáng tối đa</label>
+                <input type="text" class="input_product" id="dstd" name="doSangToiDa" th:field = "*{manHinhDto.doSangToiDa}"  placeholder="Độ phân giải màn hình">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="mkcu">Mặt kính cảm ứng</label>
+                <input type="text" class="input_product" id="mkcu" name="matKinhCamUng" th:field = "*{manHinhDto.matKinhCamUng}" placeholder="Độ phân giải màn hình">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="tsq">Tần số quét</label>
+                <input type="text" class="input_product" id="tsq" name="tanSoQuet" th:field = "*{manHinhDto.tanSoQuet}" placeholder="Tần số quét">
+              </div>
+          </div>
+          <div class="product_body_inner" id="bonho">
+              <div class="product_add_title">
+                Bộ nhớ
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="rom">ROM</label>
+                <input type="text" class="input_product" id="rom" name="rom" th:field = "*{dtBoNhoDto.rom}" placeholder="ROM tính theo GB">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="ram">RAM</label>
+                <input type="text" class="input_product" id="ram" name="ram" th:field = "*{dtBoNhoDto.ram}" placeholder="RAM tính theo GB">
+              </div>
+          </div>
+          <div class="product_body_inner" id="tienich">
+              <div class="product_add_title">
+                Tiện ích
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="tnbm">Tính năng bảo mật</label>
+                <textarea id="tnbm" class="input_product" name="baoMat" th:field = "*{tienIchDto.baoMat}"
+                          placeholder="Tính năng bảo mật"></textarea>
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="tndb">Tính năng đặc biệt khác</label>
+                <textarea id="tndb" class="input_product" name="tinhNangDacBiet" th:field = "*{tienIchDto.tinhNangDacBiet}"
+                          placeholder="Tính năng đặc biệt khác"></textarea>
+              </div>
+          </div>
+          <div class="product_body_inner" id="pin">
+              <div class="product_add_title">
+                PIN
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="dlpin">Dung lượng PIN</label>
+                <input type="text" class="input_product" id="dlpin" name="dungLuong" th:field = "*{pinDto.dungLuong}" placeholder="Dung lượng PIN">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="lpin">Loại PIN</label>
+                <input type="text" class="input_product" id="lpin" name="loaiPin" th:field = "*{pinDto.loaiPin}" placeholder="Loại PIN">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="cnpin">Công nghệ PIN</label>
+                <textarea id="cnpin" class="input_product" name="congNghe" th:field = "*{pinDto.congNghe}"
+                          placeholder="Công nghệ PIN"></textarea>
+              </div>
+          </div>
+          <div class="product_body_inner" id="ketnoi">
+              <div class="product_add_title">
+                Kết nối
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="mdt">Mạng di động</label>
+                <input type="text" class="input_product" id="mdt" name="mangDiDong" th:field = "*{dtKetNoiDto.mangDiDong}" placeholder="Mạng di động">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="wifi">Wifi</label>
+                <input type="text" class="input_product" id="wifi" name="wifi" th:field = "*{dtKetNoiDto.wifi}" placeholder="Wifi">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="gps">GPS</label>
+                <input type="text" class="input_product" id="gps" name="gps" th:field = "*{dtKetNoiDto.gps}" placeholder="GPS">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="bluetooth">Bluetooth</label>
+                <input type="text" class="input_product" id="bluetooth" name="bluetooth" th:field = "*{dtKetNoiDto.bluetooth}" placeholder="Bluetooth">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="congsac">Cổng sạc</label>
+                <input type="text" class="input_product" id="congsac" name="congSac" th:field = "*{dtKetNoiDto.congSac}" placeholder="Cổng sạc">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="tainghe">Tai nghe</label>
+                <input type="text" class="input_product" id="tainghe" name="taiNghe" th:field = "*{dtKetNoiDto.taiNghe}" placeholder="Tai nghe">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="knkhac">Kết nối khác</label>
+                <input type="text" class="input_product" id="knkhac" name="ketNoiKhac" th:field = "*{dtKetNoiDto.ketNoiKhac}" placeholder="Kết nối khác">
+              </div>
+          </div>
+          <div class="product_body_inner" id="kichthuoctrongluong">
+              <div class="product_add_title">
+                Kích thước trọng lượng
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="chieudai">Chiều dài</label>
+                <input type="text" class="input_product" id="chieudai" name="doDai" th:field = "*{kichThuocTrongLuongDto.doDai}" placeholder="Chiều dài">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="chieurong">Chiều rộng</label>
+                <input type="text" class="input_product" id="chieurong" name="doRong" th:field = "*{kichThuocTrongLuongDto.doRong}" placeholder="Chiều rộng">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="mong">Mỏng</label>
+                <input type="text" class="input_product" id="mong" name="doMong" th:field = "*{kichThuocTrongLuongDto.doMong}" placeholder="Mỏng">
+              </div>
+              <div class="product_field">
+                <label class="label_product" for="trongluong">Trọng lượng</label>
+                <input type="text" class="input_product" id="trongluong" name="trongLuong" th:field = "*{kichThuocTrongLuongDto.trongLuong}" placeholder="Trọng lượng">
+              </div>
+              <div class="product_field">
+                <label class="container">Hiển thị sản phẩm lên website
+                  <input type="checkbox" name="acitve" th:checked="*{acitve}" value="1" th:field="*{acitve}">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            <div class="button_subpro staff_flex">
+              <button >Lưu sản phẩm</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+
+        function myFunction1() {
+            document.getElementById('datepicker').type = 'date';
+        }
+        function myFunction2() {
+            document.getElementById("imgupload").click();
+        }
+        function openPage(pageName, elmnt) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("product_body_inner");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+
+            }
+
+            // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+                tablinks[i].style.color = "white";
+            }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+
+            // Add the specific color to the button used to open the tab content
+            elmnt.style.backgroundColor = "#e6e6e6";
+            elmnt.style.color = "#0d0d0d";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+    </script>
+<script th:src="@{/styles/script.js}"></script>
+</body>
+
+</html>

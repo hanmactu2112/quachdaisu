@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <title>Quản lí nhân viên</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+    <div class="navbar1">
+        <div class="navbar_inner">
+            <div class="logo" id="logo" style="transition-duration: 400ms;">
+                <a th:href="@{/}">
+                    <img th:src="@{images/Logo1.png}" alt="SuStores"></a>
+            </div>
+            <div class="navbar_main" id="navbar_main">
+                <div class="navbar_main_inner">
+                    <div class="navbar_left">
+                        <div class="left_item">
+                                <span class="material-symbols-outlined" onclick="myFunction()">
+                                    menu
+                                </span>
+                        </div>
+                        <div class="left_item">
+                            <input class="left_input" type="text" placeholder="Nhập từ khóa cần tìm...">
+                        </div>
+                        <div class="left_item">
+                                <span class="material-symbols-outlined">
+                                    search
+                                </span>
+                        </div>
+                    </div>
+                    <div class="navbar_right">
+                        <div class="right_item notifications">
+                                <span class="material-symbols-outlined">
+                                    notifications
+                                </span>
+                            <span class="badge">3</span>
+                        </div>
+                        <div class="right_item notifications">
+                                <span class="material-symbols-outlined">
+                                    mark_email_unread
+                                </span>
+                            <span class="badge">10</span>
+                        </div>
+
+
+                        <div class="right_item">
+                                <span class="material-symbols-outlined">
+                                    account_circle
+                                </span>
+                            <span class="user_name" sec:authentication="principal.ten">
+
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    arrow_drop_down
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content_body">
+        <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+            <div class="menu-inner">
+
+                <div class="dropdow">
+                    <div class="dropdow_select active">
+                            <span class="dropdow_selected">
+                                Dashboard
+                            </span>
+                        <span class="material-symbols-outlined">
+                                dashboard
+                            </span>
+                    </div>
+                </div>
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                        <a href="#">
+                                <span class="dropdow_selected">
+                                    Người dùng
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    arrow_drop_down
+                                </span>
+                        </a>
+                    </div>
+                    <ul class="dropdow_list">
+                        <li class="dropdow_item">
+                            <a th:href="@{/addStaff}"><span class="dropdow_text">
+                                    Thêm tài khoản nhân viên
+                                </span></a>
+                            <span class="material-symbols-outlined">
+                                    person_add
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                            <a th:href="@{/managerStaff}"><span class="dropdow_text">
+                                    Quản lí tài khoản nhân viên
+                            </span></a>
+                            <span class="material-symbols-outlined">
+                                    manage_accounts
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                                <span class="dropdow_selected">
+                                    Quản lí tài khoản khách hàng
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    person
+                                </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Danh mục
+                            </span>
+                        <span class="material-symbols-outlined">
+                                arrow_drop_down
+                            </span>
+
+                    </div>
+                    <ul class="dropdow_list">
+                        <li class="dropdow_item">
+                            <a th:href="@{/addCategory}" ><span class="dropdow_text">
+                                    Thêm danh mục
+                                </span></a>
+                            <span class="material-symbols-outlined">
+                                    category
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                            <a th:href="@{/managerCategory}" > <span class="dropdow_text">
+                                    Sửa/xóa danh mục
+                            </span> </a>
+                            <span class="material-symbols-outlined">
+                                    cached
+                                </span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Sản phẩm điện thoại
+                            </span>
+                        <span class="material-symbols-outlined">
+                                arrow_drop_down
+                            </span>
+
+                    </div>
+                    <ul class="dropdow_list">
+                        <li class="dropdow_item">
+                            <a th:href="@{/addProductDT}"><span class="dropdow_selected">
+                                Thêm sản phẩm
+                            </span></a>
+                            <span class="material-symbols-outlined">
+                                    storefront
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                            <a th:href="@{/managerProductDT}" > <span class="dropdow_text">
+                                    Sửa/xóa sản phẩm
+                            </span></a>
+                            <span class="material-symbols-outlined">
+                                    cached
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Khuyến mại sản phẩm
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    sell
+                                </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Sản phẩm laptop
+                            </span>
+                        <span class="material-symbols-outlined">
+                                arrow_drop_down
+                            </span>
+
+                    </div>
+                    <ul class="dropdow_list">
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Thêm sản phẩm
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    storefront
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Sửa/xóa sản phẩm
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    cached
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Khuyến mại sản phẩm
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    sell
+                                </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Sản phẩm khác
+                            </span>
+                        <span class="material-symbols-outlined">
+                                arrow_drop_down
+                            </span>
+
+                    </div>
+                    <ul class="dropdow_list">
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Thêm sản phẩm
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    storefront
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Sửa/xóa sản phẩm
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    cached
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Khuyến mại sản phẩm
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    sell
+                                </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Đơn hàng
+                            </span>
+                        <span class="material-symbols-outlined">
+                                shopping_bag
+                            </span>
+                    </div>
+                </div>
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Mã giảm giá
+                            </span>
+                        <span class="material-symbols-outlined">
+                                sell
+                            </span>
+                    </div>
+                    <ul class="dropdow_list">
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Giảm theo phần trăm
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    percent
+                                </span>
+                        </li>
+                        <li class="dropdow_item">
+                                <span class="dropdow_text">
+                                    Giảm theo số tiền
+                                </span>
+                            <span class="material-symbols-outlined">
+                                    attach_money
+                                </span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Hóa đơn
+                            </span>
+                        <span class="material-symbols-outlined">
+                                receipt_long
+                            </span>
+                    </div>
+                </div>
+                <div class="dropdow">
+                    <div class="dropdow_select">
+                            <span class="dropdow_selected">
+                                Slider
+                            </span>
+                        <span class="material-symbols-outlined">
+                                slideshow
+                            </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="bg_body" id="bgbody">
+
+            <form method="POST">
+                <div class="table_body">
+                    <div class="table_title">
+                        Thông tin nhân viên
+                    </div>
+
+                    <div style="text-align: center; font-size: 20px; color: rgb(255, 0, 0); font-weight: bold">
+                        <span th:utext="${error_update}"></span>
+                    </div>
+                    <div style="text-align: center; font-size: 20px; color: rgb(255, 0, 0); font-weight: bold">
+                        <span th:utext="${error_delete}"></span>
+                    </div>
+
+                    <table class="table-fill" id="table-fill">
+                        <thead>
+                        <tr>
+                            <th class="text-left">STT </th>
+                            <th class="text-left">Email</th>
+                            <th class="text-left">Họ tên</th>
+                            <th class="text-left">Giới tính</th>
+                            <th class="text-left">Ngày sinh</th>
+                            <th class="text-left">Địa chỉ</th>
+                            <th class="text-left">Số điện thoại</th>
+                            <th class="text-left">Role</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-hover">
+                        <tr th:each="admin, iStat : ${admins}" class="tableClass cursor" th:attr="onclick=|setStaff('${admin.id}')|" >
+                            <td th:text="${iStat.index + 1}" class="text-left" ></td>
+                            <td th:text="${admin.email}" class="text-left"></td>
+                            <td th:text="${admin.name}" class="text-left">Nguyễn Khánh Huyền</td>
+                            <td th:text="${admin.gioiTinh}?'Nam':'Nữ'" class="text-left"></td>
+                            <td th:text="${admin.ngaySinh}" class="text-left">13/01/2000</td>
+                            <td th:text="${admin.diaChi}" class="text-left">Hà Nội</td>
+                            <td th:text="'0'+${admin.sdt}" class="text-left">0386111444</td>
+                            <td  class="text-left">Admin</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="button_staff">
+                        <div class="button_staff_inner ">
+                            <button type="button" onclick="editStaff()">Sửa thông tin</button>
+                        </div>
+                        <div class="button_staff_inner warning ">
+                            <button  type="button" onclick="deleteStaff()">Xóa thông tin</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script>
+        var staffIdSelected = 0
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+        function editStaff() {
+            window.location.href = `/editStaff/${staffIdSelected}`
+        }
+        function deleteStaff() {
+
+            if(staffIdSelected==0) confirm("Bạn chưa thực sự chọn dòng!!");
+            else {
+            var result = confirm("Bạn có thực sự muốn xóa không?");
+                    if (result) {
+                        //Logic to delete the item
+                        window.location.href = `/deleteStaff/${staffIdSelected}`
+                    }
+            }
+
+
+        }
+        function setStaff(id) {
+            staffIdSelected = id
+        }
+
+        var btnContainer = document.getElementById("table-fill");
+
+        // Get all buttons with class="btn" inside the container
+        var btns = btnContainer.getElementsByClassName("tableClass");
+
+        // Loop through the buttons and add the active class to the current/clicked button
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("tr-active");
+                if(current[0]) current[0].className = current[0].className.replace(" tr-active", "");
+                this.className += " tr-active";
+            });
+        }
+    </script>
+</body>
+
+</html>

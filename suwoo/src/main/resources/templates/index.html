@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <p sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></p>
+    <p><a th:href="@{/home}">User Home</a></p>
+    <p><a th:href="@{/admin/home}">Admin Home</a></p>
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+</div>
+</body>
+</html>
