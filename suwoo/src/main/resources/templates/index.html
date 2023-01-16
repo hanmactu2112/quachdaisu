@@ -1,15 +1,547 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styleClient.css}" />
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+    <title>Trang chủ</title>
 </head>
 <body>
-<div layout:fragment="content">
+<div class="wrapper">
+    <div th:replace="/navbar :: navbar"></div>
+    <div th:replace="/slider :: slider"></div>
+    <div class="container_cart">
+        <div class="container_inner">
+            <div class="category_index">
+                <div class="category_tittle">
+                    Danh mục sản phẩm
+                </div>
+                <div class="category_content">
+                    <div class="slider_wrapper">
+                        <div class="category_main" id="category_main">
+                            <div class="category_item" th:each="category, iStat : ${categories}">
+                                <div class="category_item_inner">
+                                    <a th:href="@{'/category/search/'+${category.id}}"><div class="category_item_main" th:text = "${category.ten}">
+                                        Iphone
+                                    </div></a>
+                                </div>
+                            </div>
+                        </div>
 
-    <p sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></p>
-    <p><a th:href="@{/home}">User Home</a></p>
-    <p><a th:href="@{/admin/home}">Admin Home</a></p>
-    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+                    </div>
+                    <div class="back_slider1 hover">
+                            <span class="material-symbols-outlined">
+                                arrow_back_ios
+                                </span>
+                    </div>
+                    <div class="next_slider1 hover">
+                            <span class="material-symbols-outlined">
+                                arrow_forward_ios
+                                </span>
+                    </div>
+                </div>
+            </div>
+            <div class="product_sales">
+                <div class="product_sales_inner">
+                    <div class="product_sales_title">
+                        Flash Deals
+                    </div>
+                    <div class="product_sale_content">
+                        <div class="slider_wrapper">
+                            <div class="product_sale_main1" id="product_sale_main1">
+                                <div class="product_item1" th:each="flashsale, iStat : ${flashsales}">
+                                    <div class="product_item_inner">
+                                        <div class="product_img">
+                                            <div class="product_sale" th:text = "${flashsale.khuyenMaiDto.tiLe + 'off'}">20% off</div>
+                                            <img th:src="${flashsale.imageDto[0].urlImg}" alt="product">
+                                        </div>
+                                        <div class="product_details">
+                                            <div class="product_details_left">
+                                                <a th:href="@{'/productDetailsClient/'+${flashsale.id}}">
+                                                    <div class="product_name" th:text = "${flashsale.ten}">
+                                                        Samsung S22 Ultra 512GB
+                                                    </div>
+                                                    <div class="product_price">
+                                                        <span th:text = "${flashsale.giaKm}">27.000.000đ</span>
+                                                        <span><del th:text = "${flashsale.gia}">30.500.000đ</del></span>
+                                                    </div>
+                                                </a>
+                                                <div class="nmber_star">
+                                                    <i class="fa fa-star" ></i>
+                                                    <i class="fa fa-star" ></i>
+                                                    <i class="fa fa-star" ></i>
+                                                    <i class="fa fa-star" ></i>
+                                                    <i class="fa fa-star" ></i>
+                                                </div>
+                                            </div>
+                                            <div class="product_details_right">
+                                                <div class="details_right_item"><a class="addCart" th:href="@{'/addToCart/'+${flashsale.id}}"><span class="material-symbols-outlined">
+                                                        shopping_cart
+                                                        </span></a></div>
+                                                <div class="details_right_item">
+                                                        <span class="material-symbols-outlined">
+                                                            favorite
+                                                            </span>
+                                                </div>
+                                                <a th:href="@{'/productDetailsClient/'+${flashsale.id}}">
+                                                    <div class="details_right_item">
+                                                            <span class="material-symbols-outlined">
+                                                                visibility
+                                                                </span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="back_slider2 hover">
+                                <span class="material-symbols-outlined">
+                                    arrow_back_ios
+                                    </span>
+                        </div>
+                        <div class="next_slider2 hover">
+                                <span class="material-symbols-outlined">
+                                    arrow_forward_ios
+                                    </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="product_sales">
+                <div class="product_sales_inner">
+                    <div class="product_title">
+                        <div class="product_tittle_left">
+                            Điện thoại
+                        </div>
+                        <a th:href="@{/viewListProductDt}"><div class="product_tittle_right">
+                            Xem tất cả sản phẩm
+                            <span class="material-symbols-outlined">
+                                        arrow_right
+                                        </span>
+                        </div></a>
+                    </div>
+                    <div class="product_sale_main">
+                        <div class="product_item" th:each="dienthoai, iStat : ${dienthoais}">
+                            <div class="product_item_inner">
+                                <div class="product_img">
+                                    <div class="product_sale" th:text = "${dienthoai.khuyenMaiDto.tiLe + ' off'}" th:if = "${dienthoai.khuyenMaiDto}">20% off</div>
+                                    <img th:src="${dienthoai.imageDto[0].urlImg}">
+                                </div>
+                                <div class="product_details">
+                                    <div class="product_details_left">
+                                        <a th:href="@{'/productDetailsClient/'+${dienthoai.id}}">
+                                            <div class="product_name" th:text = ${dienthoai.ten}>
+                                                Samsung S22 Ultra 512GB
+                                            </div>
+                                            <div class="product_price" >
+                                                <span th:text = ${dienthoai.gia} th:if = "${dienthoai.giaKm == null}">1.000.000đ</span>
+                                                <span th:text = ${dienthoai.giaKm} th:if = "${dienthoai.giaKm}">1.000.000đ</span>
+                                                <span><del th:text = ${dienthoai.gia} th:if = "${dienthoai.giaKm}" >1.500.000đ</del></span>
+                                            </div>
+                                        </a>
+                                        <div class="nmber_star">
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                        </div>
+                                    </div>
+                                    <div class="product_details_right">
+                                        <a th:href="@{'/addToCart/'+${dienthoai.id}}">
+                                            <div class="details_right_item">
+                                                <span class="material-symbols-outlined">
+                                                    shopping_cart
+                                                </span>
+                                            </div>
+                                        </a>
+                                        <div class="details_right_item">
+                                                <span class="material-symbols-outlined">
+                                                    favorite
+                                                </span>
+                                        </div>
+                                        <a th:href="@{'/productDetailsClient/'+${dienthoai.id}}">
+                                            <div class="details_right_item">
+                                                    <span class="material-symbols-outlined">
+                                                        visibility
+                                                    </span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product_sales">
+                <div class="product_sales_inner">
+                    <div class="product_title">
+                        <div class="product_tittle_left">
+                            Laptop
+                        </div>
+                        <a th:href="@{/viewListProductLt}"><div class="product_tittle_right">
+                            Xem tất cả sản phẩm
+                            <span class="material-symbols-outlined">
+                                        arrow_right
+                                        </span>
+                        </div></a>
+                    </div>
+                    <div class="product_sale_main">
+                        <div class="product_item" th:each="laptop, iStat : ${laptops}">
+                            <div class="product_item_inner">
+                                <div class="product_img" >
+                                    <div class="product_sale" th:text = "${laptop.khuyenMaiDto.tiLe + 'off'}" th:if = "${laptop.khuyenMaiDto}">20% off</div>
+                                    <img th:src="${laptop.imageDto[0].urlImg}" alt="product">
+                                </div>
+                                <div class="product_details">
+                                    <div class="product_details_left">
+                                        <a th:href="@{'/productLtDetailsClient/'+${laptop.id}}">
+                                        <div class="product_name" th:text = ${laptop.ten}>
+                                            HP Gaming Victus 16
+                                        </div>
+                                        <div class="product_price">
+                                            <span th:text = ${laptop.gia} th:if = "${laptop.giaKm == null}">1.000.000đ</span>
+                                            <span th:text = ${laptop.giaKm} th:if = "${laptop.giaKm}">1.000.000đ</span>
+                                            <span><del th:text = ${laptop.gia} th:if = "${laptop.giaKm}" >1.500.000đ</del></span>
+                                        </div>
+                                        </a>
+                                        <div class="nmber_star">
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                        </div>
+                                    </div>
+                                    <div class="product_details_right">
+                                        <div class="details_right_item"><span class="material-symbols-outlined">
+                                                shopping_cart
+                                                </span></div>
+                                        <div class="details_right_item">
+                                                <span class="material-symbols-outlined">
+                                                    favorite
+                                                    </span>
+                                        </div>
+                                        <a th:href="@{'/productLtDetailsClient/'+${laptop.id}}">
+                                        <div class="details_right_item">
+                                                <span class="material-symbols-outlined">
+                                                    visibility
+                                                    </span>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product_sales">
+                <div class="product_sales_inner">
+                    <div class="product_title">
+                        <div class="product_tittle_left">
+                            Phụ kiện
+                        </div>
+                        <a href="#"><div class="product_tittle_right">
+                            Xem tất cả sản phẩm
+                            <span class="material-symbols-outlined">
+                                        arrow_right
+                                        </span>
+                        </div></a>
+                    </div>
+                    <div class="product_sale_main">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div th:replace="/footer :: footer"></div>
 </div>
 </body>
+<script>
+    window.onscroll = function() {myFunction()};
+    var header = document.getElementById("navbar_main");
+    var sticky = header.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    };
+     function userDetailsPoppup(){
+        var x = document.getElementById('user_details');
+        var y = document.getElementById('cart_details');
+        if(x.style.display === 'none'){
+            if(y.style.display=='flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    };
+    function inputSearch(){
+        var x = document.getElementById("inputSearch").value;
+        var y = document.getElementById("optionMenu").value;
+        if((document.getElementById("inputSearch").getAttribute('hidden') != null)){
+            let p = document.getElementById("inputSearch");
+            let o = document.getElementById("optionMenu");
+            p.removeAttribute("hidden");
+            o.removeAttribute("hidden");
+        }
+        else{
+            document.getElementById("formSearch").submit();
+        }
+    }
+
+    window.addEventListener("load",function(){
+        const sliderItem = document.querySelectorAll(".slider_item_inner");
+        const sliderMain = document.querySelector(".slider_main2");
+        const next = document.querySelector(".next_slider");
+        const backSlider = document.querySelector(".back_slider");
+        const withSlider = sliderItem[0].offsetWidth;
+        console.log(withSlider);
+        const sliderLength = sliderItem.length;
+        console.log(sliderLength);
+        let positionX = 0;
+        let index =0;
+        setHeight(index);
+        next.addEventListener("click",function(){
+            changeSlider(1);
+        });
+        backSlider.addEventListener("click",function(){
+            changeSlider(-1);
+        });
+        function changeSlider(direction){
+            if(direction===1 ){
+                index++;
+                if(index<=sliderLength-1){
+                    positionX = positionX-withSlider;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    setHeight(index);
+                }
+                else {
+                    positionX = 0;
+                    index=0;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    setHeight(index);
+                }
+            }
+            else if(direction===-1){
+                index--;
+                if(index>=0){
+                    positionX += withSlider;
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    setHeight(index);
+                    console.log("prev");
+                }
+                else{
+                    index=sliderLength-1;
+                    positionX = positionX-withSlider*index;
+                    console.log("prev"+positionX)
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    setHeight(index);
+                }
+            }
+        }
+        function setHeight(index1){
+            const sliderImg = document.querySelectorAll(".imgSlider");
+            let heightSlider = sliderImg[index1].offsetHeight;
+            document.getElementById('slider_main2').style.height = `${heightSlider}px`;
+        };
+        setInterval(function(){
+            index++;
+            if(index<=sliderLength-1){
+                positionX = positionX-withSlider;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+                setHeight(index);
+            }
+
+            else {
+                positionX = 0;
+                index=0;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+                setHeight(index);
+            }
+        },4000);
+    });
+    /* Slider category */
+    window.addEventListener("load",function(){
+        const sliderItem = document.querySelectorAll(".category_item");
+        const sliderMain = document.querySelector(".category_main");
+        const next = document.querySelector(".next_slider1");
+        const backSlider = document.querySelector(".back_slider1");
+        const withSlider = sliderItem[0].offsetWidth;
+        console.log(withSlider);
+        const sliderLength = sliderItem.length;
+        console.log(sliderLength);
+        let positionX = 0;
+        let index =0;
+        // setHeight(index);
+        next.addEventListener("click",function(){
+            changeSlider(1);
+        });
+        backSlider.addEventListener("click",function(){
+            changeSlider(-1);
+        });
+        function changeSlider(direction){
+            if(direction===1 ){
+                index++;
+                if(index<=sliderLength-5){
+                    positionX = positionX-withSlider;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+                else {
+                    positionX = 0;
+                    index=0;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+            else if(direction===-1){
+                index--;
+                if(index>=0){
+                    positionX += withSlider;
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                    // console.log("prev");
+                }
+                else{
+                    index=sliderLength-5;
+                    positionX = positionX-withSlider*index;
+                    console.log("prev"+positionX)
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+        }
+        // function setHeight(index1){
+        //     const sliderImg = document.querySelectorAll(".imgSlider");
+        //     let heightSlider = sliderImg[index1].offsetHeight;
+        //     document.getElementById('slider_main2').style.height = `${heightSlider}px`;
+        // };
+        setInterval(function(){
+            index++;
+            if(index<=sliderLength-5){
+                positionX = positionX-withSlider;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+
+            else {
+                positionX = 0;
+                index=0;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+        },4500);
+    });
+
+    /* Flas sale */
+    window.addEventListener("load",function(){
+        const sliderItem = document.querySelectorAll(".product_item1");
+        const sliderMain = document.querySelector(".product_sale_main1");
+        const next = document.querySelector(".next_slider2");
+        const backSlider = document.querySelector(".back_slider2");
+        const withSlider = sliderItem[0].offsetWidth;
+        console.log(withSlider);
+        const sliderLength = sliderItem.length;
+        console.log(sliderLength);
+        let positionX = 0;
+        let index =0;
+        // setHeight(index);
+        next.addEventListener("click",function(){
+            changeSlider(1);
+        });
+        backSlider.addEventListener("click",function(){
+            changeSlider(-1);
+        });
+        function changeSlider(direction){
+            if(direction===1 ){
+                index++;
+                if(index<=sliderLength-5){
+                    positionX = positionX-withSlider;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+                else {
+                    positionX = 0;
+                    index=0;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+            else if(direction===-1){
+                index--;
+                if(index>=0){
+                    positionX += withSlider;
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                    // console.log("prev");
+                }
+                else{
+                    index=sliderLength-5;
+                    positionX = positionX-withSlider*index;
+                    console.log("prev"+positionX)
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+        }
+        // function setHeight(index1){
+        //     const sliderImg = document.querySelectorAll(".imgSlider");
+        //     let heightSlider = sliderImg[index1].offsetHeight;
+        //     document.getElementById('slider_main2').style.height = `${heightSlider}px`;
+        // };
+        setInterval(function(){
+            index++;
+            if(index<=sliderLength-5){
+                positionX = positionX-withSlider;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+
+            else {
+                positionX = 0;
+                index=0;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+        },5000);
+    });
+
+
+</script>
 </html>

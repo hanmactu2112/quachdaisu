@@ -18,3 +18,16 @@ document.querySelector("#files").addEventListener("change", (e) => {
       alert("Your browser does not support File API");
     }
   });
+  function functionDis(id){
+              console.log(id)
+              document.getElementById("img"+id).setAttribute('disabled', '');
+              document.getElementById("img"+id).setAttribute('hidden', '');
+              document.getElementById(id).setAttribute('disabled', '');
+              document.getElementById(id).setAttribute('hidden', '');
+              document.getElementById(id).style.display = "none";
+              document.getElementById("id"+id).setAttribute('disabled', '');
+              document.getElementById("id"+id).setAttribute('hidden', '');
+              document.getElementById("url"+id).setAttribute('disabled', '');
+              document.getElementById("url"+id).setAttribute('hidden', '');
+          }
+

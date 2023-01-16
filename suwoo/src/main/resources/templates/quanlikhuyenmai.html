@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+          rel="stylesheet">
+  <!-- Google Web Fonts -->
+  <title>Quản lí khuyến mại</title>
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+    <div th:replace="/header :: header"></div>
+  <div class="content_body">
+    <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+        <div th:replace="/menu :: menu"></div>
+
+    </div>
+    <div class="bg_body" id="bgbody">
+      <form method="POST">
+        <div class="table_body">
+          <div class="table_title">
+              Khuyến mại
+          </div>
+          <table class="table-fill" id="table-fill">
+            <thead>
+            <tr>
+              <th class="text-left">STT</th>
+              <th class="text-left">Mã khuyến mại</th>
+              <th class="text-left">Tỉ lệ</th>
+                <th class="text-left">Ngày bắt đầu</th>
+                <th class="text-left">Ngày kết thúc</th>
+                <th class="text-left">Active</th>
+            </tr>
+            </thead>
+            <tbody class="table-hover">
+            <tr th:each="khuyenmai, iStat : ${khuyenmais}" class="tableClass cursor" th:attr="onclick=|setKM('${khuyenmai.id}')|" >
+              <td th:text="${iStat.index + 1}" class="text-left" ></td>
+              <td th:text="${khuyenmai.maKm}" class="text-left"></td>
+              <td th:text="${khuyenmai.tiLe}" class="text-left"></td>
+              <td th:text="${khuyenmai.ngayBd}" class="text-left"></td>
+              <td th:text="${khuyenmai.ngayKt}" class="text-left"></td>
+                <td th:text="${khuyenmai.trangThai}" class="text-left"></td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="button_staff">
+            <div class="button_staff_inner ">
+              <button type="button" onclick="addKM()">Thêm khuyến mại</button>
+            </div>
+              <div class="button_staff_inner ">
+                  <button type="button" onclick="editKM()">Sửa khuyến mại</button>
+              </div>
+              <div class="button_staff_inner ">
+                  <button type="button" onclick="addKmDt()">Áp dụng sản phẩm</button>
+              </div>
+            <div class="button_staff_inner warning ">
+              <button  type="button" onclick="deleteKM()">Xóa khuyến mại</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<script>
+        var IdSelected = 0
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+        function addKM() {
+            window.location.href = `/admin/addKhuyenMai`
+        }
+        function addKmDt() {
+         if(IdSelected==0) confirm("Bạn chưa thực sự chọn dòng!!");
+          else{
+             window.location.href = `/admin/addKmSpDt/${IdSelected}`
+          }
+
+        }
+        function editKM() {
+            if(IdSelected==0) confirm("Bạn chưa thực sự chọn dòng!!");
+          else{
+             window.location.href = `/admin/editKhuyenMai/${IdSelected}`
+          }
+
+        }
+        function deleteKM() {
+
+            if(IdSelected==0) confirm("Bạn chưa thực sự chọn dòng!!");
+            else {
+            var result = confirm("Bạn có thực sự muốn xóa không?");
+                    if (result) {
+                        //Logic to delete the item
+                        window.location.href = `/deleteKhuyenMai/${IdSelected}`
+                    }
+            }
+
+
+        }
+        function setKM(id) {
+            IdSelected = id
+        }
+
+        var btnContainer = document.getElementById("table-fill");
+
+        // Get all buttons with class="btn" inside the container
+        var btns = btnContainer.getElementsByClassName("tableClass");
+
+        // Loop through the buttons and add the active class to the current/clicked button
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("tr-active");
+                if(current[0]) current[0].className = current[0].className.replace(" tr-active", "");
+                this.className += " tr-active";
+            });
+        }
+    </script>
+</body>
+
+</html>

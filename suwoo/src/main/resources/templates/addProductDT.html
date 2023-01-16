@@ -13,325 +13,23 @@
           href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
           rel="stylesheet">
   <!-- Google Web Fonts -->
-  <title>Thêm sản phẩm</title>
+  <title>Điện thoại</title>
   <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
 </head>
 
 <body>
 <div class="wraper">
-  <div class="navbar1">
-    <div class="navbar_inner">
-      <div class="logo" id="logo" style="transition-duration: 400ms;">
-        <a th:href="@{/}">
-          <img th:src="@{/images/Logo1.png}" src="../static/images/Logo1.png" alt="SuStores"></a>
-      </div>
-      <div class="navbar_main" id="navbar_main">
-        <div class="navbar_main_inner">
-          <div class="navbar_left">
-            <div class="left_item">
-                                <span class="material-symbols-outlined" onclick="myFunction()">
-                                    menu
-                                </span>
-            </div>
-            <div class="left_item">
-              <input class="left_input" type="text" placeholder="Nhập từ khóa cần tìm...">
-            </div>
-            <div class="left_item">
-                                <span class="material-symbols-outlined">
-                                    search
-                                </span>
-            </div>
-          </div>
-          <div class="navbar_right">
-            <div class="right_item notifications">
-                                <span class="material-symbols-outlined">
-                                    notifications
-                                </span>
-              <span class="badge">3</span>
-            </div>
-            <div class="right_item notifications">
-                                <span class="material-symbols-outlined">
-                                    mark_email_unread
-                                </span>
-              <span class="badge">10</span>
-            </div>
-            <div class="right_item">
-                                <span class="material-symbols-outlined">
-                                    account_circle
-                                </span>
-              <span class="user_name" sec:authentication="principal.ten">
-                                </span>
-              <span class="material-symbols-outlined">
-                                    arrow_drop_down
-                                </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div th:replace="/header :: header"></div>
   <div class="content_body">
     <div class="menu" id="sideBar" style="transition-duration: 400ms;">
-      <div class="menu-inner">
-
-        <div class="dropdow">
-          <div class="dropdow_select active">
-                            <span class="dropdow_selected">
-                                Dashboard
-                            </span>
-            <span class="material-symbols-outlined">
-                                dashboard
-                            </span>
-          </div>
-        </div>
-        <div class="dropdow">
-          <div class="dropdow_select">
-            <a href="#">
-                                <span class="dropdow_selected">
-                                    Người dùng
-                                </span>
-              <span class="material-symbols-outlined">
-                                    arrow_drop_down
-                                </span>
-            </a>
-          </div>
-          <ul class="dropdow_list">
-
-            <li class="dropdow_item">
-              <a th:href="@{/addStaff}"><span class="dropdow_text">
-                                    Thêm tài khoản nhân viên
-                                </span></a>
-              <span class="material-symbols-outlined">
-                                    person_add
-                                </span>
-            </li>
-            <li class="dropdow_item">
-              <a th:href="@{/managerStaff}"><span class="dropdow_text">
-                                    Quản lí tài khoản nhân viên
-                            </span></a>
-              <span class="material-symbols-outlined">
-                                    manage_accounts
-                                </span>
-            </li>
-            <li class="dropdow_item">
-                                <span class="dropdow_selected">
-                                    Quản lí tài khoản khách hàng
-                                </span>
-              <span class="material-symbols-outlined">
-                                    person
-                                </span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="dropdow">
-          <div class="dropdow_select">
-                            <span class="dropdow_selected">
-                                Danh mục
-                            </span>
-            <span class="material-symbols-outlined">
-                                arrow_drop_down
-                            </span>
-
-          </div>
-          <ul class="dropdow_list">
-              <li class="dropdow_item">
-                  <a th:href="@{/addCategory}" ><span class="dropdow_text">
-                                    Thêm danh mục
-                                </span></a>
-                  <span class="material-symbols-outlined">
-                                    category
-                                </span>
-              </li>
-              <li class="dropdow_item">
-                  <a th:href="@{/managerCategory}" > <span class="dropdow_text">
-                                    Sửa/xóa danh mục
-                            </span> </a>
-                  <span class="material-symbols-outlined">
-                                    cached
-                                </span>
-              </li>
-
-          </ul>
-        </div>
-        <div class="dropdow">
-          <div class="dropdow_select">
-                            <span class="dropdow_selected">
-                                Sản phẩm điện thoại
-                            </span>
-            <span class="material-symbols-outlined">
-                                arrow_drop_down
-                            </span>
-
-          </div>
-          <ul class="dropdow_list">
-            <li class="dropdow_item">
-                <a th:href="@{/addProductDT}"><span class="dropdow_selected">
-                                Thêm sản phẩm
-                            </span></a>
-              <span class="material-symbols-outlined">
-                                    storefront
-                                </span>
-            </li>
-              <li class="dropdow_item">
-                  <a th:href="@{/managerProductDT}" > <span class="dropdow_text">
-                                    Sửa/xóa sản phẩm
-                            </span></a>
-                  <span class="material-symbols-outlined">
-                                    cached
-                                </span>
-              </li>
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Khuyến mại sản phẩm
-                                </span>
-              <span class="material-symbols-outlined">
-                                    sell
-                                </span>
-            </li>
-          </ul>
-        </div>
-        <div class="dropdow">
-          <div class="dropdow_select">
-                            <span class="dropdow_selected">
-                                Sản phẩm laptop
-                            </span>
-            <span class="material-symbols-outlined">
-                                arrow_drop_down
-                            </span>
-
-          </div>
-          <ul class="dropdow_list">
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Thêm sản phẩm
-                                </span>
-              <span class="material-symbols-outlined">
-                                    storefront
-                                </span>
-            </li>
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Sửa/xóa sản phẩm
-                                </span>
-              <span class="material-symbols-outlined">
-                                    cached
-                                </span>
-            </li>
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Khuyến mại sản phẩm
-                                </span>
-              <span class="material-symbols-outlined">
-                                    sell
-                                </span>
-            </li>
-          </ul>
-        </div>
-        <div class="dropdow">
-          <div class="dropdow_select">
-                            <span class="dropdow_selected">
-                                Sản phẩm khác
-                            </span>
-            <span class="material-symbols-outlined">
-                                arrow_drop_down
-                            </span>
-
-          </div>
-          <ul class="dropdow_list">
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Thêm sản phẩm
-                                </span>
-              <span class="material-symbols-outlined">
-                                    storefront
-                                </span>
-            </li>
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Sửa/xóa sản phẩm
-                                </span>
-              <span class="material-symbols-outlined">
-                                    cached
-                                </span>
-            </li>
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Khuyến mại sản phẩm
-                                </span>
-              <span class="material-symbols-outlined">
-                                    sell
-                                </span>
-            </li>
-          </ul>
-        </div>
-        <div class="dropdow">
-          <div class="dropdow_select">
-                            <span class="dropdow_selected">
-                                Đơn hàng
-                            </span>
-            <span class="material-symbols-outlined">
-                                shopping_bag
-                            </span>
-          </div>
-        </div>
-        <div class="dropdow">
-          <div class="dropdow_select">
-                            <span class="dropdow_selected">
-                                Mã giảm giá
-                            </span>
-            <span class="material-symbols-outlined">
-                                sell
-                            </span>
-          </div>
-          <ul class="dropdow_list">
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Giảm theo phần trăm
-                                </span>
-              <span class="material-symbols-outlined">
-                                    percent
-                                </span>
-            </li>
-            <li class="dropdow_item">
-                                <span class="dropdow_text">
-                                    Giảm theo số tiền
-                                </span>
-              <span class="material-symbols-outlined">
-                                    attach_money
-                                </span>
-            </li>
-
-          </ul>
-        </div>
-        <div class="dropdow">
-          <div class="dropdow_select">
-                            <span class="dropdow_selected">
-                                Hóa đơn
-                            </span>
-            <span class="material-symbols-outlined">
-                                receipt_long
-                            </span>
-          </div>
-        </div>
-        <div class="dropdow">
-          <div class="dropdow_select">
-                            <span class="dropdow_selected">
-                                Slider
-                            </span>
-            <span class="material-symbols-outlined">
-                                slideshow
-                            </span>
-          </div>
-        </div>
-      </div>
+        <div th:replace="/menu :: menu"></div>
 
     </div>
     <div class="bg_body" id="bgbody">
       <div class="add_product_body">
         <div class="add_product_out">
-          <div class="tittle_addProduct">
-            Thêm sản phẩm điện thoại
+          <div class="tittle_addProduct" th:text = "${tittle}">
+
           </div>
           <div class="button_tab">
             <!-- //TT chinh -->
@@ -385,7 +83,7 @@
                                     straighten
                                 </span></button>
           </div>
-          <form th:action="@{/addProductDT}" th:object="${dienthoai}" enctype="multipart/form-data" method="post">
+          <form th:action="@{/admin/addProductDT}" th:object="${dienthoai}" enctype="multipart/form-data" method="post">
               <input type="text" hidden class="input_product" name="id"  th:field = "*{id}">
               <div class="product_body_inner" id="main">
               <div class="product_add_title">
@@ -402,7 +100,7 @@
               </div>
               <div class="product_field">
                 <label class="label_product" for="gsp"> Giá sản phẩm </label>
-                <input type="text" class="input_product" id="gsp" name="gia" th:field = "*{gia}" placeholder="Giá sản phẩm tính theo VNĐ" />
+                <input type="number" class="input_product" id="gsp" name="gia" th:field = "*{gia}" placeholder="Giá sản phẩm tính theo VNĐ" />
               </div>
               <div class="product_field custom1">
                 <div class="date_staff">
@@ -411,7 +109,7 @@
                 </div>
                 <div class="date_staff">
                   <label class="label_product" for="sl">Số lượng</label>
-                  <input type="text" class="input_product" name="soLuong" th:field = "*{soLuong}" id ="sl" placeholder="Nhập số lượng" />
+                  <input type="number" class="input_product" name="soLuong" th:field = "*{soLuong}" id ="sl" placeholder="Nhập số lượng" />
                 </div>
               </div>
               <div class="product_field">
@@ -427,7 +125,7 @@
                 </div>
                 <div class="date_staff">
                   <label class="label_product" for="categoryDto">Category</label>
-                  <select name="category" id="categoryDto" class="input_product" aria-hidden="true">
+                  <select name="category"  id="categoryDto" class="input_product" aria-hidden="true">
                       <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.ten}" th:selected = "${categoryDto.id !=null}?${category.id}==${categoryDto.id}:'false'"></option>
                   </select>
                 </div>
@@ -448,16 +146,21 @@
           </div>
           <div class="product_body_inner" id="image_product">
               <div class="product_add_title">
-                Thông tin cơ bản
-              </div>
-              <div class="product_field">
-                <label class="label_product" for="mtanh">Mô tả ảnh</label>
-                <input type="text" class="input_product" th:field = *{imageDto[0].moTa} name="mtanh" id="mtanh" placeholder="Mô tả ảnh" />
+                Ảnh sản phẩm
               </div>
               <div class="product_field">
                 <label class="label_product" for="files">Ảnh sản phẩm</label>
-                <input type="file" id="files" name="listimages" th:field = "${files}"  accept="image/jpeg, image/png, image/jpg" class="input_product" multiple="multiple"/>
-                <output id="result"> </output>
+                <input type="file" id="files" name="listimages" accept="image/jpeg, image/png, image/jpg" class="input_product" multiple="multiple"/>
+                <output id="result">
+                </output>
+                  <output th:each="img, itemStat : *{imageDto}" class="thumbnail2_output" >
+                          <img class="thumbnail2" th:src="${img.urlImg}" th:id="'img' + ${img.id}"/>
+                        <span class="material-symbols-outlined" th:id="${img.id}" th:attr="onclick=|functionDis('${img.id}')|">close</span>
+                  </output>
+                  <div th:each="img, itemStat : *{imageDto}">
+                      <input type="hidden" th:field = *{imageDto[__${itemStat.index}__].urlImg} th:id="'url' + ${img.id}">
+                      <input type="hidden" th:field = *{imageDto[__${itemStat.index}__].id} th:id="'id' + ${img.id}">
+                  </div>
               </div>
           </div>
           <div class="product_body_inner" id="cpu_product">
@@ -640,12 +343,12 @@
               </div>
               <div class="product_field">
                 <label class="container">Hiển thị sản phẩm lên website
-                  <input type="checkbox" name="acitve" th:checked="*{acitve}" value="1" th:field="*{acitve}">
+                  <input type="checkbox" name="active" th:checked="*{active}" value="1" th:field="*{active}">
                   <span class="checkmark"></span>
                 </label>
               </div>
             <div class="button_subpro staff_flex">
-              <button >Lưu sản phẩm</button>
+              <button type="submit">Lưu sản phẩm</button>
             </div>
           </div>
           </form>

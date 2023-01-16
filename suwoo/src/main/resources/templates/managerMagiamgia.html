@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+          rel="stylesheet">
+  <!-- Google Web Fonts -->
+  <title>Quản lí khuyến mại</title>
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+  <div th:replace="/header :: header"></div>
+  <div class="content_body">
+    <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+      <div th:replace="/menu :: menu"></div>
+
+    </div>
+    <div class="bg_body" id="bgbody">
+      <form method="POST">
+        <div class="table_body">
+          <div class="table_title">
+            Khuyến mại
+          </div>
+          <div class="alert alert-primary"style="color:red;" role="alert" th:text="${success}" th:if="${success}"></div>
+          <div class="alert alert-danger"style="color:red;" role="alert" th:text="${error}" th:if="${error}"></div>
+          <table class="table-fill" id="table-fill">
+            <thead>
+            <tr>
+              <th class="text-left">STT</th>
+              <th class="text-left">Tên mã giảm giá</th>
+              <th class="text-left">Code</th>
+              <th class="text-left">Loại mã giảm giá</th>
+              <th class="text-left">Ngày bắt đầu</th>
+              <th class="text-left">Ngày kết thúc</th>
+              <th class="text-left">Giá trị</th>
+              <th class="text-left">Giảm tối đa</th>
+              <th class="text-left">Giảm giá cho đơn hàng từ</th>
+              <th class="text-left">Mô tả</th>
+              <th class="text-left">Active</th>
+            </tr>
+            </thead>
+            <tbody class="table-hover">
+            <tr th:each="maGiamGia, iStat : ${maGiamGias}" class="tableClass cursor" th:attr="onclick=|setKM('${maGiamGia.id}')|" >
+              <td th:text="${iStat.index + 1}" class="text-left" ></td>
+              <td th:text="${maGiamGia.ten}" class="text-left"></td>
+              <td th:text="${maGiamGia.code}" class="text-left"></td>
+              <td th:text="${maGiamGia.loaiMa}" class="text-left"></td>
+              <td th:text="${maGiamGia.ngayBd}" class="text-left"></td>
+              <td th:text="${maGiamGia.ngayKt}" class="text-left"></td>
+              <td th:text="${maGiamGia.giaTri}" class="text-left"></td>
+              <td th:text="${maGiamGia.giamToiDa}" class="text-left"></td>
+              <td th:text="${maGiamGia.donHangTu}" class="text-left"></td>
+              <td th:text="${maGiamGia.moTa}" class="text-left"></td>
+              <td th:text="${maGiamGia.trangThai}" class="text-left"></td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="button_staff">
+            <div class="button_staff_inner ">
+              <button type="button" onclick="addMGG()">Thêm mã giảm giá</button>
+            </div>
+            <div class="button_staff_inner ">
+              <button type="button" onclick="editMGG()">Sửa mã giảm giá</button>
+            </div>
+            <div class="button_staff_inner warning ">
+              <button  type="button" onclick="deleteMGG()">Xóa mã giảm giá</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<script>
+        var IdSelected = 0
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+        function addMGG() {
+            window.location.href = `/admin/addMaGiamGia`
+        }
+
+        function editMGG() {
+            if(IdSelected==0) confirm("Bạn chưa thực sự chọn dòng!!");
+          else{
+             window.location.href = `/admin/editMaGiamGia/${IdSelected}`
+          }
+
+        }
+        function deleteMGG() {
+
+            if(IdSelected==0) confirm("Bạn chưa thực sự chọn dòng!!");
+            else {
+            var result = confirm("Bạn có thực sự muốn xóa không?");
+                    if (result) {
+                        //Logic to delete the item
+                        window.location.href = `/admin/deleteMaGiamGia/${IdSelected}`
+                    }
+            }
+
+
+        }
+        function setKM(id) {
+            IdSelected = id
+        }
+
+        var btnContainer = document.getElementById("table-fill");
+
+        // Get all buttons with class="btn" inside the container
+        var btns = btnContainer.getElementsByClassName("tableClass");
+
+        // Loop through the buttons and add the active class to the current/clicked button
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("tr-active");
+                if(current[0]) current[0].className = current[0].className.replace(" tr-active", "");
+                this.className += " tr-active";
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/styleClient.css}" />
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+  <title>Sản phẩm điện thoại</title>
+</head>
+<body>
+<div class="wrapper">
+  <div th:replace="/navbar :: navbar"></div>
+  <div class="container">
+    <div class="banner_dt">
+      <img th:src="@{/images/banner.png}" alt="">
+    </div>
+    <div class="container_inner">
+
+      <div class="product_sales">
+        <div class="product_sales_inner">
+          <div class="padding_bottom">
+            <div class="product_tittle_left">
+              Điện thoại
+            </div>
+            <a onclick="functionSort()">
+              <div class="product_tittle_right" th:text = "${sort !=null}?${'Sắp xếp theo: '+sort}:'Sắp xếp theo: Mặc định'">
+                Sắp xếp theo: Mặc định
+                <span class="material-symbols-outlined">
+                                        keyboard_arrow_down
+                                    </span>
+              </div>
+            </a>
+            <div class="sortdt_details" id="sortdt_details">
+              <a >
+                <div class="sortdt_item" th:attr="onclick=|linksortpage('${currentPage}','sortNameASC')|">Tên A -> Z</div>
+              </a>
+
+              <a >
+                <div class="sortdt_item" th:attr="onclick=|linksortpage('${currentPage}','sortNameDESC')|" >Tên Z -> A</div>
+              </a>
+
+              <a >
+                <div class="sortdt_item" th:attr="onclick=|linksortpage('${currentPage}','sortPriceASC')|">Giá tăng dần</div>
+              </a>
+              <a >
+                <div class="sortdt_item" th:attr="onclick=|linksortpage('${currentPage}','sortPriceDESC')|">Giá giảm dần</div>
+              </a>
+            </div>
+          </div>
+          <div class="product_list_out">
+            <div class="list_filter">
+              <div class="list_filter_inner">
+                <div class="item_filter">
+                  <form th:action="@{/viewListProductDtWithFilter}" method="get">
+                  <div class="item_filter_inner">
+                    <div class="item_filter2">
+                      <div class="filter_title">Hãng sản xuất</div>
+                      <div class="list_filter_item">
+                        <div class="filter_item" th:each = "hang, item:${hangs}"><input th:value="${hang}" th:checked = "${hangFts !=null}?${#arrays.contains(hangFts, hangs[__${item.index}__])}:'false'" name="hang" type="checkbox"><label th:text="${hang}">Iphone</label></div>
+                      </div>
+                    </div>
+                    <div class="item_filter2">
+                      <div class="filter_title">Mức giá</div>
+                      <div class="list_filter_item">
+                        <div class="input_rate">
+                          <input type="number" name="giamin" hidden id="giamin">
+                          <div class="input_rate_inner"><label for="price-min">Min</label><input type="text" id="minPrice" readonly ></div>
+                          <input type="range" id="price-min" th:value = "${minPriceFts}" min="0" max="100000000" onchange="myFunctionpriceMin()">
+                        </div>
+                        <div class="input_rate">
+                          <input type="number" name="giamax" hidden id="giamax">
+                          <div class="input_rate_inner"><label for="price-max">Max</label><input type="text" readonly id="maxPrice"></div>
+                          <input type="range"  id="price-max" th:value = "${maxPriceFts}" min="0" max="100000000" onchange="myFunctionpriceMax()" >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item_filter2">
+                      <div class="filter_title">Hệ điều hành</div>
+                      <div class="list_filter_item">
+                        <div class="filter_item"><input type="checkbox"  name="heDieuHanh" th:checked = "${hedieuhanhFts !=null}?${#arrays.contains(hedieuhanhFts, 'Android')}:'false'" value="Android"><label>Android</label></div>
+                        <div class="filter_item"><input type="checkbox" name="heDieuHanh" th:checked = "${hedieuhanhFts !=null}?${#arrays.contains(hedieuhanhFts, 'IOS')}:'false'" value="IOS"><label>IOS</label></div>
+                      </div>
+                    </div>
+                    <div class="item_filter2">
+                      <div class="filter_title">Kích thước màn hình</div>
+                      <div class="list_filter_item">
+                        <div class="filter_item"><input type="checkbox" name="kichthuoc" th:checked = "${kichthuocFts !=null}?${#arrays.contains(kichthuocFts, '>=6')}:'false'" value =">=6"><label>Lớn hơn 6 inch</label></div>
+                        <div class="filter_item"><input type="checkbox" name="kichthuoc" th:checked = "${kichthuocFts !=null}?${#arrays.contains(kichthuocFts, '<=6')}:'false'" value ="<=6"><label>Nhỏ hơn 6 inch</label></div>
+                      </div>
+                    </div>
+                    <div class="item_filter2">
+                      <div class="filter_title">Độ phân giải</div>
+                      <div class="list_filter_item" >
+                        <div class="filter_item" th:each = "manhinh,item:${manhinhs}"><input type="checkbox" th:value = "${manhinh}" name="manhinh" th:checked = "${dophangiaiFts !=null}?${#arrays.contains(dophangiaiFts, manhinhs[__${item.index}__])}:'false'" ><label th:text = "${manhinh}">4K</label></div>
+                      </div>
+                    </div>
+                    <div class="item_filter2">
+                      <div class="filter_title">Bộ nhớ</div>
+                      <div class="list_filter_item">
+                        <div class="filter_item" th:each = "bonho,item:${bonhos}"><input type="checkbox" th:value = "${bonho}" name="bonho" th:checked = "${bonhoFts !=null}?${#arrays.contains(bonhoFts, bonhos[__${item.index}__])}:'false'"><label th:text = "${bonho}">32GB</label></div>
+                      </div>
+                    </div>
+                    <div class="item_filter2">
+                      <div class="filter_title">RAM</div>
+                      <div class="list_filter_item">
+                        <div class="filter_item" th:each = "ram,item:${rams}"><input type="checkbox" th:value = "${ram}" name="ram" th:checked = "${ramFts !=null}?${#arrays.contains(ramFts, rams[__${item.index}__])}:'false'"><label th:text = "${ram}">32GB</label></div>
+                      </div>
+                    </div>
+                    <div class="item_filter2">
+                      <div class="filter_title">Pin</div>
+                      <div class="list_filter_item">
+                        <div class="filter_item"><input type="checkbox" value="1" name="pin" th:checked = "${pinFts !=null}?${#arrays.contains(pinFts, '1')}:'false'"><label>Dưới 3000mAh</label></div>
+                        <div class="filter_item"><input type="checkbox" value="2" name="pin" th:checked = "${pinFts !=null}?${#arrays.contains(pinFts, '2')}:'false'"><label>Khoảng 3000 - 5000mAh</label></div>
+                        <div class="filter_item"><input type="checkbox" value="3" name="pin" th:checked = "${pinFts !=null}?${#arrays.contains(pinFts, '3')}:'false'"><label>Trên 5000mAh</label></div>
+                      </div>
+                    </div>
+                    <div class="item_filter2">
+                      <div class="filter_title">Camera</div>
+                      <div class="list_filter_item">
+                        <div class="filter_item_lt" th:each = "tinhnang,item:${tinhnangs}"><input type="checkbox" name="tinhnang" th:checked = "${tinhnangFts !=null}?${#arrays.contains(tinhnangFts, tinhnangs[__${item.index}__])}:'false'" th:value = "${tinhnang}"><label th:text = "${tinhnang}">Zoom quang học</label></div>
+                      </div>
+                    </div>
+                    <div class="item_filter3">
+                      <button type="submit">Áp dụng</button>
+                    </div>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="product_list_main">
+              <div class="product_sales_inner3">
+                <h4 style="color:red;" th:if = "${#lists.size(dienthoais)==0}"  th:text = "${#lists.size(dienthoais)==0}?'Không tìm thấy sản phẩm nào!!!':'false'" ></h4>
+                <div class="product_item2" th:each = " dienthoai, istat : ${dienthoais}">
+                  <div class="product_item_inner">
+                    <div class="product_img">
+                      <div class="product_sale" th:text =" ${dienthoai.khuyenMaiDto.tiLe + ' off'}" th:if = ${dienthoai.khuyenMaiDto}>20% off</div>
+                      <img th:src="${dienthoai.imageDto[0].urlImg}"
+                           alt="product">
+                    </div>
+                    <div class="product_details">
+                      <div class="product_details_left">
+                        <a th:href="@{'/productDetailsClient/'+${dienthoai.id}}">
+                        <div class="product_name" th:text = "${dienthoai.ten}">
+                          Samsung S22 Ultra 512GB
+                        </div>
+                        <div class="product_price">
+                          <span th:text = ${dienthoai.gia} th:if = "${dienthoai.giaKm == null}">1.000.000đ</span>
+                          <span th:text = ${dienthoai.giaKm} th:if = "${dienthoai.giaKm}">1.000.000đ</span>
+                          <span><del th:text = ${dienthoai.gia} th:if = "${dienthoai.giaKm}" >1.500.000đ</del></span>
+                        </div>
+                        <div class="nmber_star">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                        </div>
+                        </a>
+                      </div>
+                      <div class="product_details_right">
+                        <a th:href="@{'/addToCart/'+${dienthoai.id}}">
+                          <div class="details_right_item">
+                                                <span class="material-symbols-outlined">
+                                                    shopping_cart
+                                                </span>
+                          </div>
+                        </a>
+                        <div class="details_right_item">
+                                                        <span class="material-symbols-outlined">
+                                                            favorite
+                                                        </span>
+                        </div>
+                        <a th:href="@{'/productDetailsClient/'+${dienthoai.id}}">
+                        <div class="details_right_item">
+                                                        <span class="material-symbols-outlined">
+                                                            visibility
+                                                        </span>
+                        </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pagination">
+            <a th:if="${currentPage >1}" th:attr="onclick=|linkpage('${currentPage - 1}')|">&laquo;</a>
+            <div th:each="i: ${#numbers.sequence(1, totalPages)}">
+              <a  th:classappend = "${currentPage == i} ? 'active':''" th:attr="onclick=|linkpage('${i}')|">[[${i}]]</a>
+            </div>
+            <a th:if="${currentPage < totalPages}" th:attr="onclick=|linkpage('${currentPage + 1}')|">&raquo;</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div th:replace="/footer :: footer"></div>
+</div>
+</body>
+<script>
+    window.onscroll = function () { myFunction() };
+    var header = document.getElementById("navbar_main");
+    var sticky = header.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    };
+    function myFunctionpriceMin(){
+        var priceMin= document.getElementById("price-min").value;
+        console.log(priceMin);
+        var priceMinvnd = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(priceMin);
+       document.getElementById("minPrice").value = priceMinvnd;
+       document.getElementById("giamin").value = priceMin;
+    }
+    function myFunctionpriceMax(){
+        var priceMax = document.getElementById("price-max").value;
+        console.log(priceMax);
+        var priceMaxvnd = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(priceMax);
+       document.getElementById("maxPrice").value = priceMaxvnd;
+       document.getElementById("giamax").value = priceMax;
+    }
+    function inputSearch(){
+        var x = document.getElementById("inputSearch").value;
+        var y = document.getElementById("optionMenu").value;
+        if((document.getElementById("inputSearch").getAttribute('hidden') != null)){
+            let p = document.getElementById("inputSearch");
+            let o = document.getElementById("optionMenu");
+            p.removeAttribute("hidden");
+            o.removeAttribute("hidden");
+        }
+        else{
+            document.getElementById("formSearch").submit();
+        }
+    }
+    function userDetailsPoppup() {
+        var x = document.getElementById('user_details');
+        var y = document.getElementById('cart_details');
+        if (x.style.display === 'none') {
+            if (y.style.display == 'flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    };
+    function functionSort(){
+        var x = document.getElementById('sortdt_details');
+        if (x.style.display === 'none') {
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    }
+    function cartDetailsPoppup() {
+        var x = document.getElementById('cart_details');
+        var y = document.getElementById('user_details');
+        if (x.style.display === 'none') {
+            if (y.style.display == 'flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    }
+    function linksortpage(page,loaisort){
+      console.log(page);
+      var urlPage = window.location.href;
+      var utlBase = '';
+      var urlParram = '';
+      let start = 0;
+      for(let i = 0; i < urlPage.length-1; i++){
+        if(urlPage.charAt(i) =='?'){
+          start = i;
+          break;
+        }
+      }
+      if(start > 0){
+        utlBase = urlPage.substring(0,start);
+        urlParram = urlPage.substring(start,urlPage.length);
+      }else {
+        utlBase = urlPage;
+      }
+      console.log(page);
+      if(utlBase.charAt(utlBase.length-2) =='/' && (utlBase.charAt(utlBase.length-1) >= '0' && utlBase.charAt(utlBase.length-1) <= '9')){
+        utlBase = utlBase.substring(0, utlBase.length-1)+ page;
+      }
+      else{
+        utlBase += '/'+ page;
+      }
+      console.log(urlParram);
+      if(urlParram ==''){
+        urlParram += '?sorting='+loaisort;
+      }
+      else{
+        let index = urlParram.indexOf('sorting');
+        if(index > 0){
+          urlParram = urlParram.substring(0,index)+'sorting='+loaisort;
+          console.log(urlParram);
+        }
+        else{
+          urlParram += '&sorting='+loaisort;
+        }
+      }
+      var newUrl = utlBase + urlParram;
+      window.location.href = newUrl;
+    }
+    function linkpage(page){
+      console.log(page);
+      var urlPage = window.location.href;
+      var utlBase = '';
+      var urlParram = '';
+      let start = 0;
+      for(let i = 0; i < urlPage.length-1; i++){
+        if(urlPage.charAt(i) =='?'){
+          start = i;
+          break;
+        }
+      }
+      if(start > 0){
+        utlBase = urlPage.substring(0,start);
+        urlParram = urlPage.substring(start,urlPage.length);
+      }else {
+        utlBase = urlPage;
+      }
+      console.log(page);
+      if(utlBase.charAt(utlBase.length-2) =='/' && (utlBase.charAt(utlBase.length-1) >= '0' && utlBase.charAt(utlBase.length-1) <= '9')){
+        utlBase = utlBase.substring(0, utlBase.length-1)+ page;
+      }
+      else{
+        utlBase += '/'+ page;
+      }
+      var newUrl = utlBase + urlParram;
+      window.location.href = newUrl;
+    }
+</script>
+</html>

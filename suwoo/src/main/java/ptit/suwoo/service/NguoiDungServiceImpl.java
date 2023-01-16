@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 import ptit.suwoo.Dto.NguoiDungDTO;
@@ -25,8 +26,8 @@ import java.util.Optional;
 
 @Service
 public class NguoiDungServiceImpl implements UserDetailsService {
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private NguoiDungRepository nguoiDungRepository;
     @Autowired

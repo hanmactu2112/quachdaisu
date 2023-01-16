@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <title>Điện thoại</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+    <div th:replace="/header :: header"></div>
+    <div class="content_body">
+        <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+            <div th:replace="/menu :: menu"></div>
+
+        </div>
+        <div class="bg_body" id="bgbody">
+            <div class="body_productDtdetails">
+                <div class="productDtdetails_inner" th:object = ${dienthoai}>
+                    <div class="productDtdetails_left">
+                        <div class="productDtdetails_inner_left" >
+                            <div class="productDtdetails_image" >
+                                <div class="productdt_item fade" th:each="img, itemStat : ${dienthoai.imageDto}" >
+                                    <img th:src="${img.urlImg}" alt="main"/>
+                                </div>
+                                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                            </div>
+                            <div class="list_image_outer">
+                                <div class="list_image" >
+                                        <div class="image_item"  th:each="img, itemStat : ${dienthoai.imageDto}">
+                                            <div  th:attr="onclick=|currentSlide('${itemStat.index + 1}')|">
+                                                <div class="image_item_inner">
+                                                    <img th:src="${img.urlImg}" alt="main"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="productDtdetails_right">
+                        <div class="productDtdetails_inner_right">
+                            <div class="tittle_left">
+                                <div class="tittle_left_inner">
+                                    <div class="namedtProduct" th:text = ${dienthoai.ten}>
+                                    </div>
+                                    <div class="boder"></div>
+                                    <div class="price_dt" th:text = ${dienthoai.gia}>
+                                        26.000.000đ
+                                    </div>
+                                    <div class="review">
+                                        <div class="nmber_star">
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            <i class="fa fa-star" ></i>
+                                            8 Reviews
+                                        </div>
+                                        <div class="review_inner">
+
+                                        </div>
+                                    </div>
+                                    <div class="mota_dt" th:text = "${dienthoai.moTa}">
+                                        sadsa
+                                    </div>
+                                    <div class="quantity">
+                                        <div class="title_quantity">
+                                            Quantity
+                                        </div>
+                                        <div class="quantity_num">
+                                            <input type="number" readonly value="1" th:field = "*{soLuong}"/>
+                                        </div>
+                                    </div>
+                                    <div class="button_dt">
+                                        Danh sách sản phẩm
+                                    </div>
+                                    <div class="details_product">
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                Thông tin cơ bản
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('ttcb')">
+                                                    add
+                                                    </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="ttcb">
+                                            <div class="details_product_content_inner">
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Tên sản phẩm:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.ten}">Samsung s22 ultra</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Màu sắc:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.color}">Đen</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Nhà sản xuất:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.hang}" >Samsung</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Ngày ra mắt:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.ngayRaMat}">03/02/2020</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Danh mục:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.categoryDto.ten}">Điện thoại</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Chất liệu:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.chatLieu}">Nhựa</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Thiết kế:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.thietKe}">Nguyên khối</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                CPU
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('cpu')">
+                                                    add
+                                                </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="cpu">
+                                            <div class="details_product_content_inner">
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Hệ điều hành:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtHeDieuHanhCpuDto.heDieuHanh}">Android 12</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">CPU:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtHeDieuHanhCpuDto.cpu}">Snapdragon 825</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Tốc độ CPU:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtHeDieuHanhCpuDto.tocDoCpu}">2.8Ghz</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">GPU:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtHeDieuHanhCpuDto.gpu}">Tích hợp</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                Camera
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('camera')">
+                                                    add
+                                                    </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="camera">
+                                            <div class="details_product_content_inner" th:each = "camera, itemStat :${dienthoai.cameraDtoList}">
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Loại camera:</div>
+                                                    <div class="details_product_field_value" th:text = "${camera.loai}"></div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Độ phâm giải:</div>
+                                                    <div class="details_product_field_value" th:text = "${camera.doPhanGiaiCamera}">48MP</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Tính năng:</div>
+                                                    <div class="details_product_field_value" th:text = "${camera.tinhNang}">Chụp ảnh đẹp</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                Màn hình
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('mh')">
+                                                    add
+                                                    </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="mh">
+                                            <div class="details_product_content_inner">
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Công nghệ màn hình:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.manHinhDto.congNgheManHinh}">Màn hình amorled</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Độ phâm giải:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.manHinhDto.doPhanGiai}">4K</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Kích thước:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.manHinhDto.kichThuoc}">6.8 Inch</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Độ sáng tối đa:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.manHinhDto.doSangToiDa}">1750 nit</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Màn hình cảm ứng:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.manHinhDto.matKinhCamUng}">Cường lực</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Tần số quét:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.manHinhDto.tanSoQuet}">120Hz</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                Bộ nhớ
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('bnho')">
+                                                    add
+                                                    </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="bnho">
+                                            <div class="details_product_content_inner">
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">ROM:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtBoNhoDto.rom}">512GB</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">RAM:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtBoNhoDto.ram}">8GB</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                Tiện ích
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('tienich')">
+                                                    add
+                                                    </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="tienich">
+                                            <div class="details_product_content_inner" >
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Tính năng bảo mật:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.tienIchDto.baoMat}">Bảo mật vân tay</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Tính năng đặc biệt khác:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.tienIchDto.tinhNangDacBiet}">Nhận diện khuôn mặt</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                Pin
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('pin')">
+                                                    add
+                                                    </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="pin">
+                                            <div class="details_product_content_inner">
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Dung lượng PIN:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.pinDto.dungLuong}">5000mAh</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title" >Loại PIN:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.pinDto.loaiPin}">Cell</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Công nghệ PIN:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.pinDto.congNghe}">Sạc nhanh 120W</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                Kết nối
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('ketnoi')">
+                                                    add
+                                                    </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="ketnoi">
+                                            <div class="details_product_content_inner">
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Mạng di động:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtKetNoiDto.mangDiDong}">Hỗ trợ 5G:</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Wifi:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtKetNoiDto.wifi}">802.11g/a/c/b</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">GPS</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtKetNoiDto.gps}">gps</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Bluetooth:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtKetNoiDto.bluetooth}">v5.2</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Cổng sạc:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtKetNoiDto.congSac}">type-c</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Tai nghe:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtKetNoiDto.taiNghe}">type-c</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Kết nối khác:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.dtKetNoiDto.ketNoiKhac}">không</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="details_product_item">
+                                            <div class="details_product_item_inner">
+                                                Kích thước trọng lượng
+                                            </div>
+                                            <div class="icon_details"><span class="material-symbols-outlined" onclick="openDetails('kttl')">
+                                                    add
+                                                    </span></div>
+                                        </div>
+                                        <div class="details_product_content" id="kttl">
+                                            <div class="details_product_content_inner">
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Chiều dài:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.kichThuocTrongLuongDto.doDai}">68.9mm</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Chiều rộng:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.kichThuocTrongLuongDto.doRong}">12mm</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Độ dày:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.kichThuocTrongLuongDto.doMong}">8.9mm</div>
+                                                </div>
+                                                <div class="details_product_field">
+                                                    <div class="details_product_field_title">Trọng lượng:</div>
+                                                    <div class="details_product_field_value" th:text = "${dienthoai.kichThuocTrongLuongDto.trongLuong}">600g</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+        var productIdSelected = 0
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("productdt_item");
+            let dots = document.getElementsByClassName("image_item");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" img_active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " img_active";
+        }
+        function openDetails(a){
+            if (document.getElementById(a).style.display === "none") {
+                document.getElementById(a).style.display = "block";
+            }
+            else {
+                document.getElementById(a).style.display = "none";
+            }
+        }
+
+    </script>
+</body>
+
+</html>

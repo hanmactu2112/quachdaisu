@@ -32,4 +32,12 @@ public class CategoryServiceImpl implements CategoryService{
         Optional<Category> category = categoryReponsitory.findById(id);
         return category;
     }
+    @Override
+    public Category findCategoryByDt(Long id) {
+        return categoryReponsitory.searchCategoryByDt(id);
+    }
+    @Override
+    public Category findCategoryByLt(Long id) {
+        return categoryReponsitory.searchCategoryByLt(id);
+    }
 }

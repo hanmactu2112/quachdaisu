@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/styleClient.css}" />
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../Logo1.png">
+  <title>Trang chủ</title>
+</head>
+<body>
+<div th:fragment="footer">
+  <div class="footer">
+    <div class="footer_inner">
+      <div class="footer_main">
+        <div class="footer_item">
+          <div class="footer_item_inner">
+            <div class="footer_item_title">
+              Dịch vụ khách hàng
+            </div>
+            <div class="footer_item_hoder">
+              <div class="footer_text_item">
+                <a href="#">Hỗ trợ 24/24</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Đổi trả miễn phí</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Bảo hành 2 năm</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Hàng chính hãng</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer_item">
+          <div class="footer_item_inner">
+            <div class="footer_item_title">
+              Danh mục sản phẩm
+            </div>
+            <div class="footer_item_hoder">
+              <div class="footer_text_item">
+                <a th:href="@{/viewListProductDt}">Điện thoại</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Laptop</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Phụ kiện</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Sản phẩm mới</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer_item">
+          <div class="footer_item_inner">
+            <div class="footer_item_title">
+              Theo dõi chúng tôi
+            </div>
+            <div class="footer_item_hoder">
+              <div class="footer_text_item">
+                <a href="#">Twitter</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="https://www.instagram.com/21th.dec___/" target="_blank">Instagram</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="https://www.facebook.com/Su.rattotluon/" target="_blank">Facebook</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Pinterest</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer_item">
+          <div class="footer_item_inner">
+            <div class="footer_item_title">
+              Tài khoản
+            </div>
+            <div class="footer_item_hoder">
+              <div class="footer_text_item">
+                <a href="#">Thông tin cá nhân</a>
+              </div>
+              <div class="footer_text_item">
+                <a th:href="@{/Cart}">Giỏ hàng</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Lịch sử mua hàng</a>
+              </div>
+              <div class="footer_text_item">
+                <a href="#">Phản hồi</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer_item">
+          <div class="footer_item_inner">
+            <div class="footer_item_title">
+              Liên hệ
+            </div>
+            <div class="footer_item_hoder">
+              <a href="#">
+                <div class="footer_text_item">
+                                    <span class="material-symbols-outlined">
+                                        location_on
+                                        </span>
+                  <div class="footer_text_item_text">Hà Nội, Việt Nam</div>
+                </div>
+              </a>
+              <a href="#">
+                <div class="footer_text_item">
+                                    <span class="material-symbols-outlined">
+                                        mail
+                                        </span>
+                  <div class="footer_text_item_text">contact@gmail.com</div>
+                </div></a>
+              <a href="#">
+                <div class="footer_text_item">
+                                        <span class="material-symbols-outlined">
+                                        call
+                                        </span>
+                  <div class="footer_text_item_text">+193434545</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer_end">
+    <div class="footer_end_inner">
+      <div class="footer_end_text">
+        © Copyright 2022 & Made with SuWoo
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+    window.onscroll = function() {myFunction()};
+    var header = document.getElementById("navbar_main");
+    var sticky = header.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    };
+    function inputSearch(){
+        var x = document.getElementById("inputSearch").value;
+        var y = document.getElementById("optionMenu").value;
+        if(!x){
+            let p = document.getElementById("inputSearch");
+            let o = document.getElementById("optionMenu");
+            p.removeAttribute("hidden");
+            o.removeAttribute("hidden");
+        }
+        else{
+            let p = document.getElementById("inputSearch");
+            let o = document.getElementById("optionMenu");
+            p.setAttribute("hidden", true);
+            o.setAttribute("hidden", true);
+            p.value=null;
+        }
+    }
+
+    window.addEventListener("load",function(){
+        const sliderItem = document.querySelectorAll(".slider_item_inner");
+        const sliderMain = document.querySelector(".slider_main2");
+        const next = document.querySelector(".next_slider");
+        const backSlider = document.querySelector(".back_slider");
+        const withSlider = sliderItem[0].offsetWidth;
+        console.log(withSlider);
+        const sliderLength = sliderItem.length;
+        console.log(sliderLength);
+        let positionX = 0;
+        let index =0;
+        setHeight(index);
+        next.addEventListener("click",function(){
+            changeSlider(1);
+        });
+        backSlider.addEventListener("click",function(){
+            changeSlider(-1);
+        });
+        function changeSlider(direction){
+            if(direction===1 ){
+                index++;
+                if(index<=sliderLength-1){
+                    positionX = positionX-withSlider;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    setHeight(index);
+                }
+                else {
+                    positionX = 0;
+                    index=0;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    setHeight(index);
+                }
+            }
+            else if(direction===-1){
+                index--;
+                if(index>=0){
+                    positionX += withSlider;
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    setHeight(index);
+                    console.log("prev");
+                }
+                else{
+                    index=sliderLength-1;
+                    positionX = positionX-withSlider*index;
+                    console.log("prev"+positionX)
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    setHeight(index);
+                }
+            }
+        }
+        function setHeight(index1){
+            const sliderImg = document.querySelectorAll(".imgSlider");
+            let heightSlider = sliderImg[index1].offsetHeight;
+            document.getElementById('slider_main2').style.height = `${heightSlider}px`;
+        };
+        setInterval(function(){
+            index++;
+            if(index<=sliderLength-1){
+                positionX = positionX-withSlider;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+                setHeight(index);
+            }
+
+            else {
+                positionX = 0;
+                index=0;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+                setHeight(index);
+            }
+        },4500);
+    });
+    /* Slider category */
+    window.addEventListener("load",function(){
+        const sliderItem = document.querySelectorAll(".category_item");
+        const sliderMain = document.querySelector(".category_main");
+        const next = document.querySelector(".next_slider1");
+        const backSlider = document.querySelector(".back_slider1");
+        const withSlider = sliderItem[0].offsetWidth;
+        console.log(withSlider);
+        const sliderLength = sliderItem.length;
+        console.log(sliderLength);
+        let positionX = 0;
+        let index =0;
+        // setHeight(index);
+        next.addEventListener("click",function(){
+            changeSlider(1);
+        });
+        backSlider.addEventListener("click",function(){
+            changeSlider(-1);
+        });
+        function changeSlider(direction){
+            if(direction===1 ){
+                index++;
+                if(index<=sliderLength-5){
+                    positionX = positionX-withSlider;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+                else {
+                    positionX = 0;
+                    index=0;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+            else if(direction===-1){
+                index--;
+                if(index>=0){
+                    positionX += withSlider;
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                    // console.log("prev");
+                }
+                else{
+                    index=sliderLength-5;
+                    positionX = positionX-withSlider*index;
+                    console.log("prev"+positionX)
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+        }
+        // function setHeight(index1){
+        //     const sliderImg = document.querySelectorAll(".imgSlider");
+        //     let heightSlider = sliderImg[index1].offsetHeight;
+        //     document.getElementById('slider_main2').style.height = `${heightSlider}px`;
+        // };
+        setInterval(function(){
+            index++;
+            if(index<=sliderLength-5){
+                positionX = positionX-withSlider;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+
+            else {
+                positionX = 0;
+                index=0;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+        },5000);
+    });
+
+    /* Flas sale */
+    window.addEventListener("load",function(){
+        const sliderItem = document.querySelectorAll(".product_item1");
+        const sliderMain = document.querySelector(".product_sale_main1");
+        const next = document.querySelector(".next_slider2");
+        const backSlider = document.querySelector(".back_slider2");
+        const withSlider = sliderItem[0].offsetWidth;
+        console.log(withSlider);
+        const sliderLength = sliderItem.length;
+        console.log(sliderLength);
+        let positionX = 0;
+        let index =0;
+        // setHeight(index);
+        next.addEventListener("click",function(){
+            changeSlider(1);
+        });
+        backSlider.addEventListener("click",function(){
+            changeSlider(-1);
+        });
+        function changeSlider(direction){
+            if(direction===1 ){
+                index++;
+                if(index<=sliderLength-5){
+                    positionX = positionX-withSlider;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+                else {
+                    positionX = 0;
+                    index=0;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+            else if(direction===-1){
+                index--;
+                if(index>=0){
+                    positionX += withSlider;
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                    // console.log("prev");
+                }
+                else{
+                    index=sliderLength-5;
+                    positionX = positionX-withSlider*index;
+                    console.log("prev"+positionX)
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+        }
+        // function setHeight(index1){
+        //     const sliderImg = document.querySelectorAll(".imgSlider");
+        //     let heightSlider = sliderImg[index1].offsetHeight;
+        //     document.getElementById('slider_main2').style.height = `${heightSlider}px`;
+        // };
+        setInterval(function(){
+            index++;
+            if(index<=sliderLength-5){
+                positionX = positionX-withSlider;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+
+            else {
+                positionX = 0;
+                index=0;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+        },4000);
+    });
+
+    function userDetailsPoppup(){
+        var x = document.getElementById('user_details');
+        var y = document.getElementById('cart_details');
+        if(x.style.display === 'none'){
+            if(y.style.display=='flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    };
+    function cartDetailsPoppup(){
+        var x = document.getElementById('cart_details');
+        var y = document.getElementById('user_details');
+        if(x.style.display === 'none'){
+            if(y.style.display=='flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    }
+</script>
+<script src="./addCart.js"></script>
+</html>

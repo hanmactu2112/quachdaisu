@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <title>Thêm khuyến mại</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+    <div th:replace="/header :: header"></div>
+    <div class="content_body">
+        <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+            <div th:replace="/menu :: menu"></div>
+        </div>
+        <div class="bg_body" id="bgbody">
+            <div class="add_product_body">
+                <div class="add_product_out">
+                    <div class="tittle_addProduct">
+                        Mã giảm giá
+                    </div>
+                    <div class="category_body_inner" id="main">
+                        <form th:action="@{/admin/addMaGiamGia}" method="POST" th:object = "${maGiamGia}">
+                            <input type="text" hidden class="input_product" name="id"  th:field = "*{id}">
+                            <div class="product_field">
+                                <label class="label_product" for="ten">Tên mã giảm giá</label>
+                                <input type="text" class="input_product" id="ten" name="ten"  th:field = "*{ten}" placeholder="Tên mã giảm giá">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="code">Code</label>
+                                <input type="text" class="input_product" id="code" name="code"  th:field = "*{code}" placeholder="Code">
+                            </div>
+                            <div class="product_field custom1">
+                                <div class="date_staff">
+                                    <label class="label_product" for="loaiMa">Loại mã</label>
+                                    <select id="loaiMa" name="loaiMa" class="input_product" aria-hidden="true">
+                                        <option value="0" th:checked="${loaiMa}">Giảm theo phần trăm</option>
+                                        <option value="1" th:checked="${loaiMa}">Giảm theo số tiền</option>
+                                    </select>
+                                </div>
+                                <div class="date_staff">
+                                    <label class="label_product" for="categoryDto">Category</label>
+                                    <select name="category"  id="categoryDto" class="input_product" aria-hidden="true">
+                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.ten}" th:selected = "${categoryDto.id !=null}?${category.id}==${categoryDto.id}:'false'"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="datepicker">Ngày bắt đầu</label>
+                                <input type="text" class="input_product" id="datepicker" name="ngayBd"  th:field = "*{ngayBd}" placeholder="Ngày bắt đầu" onclick="myFunction1()">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="ngayKt">Ngày kết thúc</label>
+                                <input type="text" class="input_product" id="ngayKt" name="ngayKt"  th:field = "*{ngayKt}" placeholder="Ngày kết thúc" onclick="myFunction4()">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="giaTri">Giá trị</label>
+                                <input type="number" class="input_product" id="giaTri" name="giaTri"  th:field = "*{giaTri}" placeholder="Giá trị">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="giamToiDa">Giảm tối đa</label>
+                                <input type="number" class="input_product" id="giamToiDa" name="giamToiDa"  th:field = "*{giamToiDa}" placeholder="Giảm tối đa">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="donHangTu">Giảm giá cho đơn hàng từ</label>
+                                <input type="number" class="input_product" id="donHangTu" name="donHangTu"  th:field = "*{donHangTu}" placeholder="Giảm giá cho đơn hàng từ">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="moTa">Mô tả</label>
+                                <input type="text" class="input_product" id="moTa" name="moTa"  th:field = "*{moTa}" placeholder="Mô tả">
+                            </div>
+                            <div class="product_field">
+                                <label class="container">Kích hoạt mã giảm giá
+                                    <input type="checkbox" name="active" th:checked="*{trangThai}" value="1" th:field="*{trangThai}">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="button_subpro staff_flex">
+                                <button>Lưu</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+
+        function myFunction1() {
+            document.getElementById('datepicker').type = 'date';
+        }
+        function myFunction4() {
+            document.getElementById('ngayKt').type = 'date';
+        }
+        function myFunction2() {
+            document.getElementById("imgupload").click();
+        }
+        function openPage(pageName, elmnt) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("product_body_inner");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+
+            }
+
+            // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+                tablinks[i].style.color = "white";
+            }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+
+            // Add the specific color to the button used to open the tab content
+            elmnt.style.backgroundColor = "#e6e6e6";
+            elmnt.style.color = "#0d0d0d";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+    </script>
+</body>
+
+</html>

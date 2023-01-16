@@ -37,7 +37,7 @@ public class AdminController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private UserRoleRepository userRoleRepository;
-    @GetMapping("/managerStaff")
+    @GetMapping("/admin/managerStaff")
     public String managerStaff(Model model){
         List<Admin> admin = adminService.findAllAdmin();
         for (int i = 0; i < admin.size(); i++) {
@@ -47,26 +47,26 @@ public class AdminController {
         model.addAttribute("admins",admin);
         return "managerStaff";
     }
-    @GetMapping("/deleteStaff/{id}")
+    @GetMapping("/admin/deleteStaff/{id}")
     public String deleteStaff(@PathVariable Long id,RedirectAttributes redir){
         Optional<NguoiDung> nd = nguoiDungRepository.findById(id);
         if(!nd.isPresent()){
             redir.addFlashAttribute("error_delete","Khong the Tim Thay Nhan Vien de xoa!!");
-            return "redirect:/managerStaff";
+            return "redirect:/admin/managerStaff";
         }
         UserRole ur = userRoleRepository.findByidUser(nd.get()).get(0);
 
         userRoleService.deleteById(ur.getId());
         adminService.deleteAdminById(id);
-        return "redirect:/managerStaff";
+        return "redirect:/admin/managerStaff";
     }
-    @GetMapping("/editStaff/{id}")
+    @GetMapping("/admin/editStaff/{id}")
     public  String editStaff(@PathVariable Long id, Model model, RedirectAttributes redir){
         AdminDTO nd = new AdminDTO();
         Optional<Admin> a = adminService.findById(id);
         if(!a.isPresent()){
             redir.addFlashAttribute("error_update","Khong the Tim Thay Nhan Vien de sua!!");
-            return "redirect:/managerStaff";
+            return "redirect:/admin/managerStaff";
         }
         nd.setId(String.valueOf(a.get().getId()));
         nd.setName((a.get()).getName());

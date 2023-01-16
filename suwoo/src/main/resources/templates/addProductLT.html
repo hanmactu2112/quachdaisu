@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <title>Laptop</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+    <div th:replace="/header :: header"></div>
+    <div class="content_body">
+        <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+            <div th:replace="/menu :: menu"></div>
+
+        </div>
+        <div class="bg_body" id="bgbody">
+            <div class="add_product_body">
+                <div class="add_product_out">
+                    <div class="tittle_addProduct" th:text = "${tittle}">
+
+                    </div>
+                    <div class="button_tab">
+                        <!-- //TT chinh -->
+                        <button class="tablink" onclick="openPage('main', this)" id="defaultOpen"><span
+                                class="material-symbols-outlined">
+                                    display_settings
+                                </span></button>
+                        <!-- anh san pham   -->
+                        <button class="tablink" onclick="openPage('image_product', this)"><span
+                                class="material-symbols-outlined">
+                                    image
+                                </span></button>
+                        <!-- he dieu hanh - cpu -->
+                        <button class="tablink" onclick="openPage('cpu_product', this)"><span
+                                class="material-symbols-outlined">
+                                    memory
+                                </span></button>
+                        <!-- camera -->
+                        <button class="tablink" onclick="openPage('cameratruoc', this)"><span
+                                class="material-symbols-outlined">
+                                    photo_camera
+                                </span></button>
+                        <!-- cong nghe man hinh -->
+                        <button class="tablink" onclick="openPage('manhinh', this)"><span
+                                class="material-symbols-outlined">
+                                    monitor
+                                </span></button>
+
+                        <button class="tablink" onclick="openPage('cardmh', this)"><span class="material-symbols-outlined">
+                                preview
+                        </span></button>
+                        <!-- bo nho -->
+                        <button class="tablink" onclick="openPage('bonho', this)"><span
+                                class="material-symbols-outlined">
+                                    database
+                                </span></button>
+                        <!-- tiện ích -->
+                        <button class="tablink" onclick="openPage('tienich', this)"><span
+                                class="material-symbols-outlined">
+                                    broadcast_on_home
+                                </span></button>
+                        <!-- pin -->
+                        <button class="tablink" onclick="openPage('pin', this)"><span
+                                class="material-symbols-outlined">
+                                    fiber_pin
+                                </span></button>
+                        <button class="tablink" onclick="openPage('connectlt', this)"><span class="material-symbols-outlined">
+                                usb
+                            </span></button>
+                        <!-- Kết nối -->
+                        <!-- Kích thước trọng lượng -->
+                        <button class="tablink" onclick="openPage('kichthuoctrongluong', this)"><span
+                                class="material-symbols-outlined">
+                                    straighten
+                                </span></button>
+                    </div>
+                    <form th:action="@{/admin/addProductLT}" th:object="${laptop}" enctype="multipart/form-data" method="post">
+                        <input type="text" hidden class="input_product" name="id"  th:field = "*{id}">
+                        <div class="product_body_inner" id="main">
+                            <div class="product_add_title">
+                                Thông tin cơ bản
+                            </div>
+
+                            <div class="product_field">
+                                <label class="label_product" for="msp"> Mã sản phẩm</label>
+                                <input type="text" class="input_product" name="maSp" th:field = "*{maSp}" id = "msp" placeholder="Mã sản phẩm" />
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="tsp"> Tên sản phẩm</label>
+                                <input type="text" class="input_product" name="ten" th:field = "*{ten}" id = "tsp" placeholder="Tên sản phẩm" />
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="gsp"> Giá sản phẩm </label>
+                                <input type="number" class="input_product" id="gsp" name="gia" th:field = "*{gia}" placeholder="Giá sản phẩm tính theo VNĐ" />
+                            </div>
+                            <div class="product_field custom1">
+                                <div class="date_staff">
+                                    <label class="label_product" for="ms">Màu sắc</label>
+                                    <input type="text" class="input_product" name="color" th:field = "*{color}" id="ms" placeholder="Nhập màu sắc" />
+                                </div>
+                                <div class="date_staff">
+                                    <label class="label_product" for="sl">Số lượng</label>
+                                    <input type="number" class="input_product" name="soLuong" th:field = "*{soLuong}" id ="sl" placeholder="Nhập số lượng" />
+                                </div>
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="nsx">Nhà sản xuất</label>
+                                <input type="text" class="input_product" name="hang" th:field = "*{hang}" id="nsx" placeholder="Nhà sản xuất" />
+                            </div>
+                            <div class="product_field custom1">
+                                <!-- ngaysinh-gioitinh -->
+                                <div class="date_staff">
+                                    <label class="label_product" for="datepicker">Ngày ra mắt</label>
+                                    <input type="text" class="input_product" name="ngayRaMat" th:field = "*{ngayRaMat}" id="datepicker" placeholder="Ngày ra mắt"
+                                           onclick="myFunction1()" />
+                                </div>
+                                <div class="date_staff">
+                                    <label class="label_product" for="category">Category</label>
+                                    <select name="category" id="category" class="input_product" aria-hidden="true">
+                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.ten}" th:selected = "${categoryDto.id !=null}?${category.id}==${categoryDto.id}:'false'"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="cl">Chất liệu</label>
+                                <input type="text" class="input_product" name="chatLieu" th:field = "*{chatLieu}" id="cl" placeholder="Chất liệu" />
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="mta">Mô tả</label>
+                                <textarea id="mta" class="input_product" name="moTa" th:field = "*{moTa}"
+                                          placeholder="Mô tả sản phẩm"></textarea>
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="image_product">
+                            <div class="product_add_title">
+                                Ảnh sản phẩm
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="files">Ảnh sản phẩm</label>
+                                <input type="file" id="files" name="listimages" accept="image/jpeg, image/png, image/jpg" class="input_product" multiple="multiple"/>
+                                <output id="result">
+                                </output>
+                                <output th:each="img, itemStat : *{imageDto}" class="thumbnail2_output" >
+                                    <img class="thumbnail2" th:src="${img.urlImg}" th:id="'img' + ${img.id}"/>
+                                    <span class="material-symbols-outlined" th:id="${img.id}" th:attr="onclick=|functionDis('${img.id}')|">close</span>
+                                </output>
+                                <div th:each="img, itemStat : *{imageDto}">
+                                    <input type="hidden" th:field = *{imageDto[__${itemStat.index}__].urlImg} th:id="'url' + ${img.id}">
+                                    <input type="hidden" th:field = *{imageDto[__${itemStat.index}__].id} th:id="'id' + ${img.id}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="cpu_product">
+                            <div class="product_add_title">
+                                CPU
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="tenCpu">Tên CPU</label>
+                                <input type="text" class="input_product"  id="tenCpu" name="cpu" th:field = "*{ltcpuDto.tenCpu}" placeholder="Tên CPU" />
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="soNhan">Số nhân</label>
+                                <input type="text" class="input_product" id="soNhan" name="soNhan" th:field = "*{ltcpuDto.soNhan}" placeholder="Số nhân cpu" />
+                            </div>
+
+                            <div class="product_field">
+                                <label class="label_product" for="soluongcpu">Số luồng</label>
+                                <input type="text" class="input_product" id="soluongcpu" name="soluongcpu" th:field = "*{ltcpuDto.soLuong}" placeholder="Số luồng cpu">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="congnghe">Công nghệ</label>
+                                <input type="text" class="input_product" id="congnghe" name="congnghe" th:field = "*{ltcpuDto.congNghe}" placeholder="Công nghệ" />
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="tocDo">Tốc độ</label>
+                                <input type="text" class="input_product" id="tocDo" name="congnghe" th:field = "*{ltcpuDto.tocDo}" placeholder="Tốc độ cpu" />
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="tocDoToiDa">Tốc độ tối đa</label>
+                                <input type="text" class="input_product" id="tocDoToiDa" name="congnghe" th:field = "*{ltcpuDto.tocDoToiDa}" placeholder="Tốc độ tối đa" />
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="boNhoDem">Bộ nhớ đệm</label>
+                                <input type="text" class="input_product" id="boNhoDem" name="boNhoDem" th:field = "*{ltcpuDto.boNhoDem}" placeholder="Bộ nhớ đệm" />
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="cameratruoc" >
+                            <div class="product_add_title" >
+                                Camera
+                            </div>
+                            <div class="product_field" >
+                                <label class="label_product" for="camerat" >Camera</label>
+                                <input type="text" class="input_product" name="doPhanGiaiCamera" id="camerat" th:field="*{cameraDto.doPhanGiaiCamera}" placeholder="Độ phân giải camera">
+                            </div>
+                            <div class="product_field" >
+                                <label class="label_product" for="tnct">Tính năng</label>
+                                <textarea id="tnct" class="input_product" name="tinhNang" th:field="*{cameraDto.tinhNang}"
+                                          placeholder="Tính năng camera"></textarea>
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="cardmh">
+                            <div class="product_add_title">
+                                Đồ họa và màn hình
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="cardDoHoa">Card màn hình</label>
+                                <input type="text" class="input_product" id="cardDoHoa" name="cardDoHoa" th:field = "*{ltCardDoHoaAmThanhDto.cardDoHoa}" placeholder="Card đồ họa">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="cardAmThanh">Công nghệ âm thanh</label>
+                                <input type="text" class="input_product" id="cardAmThanh" name="cardAmThanh" th:field = "*{ltCardDoHoaAmThanhDto.cardAmThanh}" placeholder="Công nghệ âm thanh">
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="manhinh">
+                            <div class="product_add_title">
+                                Màn hình
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="kichThuoc">Kích thước màn hình</label>
+                                <input type="text" class="input_product" id="kichThuoc" name="kichThuoc" th:field = "*{manHinhLTDto.kichThuoc}" placeholder="Kích thước màn hình">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="doPhanGiai">Độ phân giải</label>
+                                <input type="text" class="input_product" id="doPhanGiai" name="doPhanGiai" th:field = "*{manHinhLTDto.doPhanGiai}" placeholder="Độ phân giải">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="doPhanGiai">Tần số quét</label>
+                                <input type="text" class="input_product" id="tanSoQuet" name="tanSoQuet" th:field = "*{manHinhLTDto.tanSoQuet}" placeholder="Tần số quét">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="doPhanGiai">Công nghệ màn hình</label>
+                                <textarea type="text" class="input_product" id="congNgheMH" name="congNgheMH" th:field = "*{manHinhLTDto.congNgheManHinh}" placeholder="Công nghệ màn hình"></textarea>
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="bonho">
+                            <div class="product_add_title">
+                                Ram và ổ cứng
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="dungLuongRam">Dung lượng RAM</label>
+                                <input type="text" class="input_product" id="dungLuongRam" name="dungLuongRam" th:field = "*{ltRamOCungDto.dungLuongRam}" placeholder="RAM tính theo GB">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="loaiRam">Loại ram</label>
+                                <input type="text" class="input_product" id="loaiRam" name="loaiRam" th:field = "*{ltRamOCungDto.loaiRam}" placeholder="Loại ram">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="tocDoBus">Tốc độ Bus</label>
+                                <input type="text" class="input_product" id="tocDoBus" name="tocDoBus" th:field = "*{ltRamOCungDto.tocDoBus}" placeholder="Tốc độ Bus">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="hoTroToiDa">Hỗ trợ</label>
+                                <input type="text" class="input_product" id="hoTroToiDa" name="hoTroToiDa" th:field = "*{ltRamOCungDto.hoTroToiDa}" placeholder="Hỗ trợ bao nhiêu khe cắm Ram">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="oCung">Ô cứng</label>
+                                <input type="text" class="input_product" id="oCung" name="oCung" th:field = "*{ltRamOCungDto.oCung}" placeholder="Ổ cứng">
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="tienich">
+                            <div class="product_add_title">
+                                Tiện ích
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="tnbm">Tính năng bảo mật</label>
+                                <textarea id="tnbm" class="input_product" name="baoMat" th:field = "*{tienIchDto.baoMat}"
+                                          placeholder="Tính năng bảo mật"></textarea>
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="tndb">Tính năng đặc biệt khác</label>
+                                <textarea id="tndb" class="input_product" name="tinhNangDacBiet" th:field = "*{tienIchDto.tinhNangDacBiet}"
+                                          placeholder="Tính năng đặc biệt khác"></textarea>
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="pin">
+                            <div class="product_add_title">
+                                PIN
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="dlpin">Dung lượng PIN</label>
+                                <input type="text" class="input_product" id="dlpin" name="dungLuong" th:field = "*{pinDto.dungLuong}" placeholder="Dung lượng PIN">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="lpin">Loại PIN</label>
+                                <input type="text" class="input_product" id="lpin" name="loaiPin" th:field = "*{pinDto.loaiPin}" placeholder="Loại PIN">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="cnpin">Công nghệ PIN</label>
+                                <textarea id="cnpin" class="input_product" name="congNghe" th:field = "*{pinDto.congNghe}"
+                                          placeholder="Công nghệ PIN"></textarea>
+                            </div>
+                        </div>
+                        <div class="product_body_inner" id="connectlt">
+                            <div class="product_add_title">
+                                Cổng kết nối & tính năng mở rộng
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="congGiaoTiep">Cổng giao tiếp</label>
+                                <input type="text" class="input_product" id="congGiaoTiep" name="congGiaoTiep" th:field = "*{ketNoiLTDto.congGiaoTiep}" placeholder="Cổng giao tiếp">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="ketNoiKhongDay">Kết nối không dây</label>
+                                <input type="text" class="input_product" id="ketNoiKhongDay" name="ketNoiKhongDay" th:field = "*{ketNoiLTDto.ketNoiKhongDay}" placeholder="Kết nối không dây">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="denBanPhim">Đèn bàn phím</label>
+                                <input type="text" class="input_product" id="denBanPhim" name="denBanPhim" th:field = "*{ketNoiLTDto.denBanPhim}" placeholder="Đèn bàn phím">
+                            </div>
+
+                        </div>
+                        <div class="product_body_inner" id="kichthuoctrongluong">
+                            <div class="product_add_title">
+                                Kích thước trọng lượng
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="chieudai">Chiều dài</label>
+                                <input type="text" class="input_product" id="chieudai" name="doDai" th:field = "*{kichThuocTrongLuongDto.doDai}" placeholder="Chiều dài">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="chieurong">Chiều rộng</label>
+                                <input type="text" class="input_product" id="chieurong" name="doRong" th:field = "*{kichThuocTrongLuongDto.doRong}" placeholder="Chiều rộng">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="mong">Mỏng</label>
+                                <input type="text" class="input_product" id="mong" name="doMong" th:field = "*{kichThuocTrongLuongDto.doMong}" placeholder="Mỏng">
+                            </div>
+                            <div class="product_field">
+                                <label class="label_product" for="trongluong">Trọng lượng</label>
+                                <input type="text" class="input_product" id="trongluong" name="trongLuong" th:field = "*{kichThuocTrongLuongDto.trongLuong}" placeholder="Trọng lượng">
+                            </div>
+                            <div class="product_field">
+                                <label class="container">Hiển thị sản phẩm lên website
+                                    <input type="checkbox" name="active" th:checked="*{active}" value="1" th:field="*{active}">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="button_subpro staff_flex">
+                                <button >Lưu sản phẩm</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+
+        function myFunction1() {
+            document.getElementById('datepicker').type = 'date';
+        }
+        function myFunction2() {
+            document.getElementById("imgupload").click();
+        }
+        function openPage(pageName, elmnt) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("product_body_inner");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+
+            }
+
+            // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+                tablinks[i].style.color = "white";
+            }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+
+            // Add the specific color to the button used to open the tab content
+            elmnt.style.backgroundColor = "#e6e6e6";
+            elmnt.style.color = "#0d0d0d";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+    </script>
+<script th:src="@{/styles/script.js}"></script>
+</body>
+
+</html>

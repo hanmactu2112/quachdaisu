@@ -7,7 +7,6 @@ import java.util.List;
 @Data
 public class DienThoaiDto extends SanPhamDto{
     private String thietKe;
-    private boolean acitve;
     private DTHeDieuHanhCpuDto dtHeDieuHanhCpuDto;
     private DTKetNoiDto dtKetNoiDto;
     private ManHinhDto manHinhDto;

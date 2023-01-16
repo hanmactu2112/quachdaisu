@@ -1,13 +1,15 @@
 package ptit.suwoo.model;
 
 import lombok.Data;
+import ptit.suwoo.sanphamdto.DTKetNoiDto;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "dtketnoi")
-public class DTKetNoi {
+public class DTKetNoi implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,4 +28,16 @@ public class DTKetNoi {
     @Column(name = "ketnoikhac")
     private String ketNoiKhac;
 
+    public DTKetNoiDto convertToDto(){
+        DTKetNoiDto d = new DTKetNoiDto();
+        d.setId(this.id);
+        d.setMangDiDong(this.mangDiDong);
+        d.setWifi(this.wifi);
+        d.setGps(this.gps);
+        d.setBluetooth(this.bluetooth);
+        d.setCongSac(this.congSac);
+        d.setTaiNghe(this.taiNghe);
+        d.setKetNoiKhac(this.ketNoiKhac);
+        return d;
+    }
 }

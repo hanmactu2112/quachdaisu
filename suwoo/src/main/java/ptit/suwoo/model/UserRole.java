@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "user_role")
-public class UserRole  {
+public class UserRole  implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

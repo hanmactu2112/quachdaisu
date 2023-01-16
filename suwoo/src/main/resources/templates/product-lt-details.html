@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/styleClient.css}" />
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+  <title>Laptop</title>
+</head>
+<body>
+<div class="wrapper">
+  <div class="details_product_wraper" id="details_product_wraper">
+    <div class="details_product_wraper_inner">
+      <div class="details_product_wraper_title">
+        <div class="details_product_wraper_title_h3">
+          <h3>Thông số kỹ thuật</h3>
+        </div>
+        <div class="close_cauhinh" onclick="closeCauHinh()">
+                        <span class="material-symbols-outlined">
+                            close
+                            </span>
+        </div>
+      </div>
+      <div class="details_product_wraper_main">
+        <div class="details_product_wraper_item">
+          <div class="details_product_wraper_item_title">
+            Màn hình
+          </div>
+          <div class="details_wrapper_main">
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Kích thước màn hình:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.manHinhLTDto.kichThuoc}">
+                AMOLED
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Độ phân giải:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.manHinhLTDto.doPhanGiai}">
+                Full HD+ (1080 x 2400 Pixels)
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Tần số quét:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.manHinhLTDto.tanSoQuet}">
+                6.43" - Tần số quét 60 Hz
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Công nghệ màn hình:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.manHinhLTDto.congNgheManHinh}">
+                6.43" - Tần số quét 60 Hz
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details_product_wraper_item" >
+          <div class="details_product_wraper_item_title" >
+            Webcam:
+          </div>
+          <div class="details_wrapper_main">
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title" >
+                Độ phân giải:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.cameraDto.doPhanGiaiCamera}">
+                Chính 64 MP
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Tính năng:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.cameraDto.tinhNang}">
+                Toàn cảnh (Panorama), Quay video hiển thị kép, Ban đêm (Night Mode), Quay chậm (Slow Motion
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details_product_wraper_item">
+          <div class="details_product_wraper_item_title">
+            CPU
+          </div>
+          <div class="details_wrapper_main">
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Tên CPU:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltcpuDto.tenCpu}">
+                Android 12
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Số nhân:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltcpuDto.soNhan}">
+                Snapdragon 695 5G 8 nhân
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Số luồng:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltcpuDto.soLuong}">
+                Snapdragon 695 5G 8 nhân
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Công nghệ CPU:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltcpuDto.congNghe}">
+                Snapdragon 695 5G 8 nhân
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Tốc độ CPU:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltcpuDto.tocDo}">
+                Snapdragon 695 5G 8 nhân
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Tốc độ tối đa:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltcpuDto.tocDoToiDa}">
+                Snapdragon 695 5G 8 nhân
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Bộ nhớ đệm:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltcpuDto.boNhoDem}">
+                Snapdragon 695 5G 8 nhân
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details_product_wraper_item">
+          <div class="details_product_wraper_item_title">
+            Bộ nhớ và Ram:
+          </div>
+          <div class="details_wrapper_main">
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                RAM:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltRamOCungDto.dungLuongRam}">
+                8GB
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Loại RAM:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltRamOCungDto.loaiRam}">
+                128GB
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Tốc độ Buss Ram:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltRamOCungDto.tocDoBus}">
+                8GB
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Hỗ trợ khe cắm RAM:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltRamOCungDto.hoTroToiDa}">
+                128GB
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Ổ cứng:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltRamOCungDto.oCung}">
+                8GB
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details_product_wraper_item">
+          <div class="details_product_wraper_item_title">
+            Card đồ họa và âm thanh
+          </div>
+          <div class="details_wrapper_main">
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Card đồ họa:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltCardDoHoaAmThanhDto.cardDoHoa}">
+                Hỗ trợ 5G
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Card âm thanh:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.ltCardDoHoaAmThanhDto.cardAmThanh}">
+                Hỗ trợ 5G
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details_product_wraper_item">
+          <div class="details_product_wraper_item_title">
+            Pin
+          </div>
+          <div class="details_wrapper_main">
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Dung lượng pin:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.pinDto.dungLuong}">
+                4500 mAh
+              </div>
+            </div>
+
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Loại pin:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.pinDto.loaiPin}">
+                4500 mAh
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Công nghệ pin:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.pinDto.congNghe}">
+                4500 mAh
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details_product_wraper_item">
+          <div class="details_product_wraper_item_title">
+            Kích thước và trọng lượng
+          </div>
+          <div class="details_wrapper_main">
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Độ dài:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.kichThuocTrongLuongDto.doDai}">
+                4500 mAh
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Độ rộng:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.kichThuocTrongLuongDto.doRong}">
+                4500 mAh
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Độ mỏng:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.kichThuocTrongLuongDto.doMong}">
+                4500 mAh
+              </div>
+            </div>
+            <div class="details_wrapper_main_item">
+              <div class="details_wrapper_main_title">
+                Trọng lượng:
+              </div>
+              <div class="details_wrapper_main_sub" th:text = "${laptop.kichThuocTrongLuongDto.trongLuong}">
+                4500 mAh
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="/navbar :: navbar"></div>
+  <div class="container_details">
+    <div class="details_title">
+      <div class="details_title_inner">
+        <p>Trang chủ /</p>
+        <p th:text = "${loai}+' / '"></p>
+        <p th:text = "${laptop.ten}"></p>
+      </div>
+    </div>
+    <div class="details_body">
+      <div class="details_body_inner">
+        <div class="details_body_left">
+          <div class="details_body_left_inner">
+            <div class="img_details">
+              <div class="img_details_anh fade" th:each = "img , iStat : ${laptop.imageDto}">
+                <img th:src="${img.urlImg}"
+                     alt="">
+                <div class="details_sale fade" th:text = "${laptop.khuyenMaiDto.tiLe + ' off'}" th:if = "${laptop.khuyenMaiDto}">20% off</div>
+              </div>
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <div class="list_img_details">
+              <div class="img_details_item" th:each = "img , iStat : ${laptop.imageDto}">
+                <div  th:attr="onclick=|currentSlide('${iStat.index + 1}')|">
+                  <div class="img_details_item_inner" >
+                    <img th:src="${img.urlImg}"
+                         alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="details_button_tab">
+              <div class="details_tab_inner">
+                <div class="tab_item" onclick="openPage('mota', this)" id="defaultOpen">Mô tả</div>
+                <div class="tab_item_des" onclick="openPage('cauhinh', this)">Thông tin chi tiết
+                </div>
+
+                <div class="tab_item" onclick="openPage('review', this)">Đánh giá</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details_body_right">
+          <div class="details_body_right_inner">
+            <div class="details_right_name" th:text = "${laptop.ten}"> SamSung S22 Ultra</div>
+            <div class="details_right_price" ><p th:text = ${laptop.gia} th:if = "${laptop.giaKm == null}">1.000.000đ</p>
+              <p th:text = ${laptop.giaKm} th:if = "${laptop.giaKm}">1.000.000đ</p>
+              <p><del th:text = ${laptop.gia} th:if = "${laptop.giaKm}" >1.500.000đ</del></p>
+            </div>
+            <div class="details_right_review">
+              <div class="nmber_star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <div class="review_inner">8 Reviews</div>
+            </div>
+            <div class="details_right_des" th:text = "${laptop.moTa}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut
+              ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient
+              montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.</div>
+            <div class="details_right_form">
+              <div class="details_form_input">
+                <label>Số lượng</label>
+                <span class="material-symbols-outlined" onclick="changeQuantity3(1)">
+                                    arrow_left
+                                </span>
+                <input class="inputQuantityDetails" type="number" min="1" max="99" value="1">
+                <span class="material-symbols-outlined" onclick="changeQuantity4(1)">
+                                    arrow_right
+                                </span>
+              </div>
+              <div class="details_form_button">
+                <button>Thêm giỏ hàng</button>
+              </div>
+            </div>
+            <a href="#">
+              <div class="wishlist_details">
+
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                <p>Thêm vào yêu thích</p>
+
+              </div>
+            </a>
+            <div class="details_right_meta">
+              <a href="#">
+                <div class="meta_item">
+                                    <span class="material-symbols-outlined">
+                                        tag
+                                    </span>
+                  <p>Mã sản phẩm:</p><span th:text = "${laptop.maSp}">SS0023X</span>
+                </div>
+              </a>
+              <a href="#">
+                <div class="meta_item">
+                                    <span class="material-symbols-outlined">
+                                        sell
+                                    </span>
+                  <p>Danh mục sản phẩm:</p><span th:text = "${category.ten}">SamSung</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="details_des_sub">
+    <div class="details_des_sub_inner">
+      <div class="item_details_sub" id="mota">
+        <div class="item_sub_des">
+          <div class="item_sub_des_tille">
+            Mô tả
+          </div>
+          <div class="item_sub_des_content" th:text = "${laptop.moTa}">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod
+            orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus.
+            Vestibulum ultricies aliquam convallis.
+          </div>
+        </div>
+      </div>
+      <div class="item_details_sub" id="cauhinh">
+        <div class="item_sub_cauhinh">
+          <div class="item_sub_des_tille">
+            Thông tin sản phẩm
+          </div>
+          <div class="item_sub_cauhinh_content">
+            <div class="item_sub_cauhinh_content_item">
+              <div class="item_sub_cauhinh_content_title">
+                Màn hình:
+              </div>
+              <div class="item_sub_cauhinh_content_des" th:text = "${laptop.manHinhLTDto.doPhanGiai}">
+                AMOLED6.43"Full HD+
+              </div>
+            </div>
+            <div class="item_sub_cauhinh_content_item">
+              <div class="item_sub_cauhinh_content_title" >
+                Kích thước màn hình:
+              </div>
+              <div class="item_sub_cauhinh_content_des" th:text = "${laptop.manHinhLTDto.kichThuoc}">
+                iOS
+              </div>
+            </div>
+            <div class="item_sub_cauhinh_content_item">
+              <div class="item_sub_cauhinh_content_title" >
+                CPU:
+              </div>
+              <div class="item_sub_cauhinh_content_des" th:text = "${laptop.ltcpuDto.tenCpu}">
+                iOS
+              </div>
+            </div>
+            <div class="item_sub_cauhinh_content_item">
+              <div class="item_sub_cauhinh_content_title" >
+                Card đồ họa:
+              </div>
+              <div class="item_sub_cauhinh_content_des" th:text = "${laptop.ltCardDoHoaAmThanhDto.cardDoHoa}">
+                iOS
+              </div>
+            </div>
+            <div class="item_sub_cauhinh_content_item">
+              <div class="item_sub_cauhinh_content_title">
+                Ram:
+              </div>
+              <div class="item_sub_cauhinh_content_des" th:text = "${laptop.ltRamOCungDto.dungLuongRam}">
+                Snapdragon 695 5G
+              </div>
+            </div>
+
+            <div class="item_sub_cauhinh_content_item">
+              <div class="item_sub_cauhinh_content_title">
+                Ổ cứng:
+              </div>
+              <div class="item_sub_cauhinh_content_des" th:text = "${laptop.ltRamOCungDto.oCung}">
+                8GB
+              </div>
+            </div>
+            <div class="item_sub_cauhinh_button">
+              <div class="button_sub_cauhinh" onclick="closeCauHinh()">
+                Xem thêm cấu hình chi tiết
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item_details_sub" id="review">
+        <div class="item_sub_review" >
+          <div class="item_sub_des_tille">
+            Đánh giá
+          </div>
+          <div class="comment_details">
+            <div class="comment_img">
+              <div class="comment_img_inner">
+                <img src="../convit.jpg" alt="">
+              </div>
+
+            </div>
+            <div class="comment_sub">
+              <div class="comment_sub_inner">
+                <div class="comment_user">
+                  <p>Tô An An</p>
+                  <span>08.02.2017.</span>
+                </div>
+                <div class="nmber_star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+                <div class="comment_nd">
+                  Sản phẩm rất tốt!!!!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item_sub_review_form">
+            <div class="review_form_title">
+              Thêm đánh giá
+            </div>
+            <div class="rating_review">
+              <p>Đánh giá của bạn</p>
+              <div class="nmber_star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <div class="user_review">
+              <p>Bình luận</p>
+              <textarea cols="30" rows="10" placeholder="Nhập nội dung đánh giá của bạn"></textarea>
+              <button type="submit">Đánh giá</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="container_cart">
+    <div class="container_inner">
+      <div class="product_sales">
+        <div class="product_sales_inner">
+          <div class="product_sales_title">
+            Sản phẩm tương tự
+          </div>
+          <div class="product_sale_content">
+            <div class="slider_wrapper">
+              <div class="product_sale_main1" id="product_sale_main1">
+                <div class="product_item1" th:each="flashsale, iStat : ${flashsales}">
+                  <div class="product_item_inner">
+                    <div class="product_img">
+                      <div class="product_sale" th:text = "${flashsale.khuyenMaiDto.tiLe + ' off'}" th:if="${flashsale.khuyenMaiDto}">20% off</div>
+                      <img th:src="${flashsale.imageDto[0].urlImg}" alt="product">
+                    </div>
+                    <div class="product_details">
+                      <div class="product_details_left">
+                        <a th:href="@{'/productDetailsClient/'+${flashsale.id}}">
+                          <div class="product_name" th:text = "${flashsale.ten}">
+                            Samsung S22 Ultra 512GB
+                          </div>
+                          <div class="product_price">
+                            <span th:text = ${flashsale.gia} th:if = "${flashsale.giaKm == null}">1.000.000đ</span>
+                            <span th:text = ${flashsale.giaKm} th:if = "${flashsale.giaKm}">1.000.000đ</span>
+                            <span><del th:text = ${flashsale.gia} th:if = "${flashsale.giaKm}" >1.500.000đ</del></span>
+                          </div>
+                        </a>
+                        <div class="nmber_star">
+                          <i class="fa fa-star" ></i>
+                          <i class="fa fa-star" ></i>
+                          <i class="fa fa-star" ></i>
+                          <i class="fa fa-star" ></i>
+                          <i class="fa fa-star" ></i>
+                        </div>
+                      </div>
+                      <div class="product_details_right">
+                        <div class="details_right_item"><a th:href="@{'/addToCart/'+${flashsale.id}}" class="addCart"><span class="material-symbols-outlined">
+                                                shopping_cart
+                                                </span></a></div>
+                        <div class="details_right_item">
+                                                <span class="material-symbols-outlined">
+                                                    favorite
+                                                    </span>
+                        </div>
+                        <a th:href="@{'/productDetailsClient/'+${flashsale.id}}">
+                          <div class="details_right_item">
+                                                            <span class="material-symbols-outlined">
+                                                                visibility
+                                                                </span>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="back_slider2 hover">
+                        <span class="material-symbols-outlined">
+                            arrow_back_ios
+                            </span>
+            </div>
+            <div class="next_slider2 hover">
+                        <span class="material-symbols-outlined">
+                            arrow_forward_ios
+                            </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="/footer :: footer"></div>
+</div>
+</body>
+<script>
+    window.onscroll = function () { myFunction() };
+    var header = document.getElementById("navbar_main");
+    var sticky = header.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    };
+    function myFunctionpriceMin() {
+        var priceMin = document.getElementById("price-min").value;
+        console.log(priceMin);
+        var priceMinvnd = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(priceMin);
+        document.getElementById("minPrice").value = priceMinvnd;
+    }
+    function myFunctionpriceMax() {
+        var priceMax = document.getElementById("price-max").value;
+        console.log(priceMax);
+        var priceMaxvnd = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(priceMax);
+        document.getElementById("maxPrice").value = priceMaxvnd;
+    }
+    function inputSearch(){
+        var x = document.getElementById("inputSearch").value;
+        var y = document.getElementById("optionMenu").value;
+        if((document.getElementById("inputSearch").getAttribute('hidden') != null)){
+            let p = document.getElementById("inputSearch");
+            let o = document.getElementById("optionMenu");
+            p.removeAttribute("hidden");
+            o.removeAttribute("hidden");
+        }
+        else{
+            document.getElementById("formSearch").submit();
+        }
+    }
+    function userDetailsPoppup() {
+        var x = document.getElementById('user_details');
+        var y = document.getElementById('cart_details');
+        if (x.style.display === 'none') {
+            if (y.style.display == 'flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    };
+    function functionSort() {
+        var x = document.getElementById('sortdt_details');
+        if (x.style.display === 'none') {
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    }
+    function changeQuantity3(x) {
+        var input = document.querySelector(".inputQuantityDetails");
+        var vl = input.value;
+        console.log(vl);
+        const num = parseInt(vl) - 1;
+        if (num > 0) {
+            input.value = num;
+        }
+        else confirm("Số lượng không thể nhỏ hơn 1!!!")
+    }
+
+    function changeQuantity4(x) {
+        var input = document.querySelector(".inputQuantityDetails");
+        var vl = input.value;
+        const num = parseInt(vl) + 1;
+        input.value = num;
+    }
+    function updateCart() {
+        var updatebtn = document.querySelector(".cart_update_inner button");
+        updatebtn.style.opacity = '.5';
+    }
+    function cartDetailsPoppup() {
+        var x = document.getElementById('cart_details');
+        var y = document.getElementById('user_details');
+
+        if (x.style.display === 'none') {
+            if (y.style.display == 'flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    }
+    function openPage(pageName, elmnt) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.querySelectorAll(".item_details_sub");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tab_item");
+        cauhinh = document.querySelector(".tab_item_des");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "#fafafa";
+            tablinks[i].style.color = "#080808";
+        }
+
+        cauhinh.style.backgroundColor = "#fafafa";
+        cauhinh.style.color = "#080808";
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "flex";
+
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = "#080808";
+        elmnt.style.color = "#fff";
+    }
+    function closeCauHinh(){
+        cauhinh = document.getElementById('details_product_wraper');
+        if(cauhinh.style.display =="none"){
+            cauhinh.style.display ="flex";
+        }
+        else {
+            cauhinh.style.display ="none";
+        }
+    }
+    //slider anh
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+    function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("img_details_anh");
+        let dots = document.getElementsByClassName("img_details_item_inner");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" img_active", "");
+        }
+        slides[slideIndex-1].style.display = "flex";
+        dots[slideIndex-1].className += " img_active";
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    /* Flas sale */
+    window.addEventListener("load",function(){
+        const sliderItem = document.querySelectorAll(".product_item1");
+        const sliderMain = document.querySelector(".product_sale_main1");
+        const next = document.querySelector(".next_slider2");
+        const backSlider = document.querySelector(".back_slider2");
+        const withSlider = sliderItem[0].offsetWidth;
+        console.log(withSlider);
+        const sliderLength = sliderItem.length;
+        console.log(sliderLength);
+        let positionX = 0;
+        let index =0;
+        // setHeight(index);
+        next.addEventListener("click",function(){
+            changeSlider(1);
+        });
+        backSlider.addEventListener("click",function(){
+            changeSlider(-1);
+        });
+        function changeSlider(direction){
+            if(direction===1 ){
+                index++;
+                if(index<=sliderLength-5){
+                    positionX = positionX-withSlider;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+                else {
+                    positionX = 0;
+                    index=0;
+                    console.log(positionX);
+                    console.log(index);
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+            else if(direction===-1){
+                index--;
+                if(index>=0){
+                    positionX += withSlider;
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                    // console.log("prev");
+                }
+                else{
+                    index=sliderLength-5;
+                    positionX = positionX-withSlider*index;
+                    console.log("prev"+positionX)
+                    sliderMain.style = `transform:translateX(${positionX}px)`;
+                    // setHeight(index);
+                }
+            }
+        }
+        // function setHeight(index1){
+        //     const sliderImg = document.querySelectorAll(".imgSlider");
+        //     let heightSlider = sliderImg[index1].offsetHeight;
+        //     document.getElementById('slider_main2').style.height = `${heightSlider}px`;
+        // };
+        setInterval(function(){
+            index++;
+            if(index<=sliderLength-5){
+                positionX = positionX-withSlider;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+
+            else {
+                positionX = 0;
+                index=0;
+                console.log(positionX);
+                console.log(index);
+                sliderMain.style = `transform:translateX(${positionX}px)`;
+            }
+        },5000);
+    });
+</script>
+</html>

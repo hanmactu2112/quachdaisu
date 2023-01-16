@@ -43,7 +43,7 @@ public class LoginController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private KhachHangRepository khachHangRepository;
-    @GetMapping({"/","/home","/index"})
+    @GetMapping({"/admin","/admin/home","/admin/index"})
     public String index(HttpServletRequest request, HttpSession session, Principal principal){
         String user = principal.getName();
         System.err.println(user);
@@ -52,21 +52,21 @@ public class LoginController {
 
         return "home_admin";
     }
-    @GetMapping("/login")
+    @GetMapping("/admin/login")
     public String login(){
         return "login";
     }
-    @GetMapping("/addStaff")
+    @GetMapping("/admin/addStaff")
     public String addstaff(Model model){
         model.addAttribute("title","Thêm nhân viên");
         model.addAttribute("nguoiDung", new AdminDTO());
-        return "add_staff";
+        return "/add_staff";
     }
-    @GetMapping("/register")
+    @GetMapping("/admin/register")
     public String viewRegister(){
         return "register";
     }
-    @PostMapping("/register")
+    @PostMapping("/admin/register")
     public String register(@ModelAttribute("nguoiDung") NguoiDung nguoiDung, HttpServletRequest request) {
         if(nguoiDungRepository.findByEmail(nguoiDung.getEmail())!=null) return "register";
         nguoiDung.setMatKhau(bCryptPasswordEncoder.encode(nguoiDung.getMatKhau()));
@@ -92,7 +92,7 @@ public class LoginController {
         userRoleRepository.save(ur);
         return "login";
     }
-    @PostMapping("/addStaff")
+    @PostMapping("/admin/addStaff")
     public String addStaff(@ModelAttribute("nguoiDung") AdminDTO nguoiDung,@ModelAttribute("title") String title,
     @RequestParam("adminImage") MultipartFile file, @RequestParam("urlImg") String urlImg
             ,HttpServletRequest request) throws IOException {
@@ -111,6 +111,7 @@ public class LoginController {
                 a.setMatKhau(nguoiDung.getMatKhau());
             }
         System.out.println(nguoiDung.isGioiTinh());
+        System.err.println(nguoiDung.getName());
         a.setEmail(nguoiDung.getEmail());
         a.setName(nguoiDung.getName());
         a.setDiaChi(nguoiDung.getDiaChi());
@@ -145,7 +146,6 @@ public class LoginController {
                 if (!fl.isDirectory()){
                     Files.deleteIfExists(fileNameAndPathOld);
                 }
-
             }
             System.err.println("imageUUID: "+ nameFile);
             Files.write(fileNameAndPath, file.getBytes());
@@ -170,6 +170,6 @@ public class LoginController {
             }
         }
         userRoleRepository.save(ur);
-        return "redirect:/managerStaff";
+        return "redirect:/admin/managerStaff";
     }
 }
