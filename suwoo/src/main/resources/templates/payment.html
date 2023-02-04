@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/styleClient.css}" />
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+  <title>Thanh toán</title>
+</head>
+<body>
+<div class="wrapper">
+  <div th:replace="/navbar :: navbar"></div>
+  <div class="container_cart">
+    <div class="banner_cart">
+      <img th:src="@{/images/banerremove.png}" alt="Banner">
+      <div class="text_banner_cart">CHECKOUT</div>
+    </div>
+    <div class="container_inner">
+      <div class="cart_out">
+        <form th:action = "@{/subOrder}" method="post">
+        <div class="payment_out_inner">
+          <div class="title_checkout">
+            Chi tiết đơn hàng
+          </div>
+          <div class="form_checkout">
+            <div class="form_checkout_input">
+              <div class="form_checkout_input_item"><label>Người nhận</label><input type="text" th:value="${tenkh}" name="tenkh" placeholder="Tô An An"></div>
+            </div>
+            <div class="form_checkout_input">
+              <div class="form_checkout_input_item"><label>Địa chỉ giao hàng</label><input type="text" th:value="${diachi}" name="diachi" placeholder="Nhập địa chỉ giao hàng"></div>
+            </div>
+            <div class="form_checkout_input">
+              <div class="form_checkout_input_item"><label>Số điện thoại</label><input type="text" th:value="${'+84'+sdt}" name="sdt" placeholder="+84**********"></div>
+            </div>
+            <div class="form_checkout_input">
+              <div class="form_checkout_input_item"><label>Email</label><input type="email" th:value="${email}" name="email" placeholder="example@gmail.com"></div>
+            </div>
+            <input type="text" name="shipping" hidden th:value = "${shipping}">
+            <input type="text" name="magiamgia" hidden th:value="${coupon}" th:if="${coupon}" placeholder="Ghi chú"></div>
+            <div class="form_checkout_input">
+              <div class="form_checkout_input_item"><label>Ghi chú</label><input type="text" name="ghichu"  placeholder="Ghi chú" value="1"></div>
+            </div>
+          </div>
+          <div class="title_checkout">
+            Đơn hàng
+          </div>
+          <div class="table_checkout">
+            <table>
+              <thead>
+              <tr>
+                <th class="product-name">Sản phẩm</th>
+                <th class="product-total">Số lượng</th>
+                <th class="product-total">Tổng</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="checkout_item" th:each = "giohangsp,item:${giohangs.gioHangSanPhamDTOS}">
+                <td class="product-name" th:text = ${giohangsp.sanPhamDTO.ten}>Iphone 14</td>
+                <td class="product-name"><strong class="product-quantity" th:text="${giohangsp.soLuong}">×&nbsp;1</strong></td>
+                <td class="product-total" th:text="${giohangsp.tongTien}">20.000.000đ</td>
+              </tbody>
+              <tfoot>
+              <tr class="cart-subtotal">
+                <th>Tổng</th>
+                <td></td>
+                <td><span th:text = ${giohangs.tongTien} >40.000.000đ</span></td>
+              </tr>
+              <tr class="cart-subtotal">
+                <th>Phương thức vận chuyển</th>
+                <td></td>
+                <td><span th:text = "${shipping}"></span></td>
+              </tr>
+              <tr class="cart-subtotal" th:if="${coupon}">
+                <th>Mã giảm giá</th>
+                <td></td>
+                <td><span th:text="${coupon}"></span></td>
+              </tr>
+              <tr class="order-total">
+                <th>Tổng tiền</th>
+                <td></td>
+                <td><strong th:text = "${giohangs.tongCong != null}?${giohangs.tongCong}:${giohangs.tongTien}">40.000.000đ</strong></td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="checkout_payment_btn">
+            <div class="check_payment">
+              <input type="checkbox"> <label >Yêu cầu xuất hóa đơn công ty<i>&nbsp;(*Điền email để nhận hóa đơn công ty)</i></label>
+            </div>
+            <div class="note_payment">
+              (*Ghi chú: Bạn sẽ thanh toán khi nhận hàng. Thời gian giao hàng sẽ mất khoảng từ 2 - 3 ngày. Cảm ơn bạn đã tin tưởng chúng tôi!!!)
+            </div>
+            <div class="payment_btn">
+              <button type="submit">Đặt hàng</button>
+            </div>
+          </div>
+        </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div th:replace="/footer :: footer"></div>
+</div>
+</body>
+<script>
+    window.onscroll = function() {myFunction()};
+    var header = document.getElementById("navbar_main");
+    var sticky = header.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    };
+     function userDetailsPoppup(){
+        var x = document.getElementById('user_details');
+        var y = document.getElementById('cart_details');
+        if(x.style.display === 'none'){
+            if(y.style.display=='flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    };
+    function inputSearch(){
+        var x = document.getElementById("inputSearch").value;
+        var y = document.getElementById("optionMenu").value;
+        if((document.getElementById("inputSearch").getAttribute('hidden') != null)){
+            let p = document.getElementById("inputSearch");
+            let o = document.getElementById("optionMenu");
+            p.removeAttribute("hidden");
+            o.removeAttribute("hidden");
+        }
+        else{
+            document.getElementById("formSearch").submit();
+        }
+    }
+
+
+     function changeQuantity1(x){
+        var input = document.querySelectorAll(".inputQuantity");
+        var item = document.querySelectorAll(".cart_item");
+        var updatebtn = document.querySelector(".cart_update_inner button");
+        var vl = input[x].value;
+        console.log(vl);
+        const num = parseInt(vl)-1;
+        if(num>0){
+            input[x].value=num;
+            updatebtn.style.opacity = '1';
+        }
+        else {
+            updatebtn.style.opacity = '1';
+            item[x].remove();
+        }
+    }
+    function changeQuantity2(x){
+        var input = document.querySelectorAll(".inputQuantity");
+        var updatebtn = document.querySelector(".cart_update_inner button");
+        var vl = input[x].value;
+        const num = parseInt(vl)+1;
+        input[x].value=num;
+        updatebtn.style.opacity = '1';
+    }
+    function updateCart(){
+        var updatebtn = document.querySelector(".cart_update_inner button");
+        updatebtn.style.opacity = '.5';
+        document.getElementById("formCart").submit();
+
+    }
+    function cartDetailsPoppup() {
+        var x = document.getElementById('cart_details');
+        var y = document.getElementById('user_details');
+
+        if (x.style.display === 'none') {
+            if (y.style.display == 'flex') y.style.display = 'none';
+            x.style.display = 'flex';
+        }
+        else x.style.display = 'none';
+    }
+
+</script>
+</html>

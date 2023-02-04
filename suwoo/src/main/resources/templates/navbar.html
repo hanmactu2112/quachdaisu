@@ -52,10 +52,10 @@
             <div class="navbar_right_inner">
               <div class="nav_user">
                 <div class="nav_user_item hover">
-                  <a th:href="@{/user}"><span class="material-symbols-outlined">
+                  <a th:href="@{/user-profile}"><span class="material-symbols-outlined">
                                         person
                                         </span></a>
-                  <spa th:text="${#authentication.principal.ten}" th:if="${#request.userPrincipal}"></spa>
+                  <span th:text="${#authentication.principal.ten}" th:if="${#request.userPrincipal}"></span>
                 </div>
               </div>
               <div class="navbar_cart">

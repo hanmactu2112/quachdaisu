@@ -48,8 +48,11 @@ public class DienThoai  extends SanPham implements Serializable {
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         String str1 = currencyVN.format(super.getGia());
         a.setGia(str1);
-        float giaKm = Math.round((super.getGia()-super.getGia()*(super.getKhuyenMai().getTiLe()/100)));
-        a.setGiaKm(currencyVN.format(giaKm));
+        if (super.getKhuyenMai()!=null){
+            float giaKm = Math.round((super.getGia()-super.getGia()*(super.getKhuyenMai().getTiLe()/100)));
+            a.setGiaKm(currencyVN.format(giaKm));
+        }
+
         a.setSoLuong(super.getSoLuong());
         List<ImageDto> ds = new ArrayList<>();
         for (Image i:super.getImages()){
@@ -63,7 +66,9 @@ public class DienThoai  extends SanPham implements Serializable {
         a.setNgayRaMat(super.getNgayRaMat());
         a.setChatLieu(super.getChatLieu());
         a.setMoTa(super.getMoTa());
-        a.setKhuyenMaiDto(super.getKhuyenMai().convertToDto());
+        if (super.getKhuyenMai()!=null){
+            a.setKhuyenMaiDto(super.getKhuyenMai().convertToDto());
+        }
         a.setActive(super.isActive());
         return a;
     }

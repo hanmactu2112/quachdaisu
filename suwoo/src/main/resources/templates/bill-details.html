@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/styleClient.css}" />
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+  <title>Chi tiết đơn hàng</title>
+</head>
+<body>
+<div class="wrapper">
+  <div th:replace="/navbar :: navbar"></div>
+  <div class="container_details">
+
+    <div class="container_user">
+
+      <div class="title_user"></div>
+      <div class="user_left">
+        <div class="title_profile">
+          <a href="">Trang chủ/</a>
+          <a href="">Thông tin tài khoản</a>
+        </div>
+        <div class="user_left_inner">
+          <ul>
+            <li><a  th:href="@{/user-profile}"><span class="material-symbols-outlined">
+                                person
+                                </span><p>Thông tin tài khoản</p></a>
+            </li>
+            <li><a th:href="@{/user-notifications}"><span class="material-symbols-outlined">
+                                notifications
+                                </span><p>Thông báo</p><span class="notification_user">3</span></a>
+            </li>
+            <li><a class="active_user" th:href="@{/user-bill}"><span class="material-symbols-outlined">
+                                receipt
+                                </span><p>Lịch sử đơn hàng</p></a>
+            </li>
+            <li><a th:href="@{/user-resetpass}"><span class="material-symbols-outlined">
+                                lock_reset
+                                </span><p>Thay đổi mật khẩu</p></a>
+            </li>
+            <li><a th:href="@{/logout}">
+              <span class="material-symbols-outlined">
+                logout
+              </span><p>Đăng xuất</p></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="user_right">
+        <div class="user_right_inner">
+          <div class="user_profile">
+            <div class="cart_out">
+              <div class="payment_out_inner">
+                <div class="title_checkout">
+                  Chi tiết đơn hàng
+                </div>
+                <div class="form_checkout">
+                  <div class="bill_info">
+                    <div class="bill_info_item">
+                      <span>Người nhận: </span>
+                      <div class="bill-des-item">Quách Đại Sự</div></div>
+                  </div>
+                  <div class="bill_info">
+                    <div class="bill_info_item"><span>Địa chỉ giao hàng: </span><div class="bill-des-item">Ninh Bình</div></div>
+                  </div>
+                  <div class="bill_info">
+                    <div class="bill_info_item"><span>Số điện thoại: </span><div class="bill-des-item">+84386115804</div></div>
+                  </div>
+                  <div class="bill_info">
+                    <div class="bill_info_item"><span>Email: </span><div class="bill-des-item">quachdaisucn06ptit@gmail.com</div></div>
+                  </div>
+                  <div class="bill_info">
+                    <div class="bill_info_item"><span>Ghi chú: </span><div class="bill-des-item">Giao gọi trước</div></div>
+                  </div>
+                </div>
+                <div class="title_checkout">
+                  Đơn hàng
+                </div>
+                <div class="table_checkout">
+                  <table>
+                    <thead>
+                    <tr>
+                      <th class="product-name">Sản phẩm</th>
+                      <th class="product-total">Tổng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="checkout_item">
+                      <td class="product-name">Iphone 14<strong class="product-quantity">×&nbsp;1</strong></td>
+                      <td class="product-total">20.000.000đ</td>
+                    </tr>
+                    <tr class="checkout_item">
+                      <td class="product-name">Samsung S22 Ultra<strong class="product-quantity">×&nbsp;1</strong></td>
+                      <td class="product-total">20.000.000đ</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr class="cart-subtotal">
+                      <th>Tổng</th>
+                      <td><span>40.000.000đ</span></td>
+                    </tr>
+                    <tr class="cart-subtotal">
+                      <th>Phương thức vận chuyển</th>
+                      <td><span>Giao hàng miễn phí</span></td>
+                    </tr>
+                    <tr class="order-total">
+                      <th>Tổng tiền</th>
+                      <td><strong>40.000.000đ</strong></td>
+                    </tr>
+                    <tr class="order-total">
+                      <th>Tình trạng</th>
+                      <td><strong>Chờ xác nhận</strong></td>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div class="checkout_payment_btn">
+                  <div class="back_order_button">
+                    <button ><a th:href="#">Hủy đơn hàng</a></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="/footer :: footer"></div>
+</div>
+</body>
+<script>
+    window.onscroll = function () { myFunction() };
+    var header = document.getElementById("navbar_main");
+    var sticky = header.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    };
+    function myFunction2(){
+            document.getElementById("imgupload").click();
+        }
+    function inputSearch(){
+        var x = document.getElementById("inputSearch").value;
+        var y = document.getElementById("optionMenu").value;
+        if((document.getElementById("inputSearch").getAttribute('hidden') != null)){
+            let p = document.getElementById("inputSearch");
+            let o = document.getElementById("optionMenu");
+            p.removeAttribute("hidden");
+            o.removeAttribute("hidden");
+        }
+        else{
+            document.getElementById("formSearch").submit();
+        }
+    }
+    function openPage(pageName, elmnt) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.querySelectorAll(".item_details_sub");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tab_item");
+        cauhinh = document.querySelector(".tab_item_des");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "#fafafa";
+            tablinks[i].style.color = "#080808";
+        }
+
+        cauhinh.style.backgroundColor = "#fafafa";
+        cauhinh.style.color = "#080808";
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "flex";
+
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = "#080808";
+        elmnt.style.color = "#fff";
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+</html>

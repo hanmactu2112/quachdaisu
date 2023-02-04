@@ -392,21 +392,24 @@
             <div class="details_right_des" th:text = "${dienthoai.moTa}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut
               ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient
               montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.</div>
-            <div class="details_right_form">
-              <div class="details_form_input">
-                <label>Số lượng</label>
-                <span class="material-symbols-outlined" onclick="changeQuantity3(1)">
-                                    arrow_left
-                                </span>
-                <input class="inputQuantityDetails" type="number" min="1" max="99" value="1">
-                <span class="material-symbols-outlined" onclick="changeQuantity4(1)">
-                                    arrow_right
-                                </span>
+            <form th:action="@{/addToCart}" method="POST">
+              <div class="details_right_form">
+                <input type="text" hidden name="idSp" th:value = ${dienthoai.id}>
+                <div class="details_form_input">
+                  <label>Số lượng</label>
+                  <span class="material-symbols-outlined" onclick="changeQuantity3(1)">
+                                      arrow_left
+                                  </span>
+                  <input class="inputQuantityDetails" name="quantity" type="number" min="1" max="99" value="1">
+                  <span class="material-symbols-outlined" onclick="changeQuantity4(1)">
+                                      arrow_right
+                                  </span>
+                </div>
+                <div class="details_form_button">
+                  <button type="submit">Thêm giỏ hàng</button>
+                </div>
               </div>
-              <div class="details_form_button">
-                <button>Thêm giỏ hàng</button>
-              </div>
-            </div>
+            </form>
             <a href="#">
               <div class="wishlist_details">
 

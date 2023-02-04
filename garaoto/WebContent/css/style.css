@@ -1,0 +1,305 @@
+.header-inner{
+    display: flex;
+   justify-content: space-between;
+   color: aliceblue;
+   padding: 20px;
+   text-align: center;
+}
+
+.b1{
+    background-color:#000;
+}
+.logo{
+    font-family: 'Mochiy Pop P One', sans-serif;
+    font-size: 20px;
+}
+.contact{
+    display: flex;
+}
+.login{
+    margin-top: 100px;
+    width: 50%;
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    padding: 50px 50px;
+}
+.sdt{
+    margin-right: 20px;
+}
+.icon{
+    padding-right: 10px;
+}
+.footer{
+    background-color: #222222;
+    color: rgb(136, 136, 136);
+    margin-top: 100px;
+}
+.footer-top{
+    border-bottom: 1px solid #393939;
+    padding-bottom: 2px;
+}
+.footer-left {
+    width: 50%;
+    padding: 0 15px;
+    margin: 15px 0;
+    box-sizing: border-box;
+  }
+
+.footer-right {
+    width: 50%;
+    padding: 0 15px;
+    margin: 15px 0;
+    box-sizing: border-box;
+  }
+ .footer-right-inner {
+    margin-left: 15px;
+  }
+  .footer-top{
+      display: flex;
+  }
+  .flex{
+      display: flex;
+  }
+.address{
+    color: rgb(136, 136, 136);
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.text{
+    padding-top: 20px;
+}
+.icon{
+    margin-right: 15px;
+    color: rgb(136, 136, 136);
+    
+    
+}
+.icon a{
+    color: rgb(136, 136, 136);
+}
+.icon a:hover{
+    color: white;
+    text-decoration: underline;
+}
+.description{
+    word-break: break-all;
+    
+}
+.description a{
+    color: rgb(136, 136, 136);
+}
+.description a:hover{
+    color: white;
+    text-decoration: underline;
+}
+.social-icon{
+    margin-top: 42px;
+   
+}
+.phone-number{
+    padding-bottom: 10px;
+}
+.social-icon a{
+    font-size: 16px;
+    font-family: "FontAwesome";
+    color: rgb(130, 130, 130);
+    text-transform: uppercase;
+    margin-right: 28px;
+   
+   }
+.social-icon  a:hover{
+    color: white;
+  
+}
+.footer-left-tittle{
+    font-size: 26px;
+    font-family: 'Roboto';
+   color: rgb(247, 247, 247);
+   font-weight: 700;
+   padding-right: 98px;
+   border-bottom: 1px solid #393939;
+   padding-top: 43px;
+   padding-bottom: 27px;
+   letter-spacing: 0.7px;
+}
+body{
+    font-family: 'Roboto';
+}
+.footer-right-tittle{
+    font-size: 26px;
+    font-weight: 700;
+     font-family: 'Roboto';
+    color: rgb(247, 247, 247);
+    padding-right: 98px;
+    border-bottom: 1px solid #393939;
+    padding-top: 43px;
+    padding-bottom: 27px;
+    letter-spacing: 0.7px;
+}
+
+/* css index */
+
+.menu-iner{
+    padding-top: 100px;
+    justify-content: center;
+    text-align: center;
+  
+}
+.btn{
+    margin: 10px 0;
+    width: 100%;
+}
+.menu-iner a{
+    width: 100%;
+}
+.btn-group-vertical{
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    padding: 50px 100px;
+   
+}
+.tennv-iner{
+    float: right;
+    padding-bottom: 20px;
+}
+.dx{
+    padding: 10px 0;
+}
+.search-iner{
+    margin-top: 100px;
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    padding: 20px 50px;
+}
+.input{
+    display: flex;
+}
+.tim{
+    margin: 0 0 !important;
+    margin-left: 20px !important;
+}
+.ql{
+    margin: 0 0 !important;
+    width: 12% !important;
+}
+
+
+ /* css doa don tam */
+ 
+
+ .hoadontam-inner{
+     margin-top: 50px;
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    padding: 50px 100px;
+ }
+ 
+
+ 
+ table {
+   width: 100%;
+   border-collapse: collapse;
+ }
+ 
+ table tr td {
+   padding: 0;
+ }
+ 
+ table tr td:last-child {
+   text-align: right;
+ }
+ 
+ .bold {
+   font-weight: bold;
+ }
+ 
+ .right {
+   text-align: right;
+ }
+
+ 
+ .total {
+   font-weight: bold;
+ }
+ 
+
+ 
+ .line-items-container {
+   margin: 50px 0;
+ }
+ 
+ .line-items-container th {
+   text-align: left;
+   color: #999;
+   border-bottom: 2px solid #ddd;
+   padding: 10px 0 15px 0;
+   font-size: 0.75em;
+   text-transform: uppercase;
+ }
+ 
+ .line-items-container th:last-child {
+   text-align: right;
+ }
+ 
+ .line-items-container td {
+   padding: 15px 0;
+ }
+ 
+ .line-items-container tbody tr:first-child td {
+   padding-top: 25px;
+ }
+ 
+ .line-items-container.has-bottom-border tbody tr:last-child td {
+   padding-bottom: 25px;
+   border-bottom: 2px solid #ddd;
+ }
+ 
+ .line-items-container.has-bottom-border {
+   margin-bottom: 0;
+ }
+ 
+ .line-items-container th.heading-quantity {
+   width: 70px;
+ }
+ .line-items-container th.heading-price {
+   text-align: right;
+   width: 100px;
+   
+ }
+ .line-items-container th.heading-subtotal {
+   width: 100px;
+ }
+ 
+ .payment-info {
+   width: 38%;
+   font-size: 0.75em;
+   line-height: 1.5;
+ }
+ .line-items-container th.heading-description2 {
+   text-align: right;
+ }
+ .title-hd{
+     font-size: 30px;
+     font-weight: 700;
+     text-align: center;
+     width: 100%;
+     padding-bottom: 30px;
+ }
+ .content-list{
+     padding: 5px 0;
+ }
+ .button-hd{
+        justify-content: space-between;
+ }
+ .dagiao{
+     width: 120px;
+     margin-top: 20px;
+ }
+ .phai{
+ text-align: right;
+ }
+ a{
+ text-decoration: none;
+ }
+ 
+ /* end css  hoa don */

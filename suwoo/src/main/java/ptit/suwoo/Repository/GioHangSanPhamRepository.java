@@ -13,13 +13,20 @@ import java.util.Optional;
 @Repository
 public interface GioHangSanPhamRepository extends JpaRepository<GioHangSanPham,Long> {
 
-    @Query(value = "select * from giohangsp gs join giohang gh on gh.id = gs.giohang_id join sanpham s on gs.sanpham_id = s.id where gs.giohang_id = ?1", nativeQuery = true)
+    @Query(value = "select * from giohangsp gs join giohang gh on gh.id = gs.giohang_id join sanpham s on gs.sanpham_id = s.id left join khuyenmai km on km.id = s.khuyenmai_id where gs.giohang_id = ?1 and gs.active = 1", nativeQuery = true)
     List<GioHangSanPham> findAllByGioHangId(Long id);
-    @Query(value = "select * from giohangsp gs join giohang gh on gh.id = gs.giohang_id join sanpham s on gs.sanpham_id = s.id where gs.sanpham_id = ?1 and gs.giohang_id = ?2", nativeQuery = true)
+    @Query(value = "select * from giohangsp gs join giohang gh on gh.id = gs.giohang_id join sanpham s on gs.sanpham_id = s.id where gs.sanpham_id = ?1 and gs.giohang_id = ?2 and gs.active = 1", nativeQuery = true)
     Optional<GioHangSanPham> findSpInGioHangId(Long id,Long idGH);
-    @Query(value = "Select count(gs.sanpham_id) from giohangsp gs join giohang g on g.id = gs.giohang_id join khachhang kh on kh.id = g.khachhang_id where kh.id = ?1", nativeQuery = true)
+    @Query(value = "Select count(gs.sanpham_id) from giohangsp gs join giohang g on g.id = gs.giohang_id join khachhang kh on kh.id = g.khachhang_id where kh.id = ?1 and gs.active = 1", nativeQuery = true)
     Integer countProduct(Long id);
-
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE giohangsp gs SET gs.soluong = ?1 WHERE gs.id = ?2", nativeQuery = true)
+    void updateGHSP(Integer quantity,Long id);
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE giohangsp gs SET gs.active = 0 WHERE gs.id = ?1", nativeQuery = true)
+    void updateActive(Long id);
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM giohangsp gs WHERE gs.id=?1", nativeQuery = true)

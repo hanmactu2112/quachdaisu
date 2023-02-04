@@ -7,7 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ptit.suwoo.Dto.magiamgiaDto.MaGiamGiaDto;
+import ptit.suwoo.Repository.KhachHangMaGiamGiaRepository;
+import ptit.suwoo.Repository.KhachHangRepository;
+import ptit.suwoo.Repository.NguoiDungRepository;
 import ptit.suwoo.model.Category;
+import ptit.suwoo.model.KhachHang;
+import ptit.suwoo.model.maGiamGia.KhachHangMaGiamGia;
 import ptit.suwoo.model.maGiamGia.MaGiamGia;
 import ptit.suwoo.sanphamdto.CategoryDto;
 import ptit.suwoo.service.CategoryService;
@@ -23,6 +28,10 @@ public class MaGiamGiaController {
     MaGiamGiaService maGiamGiaService;
     @Autowired
     CategoryService categoryService;
+    @Autowired
+    KhachHangRepository khachHangRepository;
+    @Autowired
+    KhachHangMaGiamGiaRepository khachHangMaGiamGiaRepository;
     @GetMapping("/admin/quanliMaGiamGia")
     public String managerMaGiamGia(Model model){
         List<MaGiamGiaDto> maGiamGiaDtos = new ArrayList<>();
@@ -61,10 +70,25 @@ public class MaGiamGiaController {
         MaGiamGia maGiamGia = maGiamGiaDto.convertToEntity();
         if (maGiamGiaDto.getId()!=null){
             maGiamGia.setId(maGiamGiaDto.getId());
+            maGiamGia.setCategory(category);
+            maGiamGia.setLoaiMa(loaiMa);
+            maGiamGiaService.save(maGiamGia);
         }
-        maGiamGia.setCategory(category);
-        maGiamGia.setLoaiMa(loaiMa);
-        maGiamGiaService.save(maGiamGia);
+        else {
+            maGiamGia.setCategory(category);
+            maGiamGia.setLoaiMa(loaiMa);
+            maGiamGiaService.save(maGiamGia);
+            List<KhachHang> listKh = khachHangRepository.findAll();
+            for(KhachHang k : listKh){
+                KhachHangMaGiamGia khmg = new KhachHangMaGiamGia();
+                khmg.setKhachHang(k);
+                khmg.setMaGiamGia(maGiamGia);
+                khmg.setTrangThai(true);
+                khachHangMaGiamGiaRepository.save(khmg);
+            }
+        }
+
+
         return "redirect:/admin/quanliMaGiamGia";
     }
 

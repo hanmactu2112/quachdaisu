@@ -65,7 +65,7 @@ public class SanPham implements Serializable {
         String str1 = currencyVN.format(this.gia);
         a.setGia(str1);
         if (this.khuyenMai!=null){
-            float giaKm = Math.round((this.gia-this.gia*(this.khuyenMai.getTiLe())));
+            float giaKm = Math.round((this.gia-this.gia*(this.khuyenMai.getTiLe()/100)));
             a.setGiaKm(currencyVN.format(giaKm));
         }
         a.setSoLuong(this.soLuong);

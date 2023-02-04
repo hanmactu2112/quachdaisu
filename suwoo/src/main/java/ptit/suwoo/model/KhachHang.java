@@ -2,6 +2,7 @@ package ptit.suwoo.model;
 
 import lombok.Data;
 import ptit.suwoo.Dto.KhachHangDto;
+import ptit.suwoo.model.hoadon.HoaDon;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Table(name = "khachhang")
 @Entity
 public class KhachHang extends NguoiDung implements Serializable {
+    
     @Column(name = "ngaydangky")
     private String ngayDangKy;
 

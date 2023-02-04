@@ -13,6 +13,7 @@ public class SanPhamDto {
     private String maSp;
     private String ten;
     private String gia;
+
     private String giaKm;
     private int soLuong;
     private List<ImageDto> imageDto;

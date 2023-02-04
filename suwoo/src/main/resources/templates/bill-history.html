@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/styleClient.css}" />
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+  <title>Lịch sử đơn hàng</title>
+</head>
+<body>
+<div class="wrapper">
+  <div th:replace="/navbar :: navbar"></div>
+  <div class="container_details">
+
+    <div class="container_user">
+
+      <div class="title_user"></div>
+      <div class="user_left">
+        <div class="title_profile">
+          <a href="">Trang chủ/</a>
+          <a href="">Thông tin tài khoản</a>
+        </div>
+        <div class="user_left_inner">
+          <ul>
+            <li><a  th:href="@{/user-profile}"><span class="material-symbols-outlined">
+                                person
+                                </span><p>Thông tin tài khoản</p></a>
+            </li>
+            <li><a th:href="@{/user-notifications}"><span class="material-symbols-outlined">
+                                notifications
+                                </span><p>Thông báo</p><span class="notification_user">3</span></a>
+            </li>
+            <li><a class="active_user" th:href="@{/user-bill}"><span class="material-symbols-outlined">
+                                receipt
+                                </span><p>Lịch sử đơn hàng</p></a>
+            </li>
+            <li><a th:href="@{/user-resetpass}"><span class="material-symbols-outlined">
+                                lock_reset
+                                </span><p>Thay đổi mật khẩu</p></a>
+            </li>
+            <li><a th:href="@{/logout}">
+              <span class="material-symbols-outlined">
+                logout
+              </span><p>Đăng xuất</p></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="user_right">
+        <div class="user_right_inner">
+          <div class="user_profile" id="historybill">
+            <div class="tittle_staff">
+              Lịch sử đơn hàng
+            </div>
+            <div class="notification_user_des">
+              <table class="talbe_oder">
+                <thead>
+                <tr>
+                  <th class="idBill">Id</th>
+                  <th class="NameBill">Người nhận</th>
+                  <th class="NameBill">Ngày đặt</th>
+                  <th class="ItemBill">Sản phẩm</th>
+                  <th class="TotalBill">Tổng</th>
+                  <th class="StatusBill">Trạng thái</th>
+                  <th class="StatusBill"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each = "hoadon,item:${hoadons}">
+                  <td th:text = "${hoadon.id}"></td>
+                  <td th:text = "${hoadon.nguoiNhan}">Quách Đại Sự</td>
+                  <td th:text = "${hoadon.ngayTao}" >03/02/2023</td>
+                  <td>
+                    <div class="td_user_item" th:each = "sanpham,item:${hoadon.sanPhamHoaDons}">
+                      <div class="user_bill_thumbnail">
+                        <div class="user_bill_thumbail_inner">
+                          <img th:src="${sanpham.images}" alt="">
+                        </div>
+                      </div>
+                      <div class="user_bill_item2">
+                        <div class="user_bill_child_right">
+                          <div class="user_bill_item_name" th:text = "${sanpham.tenSp}">Iphone 14</div>
+                          <div class="user_bill_item">x</div>
+                          <div class="user_bill_item" th:text = "${sanpham.soLuong}">3</div>
+                        </div>
+                        <div class="user_bill_child_right_total">
+                          <div class="user_bill_item"> = </div>
+                          <div class="user_bill_item" th:text = "${sanpham.tong}">24.000.000đ</div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td th:text = "${hoadon.tongtien}">30.000.000 đ</td>
+                  <td th:text = "${hoadon.tinhTrang}">Đang xử lý...</td>
+                  <td><a href="#">Xem chi tiết</a></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination">
+              <a th:if="${currentPage >1}" th:attr="onclick=|linkpage('${currentPage - 1}')|">&laquo;</a>
+              <div th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a  th:classappend = "${currentPage == i} ? 'active':''" th:attr="onclick=|linkpage('${i}')|">[[${i}]]</a>
+              </div>
+              <a th:if="${currentPage < totalPages}" th:attr="onclick=|linkpage('${currentPage + 1}')|">&raquo;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="/footer :: footer"></div>
+</div>
+</body>
+<script>
+    window.onscroll = function () { myFunction() };
+    var header = document.getElementById("navbar_main");
+    var sticky = header.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    };
+    function myFunction2(){
+            document.getElementById("imgupload").click();
+        }
+    function inputSearch(){
+        var x = document.getElementById("inputSearch").value;
+        var y = document.getElementById("optionMenu").value;
+        if((document.getElementById("inputSearch").getAttribute('hidden') != null)){
+            let p = document.getElementById("inputSearch");
+            let o = document.getElementById("optionMenu");
+            p.removeAttribute("hidden");
+            o.removeAttribute("hidden");
+        }
+        else{
+            document.getElementById("formSearch").submit();
+        }
+    }
+    function openPage(pageName, elmnt) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.querySelectorAll(".item_details_sub");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tab_item");
+        cauhinh = document.querySelector(".tab_item_des");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "#fafafa";
+            tablinks[i].style.color = "#080808";
+        }
+
+        cauhinh.style.backgroundColor = "#fafafa";
+        cauhinh.style.color = "#080808";
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "flex";
+
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = "#080808";
+        elmnt.style.color = "#fff";
+    }
+    function linkpage(page){
+      console.log(page);
+      var urlPage = window.location.href;
+      var utlBase = '';
+      var urlParram = '';
+      let start = 0;
+      for(let i = 0; i < urlPage.length-1; i++){
+        if(urlPage.charAt(i) =='?'){
+          start = i;
+          break;
+        }
+      }
+      if(start > 0){
+        utlBase = urlPage.substring(0,start);
+        urlParram = urlPage.substring(start,urlPage.length);
+      }else {
+        utlBase = urlPage;
+      }
+      console.log(page);
+      if(utlBase.charAt(utlBase.length-2) =='/' && (utlBase.charAt(utlBase.length-1) >= '0' && utlBase.charAt(utlBase.length-1) <= '9')){
+        utlBase = utlBase.substring(0, utlBase.length-1)+ page;
+      }
+      else{
+        utlBase += '/'+ page;
+      }
+      var newUrl = utlBase + urlParram;
+      window.location.href = newUrl;
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+</html>

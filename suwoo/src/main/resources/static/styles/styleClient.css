@@ -1203,7 +1203,7 @@ input::placeholder {
     width: 17%;
   }
   .cart_item2{
-    width: 77%;
+    width: 83%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1264,9 +1264,15 @@ input::placeholder {
     border-bottom: 1px solid #e1e1e1;
     border-top: 1px solid #e1e1e1;
   }
+  #formCoupon{
+    width:50%;
+  }
+  .alertCoupon{
+    text-transform: none;
+    font-size: 14px;
+  }
   .cart_coupon{
     display: flex;
-    width: 50%;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
@@ -1483,7 +1489,13 @@ input::placeholder {
  }
  .cart_total_text{
     font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    float: right;
  }
+ .cart_total_text del{
+     font-size: 18px;
+  }
  .payment_out_inner{
     width: 100%;
     display: flex;
@@ -1551,6 +1563,7 @@ input::placeholder {
     font-size: 16px;
 }
 .product-name{
+    width:20%;
     padding: 14px 0;
     text-align: left;
     vertical-align: middle;
@@ -2526,7 +2539,272 @@ input::placeholder {
   .navbar_left_inner{
     max-height: 480px;
   }
+ /* start userProfile */
+ .container_user{
+    display: flex;
+    padding: 100px 30px;
+    flex-direction: row;
+ }
+ .user_left_inner ul li a{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    cursor: pointer;
+    color: #080808;
+ }
+ .user_left_inner ul li span{
+    margin-right: 10px;
+    position: relative;
+ }
+ .user_left_inner ul li{
+    padding: 10px 0;
+ }
+ .notification_user{
+    position: absolute;
+    font-size: 14px;
+    color: rgb(233, 69, 96);
+ }
+ .container_user{
+    background: rgb(246, 249, 252);
+ }
+ #notification{
+    display: flex;
+ }
+ #resetpass{
+    display: flex;
+ }
+ #userprofile{
+    display: flex;
+ }
+ #historybill{
+    display: flex;
+ }
+ .active_user{
+     border-bottom: 1px solid #080808;
+     color: rgb(233, 69, 96) !important;
+ }
+ .talbe_oder th{
+    font-size: 14px;
+ }
+ .talbe_oder tbody tr{
+    font-size: 13px;
+ }
+ .user_bill_thumbnail{
+    width: 20%;
+ }
+ .user_bill_thumbail_inner{
+    width: 100%;
+ }
+ .user_bill_thumbail_inner img{
+    width: 100%;
+ }
+ .user_bill_child_right{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+ }
+ .user_bill_item{
+    padding: 0 3px;
+ }
+ .user_bill_child_right_total{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+ }
+ .td_user_item{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+ }
+ .talbe_oder tbody tr td{
+    word-break: break-all;
+    text-align: center;
+ }
+ .talbe_oder tbody tr td{
+    border: 1px solid black;
+    /* border: 1px solid white;
+  border-collapse: collapse;
+  background-color: #96D4D4; */
+    /* border: 1px solid black;
+    border-bottom:  1px solid;
+    border-top:  1px solid #141414; */
+ }
+ .talbe_oder thead tr th{
+    /* border: 1px solid white;
+  border-collapse: collapse;
+  background-color: #96D4D4; */
+    border: 1px solid black;
+    /* border-bottom:  1px solid;
+    border-top:  1px solid #141414; */
+ }
+.idBill{
+    width: 5%;
+ }
+ .NameBill{
+    width: 10%;
+ }
+ .TotalBill{
+    width: 15%;
+ }
+ .StatusBill{
+    width: 10%;
+ }
+ .ItemBill{
+    width: 40%;
+ }
+ .user_bill_item2{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+ }
+.user_left{
+    width: 30%;
+    padding-right: 50px;
+}
+.user_right{
+    width: 100%;
+    background-color: #fff;
+    padding: 30px 30px;
+}
+.user_right_inner{
+    width: 100%;
+}
+.form_item_left img{
+    border-radius: 50%;
+}
+.form_item_left span{
+    cursor: pointer;
+}
+.user_profile_form_item{
+    display: flex;
+    flex-direction: row;
+}
+.field_item{
+    width: 100%;
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-between;
+}
+.title_profile{
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+.field_item2{
+    width: 100%;
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-between;
+}
+.field_item2 input{
+    width: 60%;
+    height: 35px;
+}
+.field_item2 select{
+    width: 60%;
+    height: 35px;
+}
+.field_item2 label{
+    width: 20%;
+}
+.field_item input{
+    width: 60%;
+    height: 35px;
+}
+.field_item select{
+    width: 60%;
+    height: 35px;
+}
+.field_item label{
+    width: 20%;
+}
+.user_profile{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.tittle_staff{
+    padding-bottom: 40px;
+    font-size: 24px;
+}
+.form_item_right{
+    width: 100%;
+    padding: 30px 30px;
+}
+.field_item_btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+.field_item_btn button{
+    height: 35px;
+}
+.alert-primary{
+    font-size: 16px;
+    width: 100%;
+    color: #379237;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #BAD1C2;
+    margin-bottom: 20px;
+}
+.alert-danger{
+    font-size: 16px;
+    width: 100%;
+    color: #CC3636;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #BAD1C2;
+    margin-bottom: 20px;
+}
+.bill_info_item{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    padding: 10px 0;
+}
+.bill_info_item span{
+    margin-right: 10px;
+}
 
+.back_order_button button{
+    font-family: inherit;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    outline: 0;
+    line-height: 30px;
+    letter-spacing: .15em;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    margin: 0;
+    -webkit-transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    -moz-transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    font-size: 14px;
+    color: #fff;
+    background-color: #CC3636;
+    border: 2px solid transparent;
+    padding: 7px 46px;
+    cursor: pointer;
+    z-index: 3;
+    border-radius: 0;
+}
+.back_order_button button a{
+    color: #fff;
+}
+/* end profile user */
 
 
   

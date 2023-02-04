@@ -14,4 +14,6 @@ public class GioHangDTO {
     private List<GioHangSanPhamDTO> gioHangSanPhamDTOS;
 
     private String tongTien;
+
+    private String tongCong;
 }

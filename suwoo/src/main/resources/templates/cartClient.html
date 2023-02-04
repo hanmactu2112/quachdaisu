@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
-    <title>Trang chủ</title>
+    <title>Giỏ hàng</title>
 </head>
 <body>
 <div class="wrapper">
@@ -25,105 +25,124 @@
             <div class="cart_out">
                 <div class="cart_out_inner">
                     <div class="cart_out_left">
+
                         <div class="cart_out_left_inner" >
                             <div class="cart_title">
                                 Giỏ hàng
                             </div>
                             <h4 style="color:red;margin-bottom:20px;" th:if = "${giohangsps==null}"  th:text = "${giohangsps!=null}?'Bạn chưa có sản phẩm nào trong giỏ hàng!!!':'false'" ></h4>
-                            <div th:each = "giohangsp,item:${giohangsps}">
-
-                                <div class="cart_item">
-                                    <div class="cart_item1">
-                                        <div class="cart_item_remove"><a th:href="@{'/deleteItem/'+${giohangsp.id}}"><span class="material-symbols-outlined">
-                                            close
-                                            </span></a></div>
-                                        <div class="cart_item_thumbnail"><div class="cart_item_thumbail_inner"><img th:src="${giohangsp.sanPhamDTO.imageDto[0].urlImg}" alt=""></div></div>
-                                    </div>
-                                    <div class="cart_item2">
-                                        <div class="cart_item_child_left"><div class="cart_item_name"  th:text = ${giohangsp.sanPhamDTO.ten}>Iphone 14</div></div>
-                                        <div class="cart_item_child_right">
-                                            <div class="cart_item_price" th:text = ${giohangsp.sanPhamDTO.gia}>27.000.000đ</div>
-                                            <div class="cart_item_quantity"><label>Số lượng</label><span class="material-symbols-outlined" th:attr="onclick=|changeQuantity1('${item.index}')|">
-                                                arrow_left
-                                                </span><input type="number" class="inputQuantity" min="1" max="99" th:value="${giohangsp.soLuong}"><span class="material-symbols-outlined" th:attr="onclick=|changeQuantity2('${item.index}')|">
-                                                arrow_right
-                                                </span></div>
-                                            <div class="cart_item_subtotal" th:text="${giohangsp.tongTien}">27.000.000đ</div>
+                            <form th:action="@{/updateCart}" id="formCart" method="POST">
+                                <div th:each = "giohangsp,item:${giohangs.gioHangSanPhamDTOS}">
+                                    <div class="cart_item">
+                                        <div class="cart_item1">
+                                            <div class="cart_item_remove"><a th:href="@{'/deleteItem/'+${giohangsp.id}}"><span class="material-symbols-outlined">
+                                                close
+                                                </span></a></div>
+                                            <div class="cart_item_thumbnail"><div class="cart_item_thumbail_inner"><img th:src="${giohangsp.sanPhamDTO.imageDto[0].urlImg}" alt=""></div></div>
                                         </div>
+
+                                            <div class="cart_item2">
+                                                <input type="text" hidden name="idgiohang" min="1" max="99" th:value="${giohangsp.id}">
+                                                <div class="cart_item_child_left"><div class="cart_item_name"  th:text = ${giohangsp.sanPhamDTO.ten}>Iphone 14</div></div>
+                                                <div class="cart_item_child_right">
+                                                    <div class="cart_item_price" th:text = "${giohangsp.sanPhamDTO.giaKm!=null}?${giohangsp.sanPhamDTO.giaKm}:${giohangsp.sanPhamDTO.gia}">27.000.000đ</div>
+                                                    <div class="cart_item_quantity"><label>Số lượng</label><span class="material-symbols-outlined" th:attr="onclick=|changeQuantity1('${item.index}')|">
+                                                        arrow_left
+                                                        </span><input type="number" name="quantity" class="inputQuantity" min="1" max="99" th:value="${giohangsp.soLuong}"><span class="material-symbols-outlined" th:attr="onclick=|changeQuantity2('${item.index}')|">
+                                                        arrow_right
+                                                        </span></div>
+                                                    <div class="cart_item_subtotal" th:text="${giohangsp.tongTien}">27.000.000đ</div>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="cart_left_button">
+                            <form th:action="@{/addCoupon}" id="formCoupon">
                             <div class="cart_coupon">
                                 <div class="cart_coupon_input">
-                                    <label for="coupon_code"><span class="material-symbols-outlined">
+                                    <label for="coupon_code">
+                                        <span class="material-symbols-outlined">
                                             sell
-                                        </span></label>
-                                    <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Mã giảm giá">
+                                        </span>
+                                    </label>
+                                    <input type="text" name="coupon" class="input-text" id="coupon_code" th:value="${coupon!=null}?${coupon}" placeholder="Mã giảm giá">
                                 </div>
-                                <div class="cart_coupon_button"><button type="submit" class="button" name="apply_coupon" value="Apply coupon">Áp dụng mã</button></div>
+                                <div class="cart_coupon_button"><button type="submit" class="button">Áp dụng mã</button></div>
                             </div>
-                            <div class="cart_update"><div class="cart_update_inner">
-                                <button onclick="updateCart()">Cập nhật giỏ hàng</button>
-                            </div></div>
+                            </form>
+                            <div class="cart_update">
+                                <div class="cart_update_inner">
+                                    <button th:attr="onclick=|updateCart()|">Cập nhật giỏ hàng</button>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="cart_back_button">
                             <a th:href="@{/}">
                                 <div class="cart_back_button_inner">
-
-                                        <span class="material-symbols-outlined">
-                                            keyboard_backspace
-                                            </span>
+                                    <span class="material-symbols-outlined">
+                                        keyboard_backspace
+                                    </span>
                                     <p>Tiếp tục mua hàng</p>
-
-                                </div></a>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="cart_out_right_out">
+                        <form th:action="@{/subCart}" method="get">
                         <div class="cart_out_right">
                             <div class="cart_right_title">
                                 Đơn hàng
                             </div>
+                            <input type="text" name="couponcart" th:if = "${coupon}" hidden class="input-text" th:value="${coupon!=null}?${coupon}" placeholder="Mã giảm giá">
                             <div class="cart_subtotal">
                                 <div class="cart_subtotal_title">
                                     Tổng tiền
                                 </div>
-                                <div class="cart_subtotal_text">
+                                <div class="cart_subtotal_text" th:text = ${giohangs.tongTien}>
                                     80.000.000đ
                                 </div>
                             </div>
+
                             <div class="cart_shipping">
                                 <div class="cart_shipping_title">
                                     Giao hàng
                                 </div>
                                 <div class="cart_shipping_method">
                                     <div class="method_item">
-                                        <input type="radio" id="html" name="fav_language" value="HTML">
+                                        <input type="radio" id="html" name="shipping" value="1">
                                         <label for="html">Lấy trực tiếp tại cửa hàng</label><br>
                                     </div>
                                     <div class="method_item">
-                                        <input type="radio" id="css" name="fav_language" value="CSS">
+                                        <input type="radio" id="css" name="shipping" value="2">
                                         <label for="css">Miễn phí giao hàng</label><br>
                                     </div>
                                     <div class="method_item">
-                                        <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+                                        <input type="radio" id="javascript" name="shipping" value="3">
                                         <label for="javascript">Giao hàng nhanh</label>
                                     </div>
                                 </div>
                             </div>
+                            <p class="alertCoupon" style="color:red;margin-bottom:20px;" th:if = "${couponError}" th:text="${couponError}"></p>
+                            <p class="alertCoupon" style="color:red;margin-bottom:20px;" th:if = "${couponSucess}" th:text="${couponSucess}"></p>
                             <div class="cart_total">
+
                                 <div class="cart_total_title">
                                     TỔNG CỘNG
                                 </div>
-                                <div class="cart_total_text">
-                                    80.000.000đ
+                                <div class="cart_total_text" >
+                                    <span th:text = ${giohangs.tongTien} th:if = "${giohangs.tongCong == null}">1.000.000đ</span>
+                                    <span th:text = ${giohangs.tongCong} th:if = "${giohangs.tongCong}">1.000.000đ</span>
+                                    <span><del th:text = ${giohangs.tongTien} th:if = "${giohangs.tongCong}" >1.500.000đ</del></span>
                                 </div>
                             </div>
                             <div class="chechout">
-                                <button>Thanh toán</button>
+                                <button type="submit">Thanh toán</button>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -194,6 +213,8 @@
     function updateCart(){
         var updatebtn = document.querySelector(".cart_update_inner button");
         updatebtn.style.opacity = '.5';
+        document.getElementById("formCart").submit();
+
     }
     function cartDetailsPoppup() {
         var x = document.getElementById('cart_details');

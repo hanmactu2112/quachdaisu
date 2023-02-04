@@ -14,4 +14,9 @@ public class GioHangSanPhamServiceImpl implements GioHangSanPhamService{
     public void deleteProduct(Long id1) {
         gioHangSanPhamRepository.deleteProduct(id1);
     }
+
+    @Override
+    public void updateCart(Integer quantity,Long id1) {
+        gioHangSanPhamRepository.updateGHSP(quantity,id1);
+    }
 }
