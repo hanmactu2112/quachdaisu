@@ -61,9 +61,7 @@ public class HoaDon implements Serializable{
         h.setXuatHD(this.xuatHD);
         h.setNgayTao(this.ngayTao);
         h.setTinhTrang(this.tinhTrang);
-        if (this.maGiamGia!=null){
-            h.setMaGiamGiaDto(this.maGiamGia.convertToDtoView());
-        }
+
         List<SanPhamHoaDonDTO> list = new ArrayList<>();
         double tongTien = 0.0;
         for(SanPhamHoaDon e:this.sanPhamHoaDons){
@@ -72,7 +70,18 @@ public class HoaDon implements Serializable{
         }
         Locale locale = new Locale("vi","VN");
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
-        h.setTongtien(numberFormat.format(tongTien));
+        h.setTong(numberFormat.format(tongTien));
+        if (this.maGiamGia!=null){
+            h.setMaGiamGiaDto(this.maGiamGia.convertToDtoView());
+            double tientru = this.maGiamGia.getGiamToiDa();
+
+            tientru = Math.min(tientru,tongTien*(this.maGiamGia.getGiaTri()/100));
+            double tongcong = tongTien - tientru;
+            h.setTongtien(numberFormat.format(tongcong));
+        }
+        else {
+            h.setTongtien(numberFormat.format(tongTien));
+        }
         h.setSanPhamHoaDons(list);
         return h;
     }

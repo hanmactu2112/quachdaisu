@@ -1,18 +1,23 @@
 package ptit.suwoo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ptit.suwoo.Dto.AdminDTO;
 import ptit.suwoo.Repository.*;
 import ptit.suwoo.model.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,14 +48,48 @@ public class LoginController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private KhachHangRepository khachHangRepository;
+    @GetMapping({"/default"})
+    public String checkUser(RedirectAttributes redirectAttributes){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String emailkh = user.getUsername();
+        NguoiDung nd = nguoiDungRepository.findByEmail(emailkh);
+        System.out.println("Role: "+SecurityContextHolder.getContext().getAuthentication().getAuthorities());;
+        if (nd != null){
+            List<Role> roles = roleRepository.findRoleByIdUser(nd.getId());
+            boolean check =false;
+            for (Role e : roles){
+                if (e.getRole().equals("ROLE_ADMIN")) check = true;
+            }
+            if (check) return "home_admin";
+            else {
+                redirectAttributes.addFlashAttribute("error","Tài khoản hoặc mật khẩu không chính xác. Vui lòng đăng nhập lại!!!");
+                return "redirect:/admin/login-error";
+            }
+        }else {
+            redirectAttributes.addFlashAttribute("error","Tài khoản hoặc mật khẩu không chính xác. Vui lòng đăng nhập lại!!!");
+            return "redirect:/admin/login-error";
+        }
+    }
     @GetMapping({"/admin","/admin/home","/admin/index"})
-    public String index(HttpServletRequest request, HttpSession session, Principal principal){
-        String user = principal.getName();
-        System.err.println(user);
-        NguoiDung nd = nguoiDungRepository.findByEmail(user);
-        String nameUser= nd.getName();
+    public String index(){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String emailkh = user.getUsername();
+        NguoiDung nd = nguoiDungRepository.findByEmail(emailkh);
+        System.out.println("Role: "+SecurityContextHolder.getContext().getAuthentication().getAuthorities());;
+        if (nd != null){
+            List<Role> roles = roleRepository.findRoleByIdUser(nd.getId());
+            boolean check =false;
+            for (Role e : roles){
+                if (e.getRole().equals("ROLE_ADMIN")) check = true;
+            }
+            if (check) return "home_admin";
+            else return "redirect:/admin/login-error";
+        }else return "redirect:/admin/login-error";
+    }
+    @GetMapping("/admin/login-error")
+    public String loginFail( ){
 
-        return "home_admin";
+        return "login";
     }
     @GetMapping("/admin/login")
     public String login(){
@@ -115,7 +154,7 @@ public class LoginController {
         a.setEmail(nguoiDung.getEmail());
         a.setName(nguoiDung.getName());
         a.setDiaChi(nguoiDung.getDiaChi());
-        a.setSdt(Integer.parseInt(nguoiDung.getSdt()));
+        a.setSdt(nguoiDung.getSdt());
         a.setGioiTinh(nguoiDung.isGioiTinh());
         a.setNgaySinh(Date.valueOf(nguoiDung.getNgaySinh()));
         System.err.println("name IMG: "+ urlImg);
@@ -172,4 +211,5 @@ public class LoginController {
         userRoleRepository.save(ur);
         return "redirect:/admin/managerStaff";
     }
+
 }

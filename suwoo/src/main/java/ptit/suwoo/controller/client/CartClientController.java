@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ptit.suwoo.Dto.gioHangDTO.GioHangDTO;
 import ptit.suwoo.Dto.gioHangDTO.GioHangSanPhamDTO;
 import ptit.suwoo.Repository.*;
@@ -234,7 +235,7 @@ public class CartClientController {
     @GetMapping("/subCart")
     public String subCart(@RequestParam(name = "couponcart",required = false) String coupon,
                           @RequestParam(name = "shipping",required = false)String ship,
-                          Model model){
+                          Model model,RedirectAttributes redirectAttributes){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email = user.getUsername();
         NguoiDung nguoiDung = nguoiDungRepository.findByEmail(email);
@@ -243,7 +244,6 @@ public class CartClientController {
             System.err.println("gio hang:" + gioHangs.getId());
             GioHang gioHang = new GioHang();
             List<GioHangSanPham> gioHangSanPhams = gioHangSanPhamRepository.findAllByGioHangId(gioHangs.getId());
-
             gioHang.setId(gioHangs.getId());
             KhachHang kh = new KhachHang();
             kh.setId(nguoiDung.getId());
@@ -251,12 +251,16 @@ public class CartClientController {
             gioHang.setGioHangSanPhams(gioHangSanPhams);
             GioHangDTO gioHangDTOS = gioHang.convertToDto();
             List<GioHangSanPhamDTO> gioHangSanPhamDTOS = new ArrayList<>();
-            if (gioHangSanPhams != null) {
+            System.err.println("gioHangSanPhams: "+gioHangSanPhams +" "+gioHangSanPhams.isEmpty());
+            if (!gioHangSanPhams.isEmpty()) {
                 gioHangSanPhams.forEach((e) -> {
                     gioHangSanPhamDTOS.add(e.convertToDto());
                 });
                 model.addAttribute("giohangsps", gioHangSanPhamDTOS);
-            } else model.addAttribute("giohangsps", gioHangSanPhams);
+            } else {
+                redirectAttributes.addFlashAttribute("error","Bạn không có sản phẩm nào trong giỏ hàng.");
+                return "redirect:/Cart";
+            }
             Integer quantityCart = gioHangSanPhamRepository.countProduct(nguoiDung.getId());
             GioHangDTO gioHangDTOList;
             if (coupon!=null){
@@ -314,7 +318,7 @@ public class CartClientController {
                            @RequestParam(name = "ghichu",required = false) String ghichu,
                            @RequestParam(name = "magiamgia",required = false) String coupon,
                            @RequestParam(name = "shipping") String shipping,
-                           Model model){
+                           Model model, RedirectAttributes redirectAttributes){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String emailkh = user.getUsername();
         Optional<KhachHang> khachHang = khachHangRepository.findKhByEmail(emailkh);
@@ -350,7 +354,8 @@ public class CartClientController {
             hd.setSanPhamHoaDons(list);
             hoaDonRepository.save(hd);
             if (coupon!=null)khachHangMaGiamGiaRepository.updateKHMGG(khachHang.get().getId(),coupon);
-            return "redirect:/";
+            redirectAttributes.addFlashAttribute("success","Đặt hàng thành công!!!");
+            return "redirect:/user-bill";
         }
         else return "loginCient";
 

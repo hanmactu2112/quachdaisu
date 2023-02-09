@@ -65,7 +65,7 @@ public class UserConfig {
 //                )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .permitAll().failureUrl("/login?error=true").defaultSuccessUrl("/", true).usernameParameter("email")
+                        .permitAll().failureUrl("/login-error").defaultSuccessUrl("/", true).usernameParameter("email")
                         .passwordParameter("password")
                 ).authenticationProvider(authenticationProvider2())
                 .logout((logout) -> logout.permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

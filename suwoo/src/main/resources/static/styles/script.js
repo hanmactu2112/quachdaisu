@@ -29,5 +29,5 @@ document.querySelector("#files").addEventListener("change", (e) => {
               document.getElementById("id"+id).setAttribute('hidden', '');
               document.getElementById("url"+id).setAttribute('disabled', '');
               document.getElementById("url"+id).setAttribute('hidden', '');
-          }
+   }
 

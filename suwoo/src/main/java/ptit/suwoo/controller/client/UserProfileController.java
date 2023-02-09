@@ -130,7 +130,11 @@ public class UserProfileController {
         Optional<KhachHang> khachHang = khachHangRepository.findKhByEmail(emailkh);
         if (khachHang.isPresent()){
             System.err.println("so sanh mat khau: "+ bCryptPasswordEncoder.matches(passCu,khachHang.get().getMatKhau()));
-            if (bCryptPasswordEncoder.matches(passCu,khachHang.get().getMatKhau())){
+            if (!(passMoi.matches("^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[^a-zA-Z]).{8,40}$")&&passMoi.matches("\\S+"))){
+                redirectAttributes.addFlashAttribute("error","*Mật khẩu lớn hơn 8 và nhỏ hơn 40 ký tự bao gồm chữ hoa, chữ thường và số.");
+                return "redirect:/user-resetpass";
+            }
+            else if (bCryptPasswordEncoder.matches(passCu,khachHang.get().getMatKhau())){
                 if ((passMoi.equals(xacnhan)) && passMoi.length()>=8){
                     try{
                         khachHangRepository.updatePass(bCryptPasswordEncoder.encode(passMoi),khachHang.get().getId());
@@ -184,6 +188,52 @@ public class UserProfileController {
             model.addAttribute("totalItems", hoaDonPage.getTotalElements());
             model.addAttribute("hoadons",hoaDonDTOS);
             return "bill-history";
+        }
+        else return "redirect:/login";
+    }
+
+    @GetMapping("/bill-details/{id}")
+    public String getBillDetail(@PathVariable Long id, Model model,RedirectAttributes redirectAttributes){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String emailkh = user.getUsername();
+        Optional<KhachHang> khachHang = khachHangRepository.findKhByEmail(emailkh);
+        if (khachHang.isPresent()){
+            Optional<HoaDon> hd = hoaDonRepository.findHD(id, khachHang.get().getId());
+            if(hd.isPresent()){
+                hd.get().setSanPhamHoaDons(sanPhamHoaDonRepository.findSPHDByHD(hd.get().getId()));
+                HoaDonDTO a = hd.get().convertToDTO();
+                model.addAttribute("hoadon", a);
+                return "bill-details";
+            }
+            else {
+                redirectAttributes.addFlashAttribute("error","Không tìm thấy hóa đơn yêu cầu!!!");
+                return "redirect:/user-bill";
+            }
+        }
+        else return "redirect:/login";
+    }
+
+    @GetMapping("/bill-cancel/{id}")
+    public String huyDonHang(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String emailkh = user.getUsername();
+        Optional<KhachHang> khachHang = khachHangRepository.findKhByEmail(emailkh);
+        if (khachHang.isPresent()){
+            Optional<HoaDon> hd = hoaDonRepository.findHD(id, khachHang.get().getId());
+            if(hd.isPresent() && hd.get().getTinhTrang().equals("Chờ xác nhận")){
+                try {
+                    hoaDonRepository.updateHDTinhTrang("Đã hủy",id);
+                    redirectAttributes.addFlashAttribute("success", "Hủy đơn hàng thành công");
+                    return "redirect:/user-bill";
+                } catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("error", "Hủy đơn hàng thất bại");
+                    return "redirect:/user-bill";
+                }
+            }
+            else {
+                redirectAttributes.addFlashAttribute("error","Không tìm thấy hóa đơn yêu cầu!!!");
+                return "redirect:/user-bill";
+            }
         }
         else return "redirect:/login";
     }

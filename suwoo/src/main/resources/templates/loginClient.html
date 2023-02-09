@@ -31,6 +31,7 @@
                         <div class="title_child">
                             Đăng nhập với Email và mật khẩu
                         </div>
+
                     </div>
                     <div class="input_login">
                         <label>Email</label>
@@ -40,11 +41,13 @@
                         <label>Mật khẩu</label>
                         <input class="input_item_login" name="password" id="password" type="password" placeholder="********">
                     </div>
+                    <div class="alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+                    <div class="alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
                     <button type="submit" class="btn_login">Đăng nhập</button>
                 </form>
                 <div class="link_register">
                     <p>Bạn chưa có tài khoản?</p>
-                    <a href="#">Đăng ký</a>
+                    <a th:href="@{/register}">Đăng ký</a>
                 </div>
             </div>
         </div>

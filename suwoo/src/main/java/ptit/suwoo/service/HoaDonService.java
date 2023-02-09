@@ -9,4 +9,6 @@ public interface HoaDonService {
 
     Page<HoaDon> findHDUser(int pageNo, int pageSize,Long id);
 
+    Page<HoaDon> findHD(int pageNo, int pageSize, String key, String status);
+
 }

@@ -1,6 +1,6 @@
 package ptit.suwoo.model.giohang;
 
-import lombok.Data;
+import lombok.*;
 import ptit.suwoo.Dto.gioHangDTO.GioHangSanPhamDTO;
 import ptit.suwoo.model.DienThoai;
 import ptit.suwoo.model.SanPham;
@@ -12,7 +12,13 @@ import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+
+@NoArgsConstructor
+
+@ToString
 @Entity
 @Table(name = "giohangsp")
 public class GioHangSanPham implements Serializable {
@@ -22,10 +28,12 @@ public class GioHangSanPham implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "giohang_id")
+    @ToString.Exclude
     private GioHang gioHang;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sanpham_id")
+    @ToString.Exclude
     private SanPham sanPham;
 
     @Column(name = "soluong")

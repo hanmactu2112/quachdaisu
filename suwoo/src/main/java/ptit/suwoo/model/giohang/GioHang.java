@@ -1,6 +1,6 @@
 package ptit.suwoo.model.giohang;
 
-import lombok.Data;
+import lombok.*;
 import ptit.suwoo.Dto.gioHangDTO.GioHangDTO;
 import ptit.suwoo.Dto.gioHangDTO.GioHangSanPhamDTO;
 import ptit.suwoo.model.KhachHang;
@@ -12,9 +12,16 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
-@Data
+@Setter
+
+@Getter
+
+@AllArgsConstructor
+
+@NoArgsConstructor
+
+@ToString
 @Entity
 @Table(name="giohang")
 public class GioHang implements Serializable {

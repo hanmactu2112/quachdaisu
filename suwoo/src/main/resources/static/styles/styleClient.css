@@ -12,6 +12,9 @@
     /* --colorhover:rgb(71, 75, 255); */
     --colorhover:rgb(233, 69, 96);
 }
+.cart_item_name{
+    word-break: break-all;
+}
 li{
     list-style: none;
 }
@@ -1563,7 +1566,7 @@ input::placeholder {
     font-size: 16px;
 }
 .product-name{
-    width:20%;
+    width:70%;
     padding: 14px 0;
     text-align: left;
     vertical-align: middle;
@@ -2580,7 +2583,6 @@ input::placeholder {
     display: flex;
  }
  .active_user{
-     border-bottom: 1px solid #080808;
      color: rgb(233, 69, 96) !important;
  }
  .talbe_oder th{
@@ -2596,7 +2598,8 @@ input::placeholder {
     width: 100%;
  }
  .user_bill_thumbail_inner img{
-    width: 100%;
+    max-width: 100%;
+        min-width: 60px;
  }
  .user_bill_child_right{
     display: flex;
@@ -2804,6 +2807,132 @@ input::placeholder {
 .back_order_button button a{
     color: #fff;
 }
+/* table css new */
+.table_oder{
+    word-break: break-all;
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+.table_oder thead tr {
+    height: 60px;
+    background: #36304a !important;
+}
+.table100-head th {
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset;
+}
+.column1 {
+    width: 180px;
+
+}
+.table_oder td, table th {
+    text-align: left;
+}
+.table_oder tbody tr {
+    height: 50px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 5px 12px -12px rgb(0 0 0 / 29%);
+    -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 5px 12px -12px rgb(0 0 0 / 29%);
+}
+.table_oder tbody tr {
+    font-size: 15px;
+    color: gray;
+    line-height: 1.2;
+    font-weight: unset;
+    /* border-bottom: 1px solid #f2f2f2; */
+    margin-bottom: 1rem;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+.child_table{
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: #fff;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+.child_table tbody tr {
+    font-size: 14px;
+    color: gray;
+    line-height: 1.2;
+    font-weight: unset;
+    border-bottom: 1px solid #f2f2f2;
+}
+.column1{
+   width:10%;
+}
+.column2{
+   width:6%;
+   padding-left: 7px;
+}
+.column3{
+   width:15%;
+}
+.column4{
+   width:40%;
+   word-break: break-all;
+}
+.column5{
+    width:13%;
+}
+.column6{
+    width:3%;
+}
+.column7{
+    width:13%;
+}
+td .column7{
+    color:red;
+}
+.table100-head th .column4{
+    padding-left:10px;
+}
+.column0_child{
+    width:15%;
+}
+.column1_child{
+    width:45%;
+}
+.column2_child{
+    width:10%;
+}
+.column3_child{
+    width:30%;
+}
+.column_details1{
+    width:50%;
+}
+.column_details2{
+    width:20%;
+}
+.column_details3{
+    width:30%;
+}
+/* .child_table tbody tr {
+    background-color: #f5f5f5;
+}
+.table_oder tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+} */
+/* end css table */
 /* end profile user */
 
 

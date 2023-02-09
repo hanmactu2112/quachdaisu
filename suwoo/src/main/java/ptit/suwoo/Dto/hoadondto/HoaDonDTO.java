@@ -25,5 +25,6 @@ public class HoaDonDTO {
     private KhachHang khachHang;
     private MaGiamGiaDto maGiamGiaDto;
     private List<SanPhamHoaDonDTO> sanPhamHoaDons;
+    private String tong;
     private String tongtien;
 }

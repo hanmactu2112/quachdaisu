@@ -102,6 +102,17 @@ li{
   text-decoration: none;
   color: white;
 }
+.alert-danger {
+    font-size: 16px;
+    width: 100%;
+    color: #CC3636;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #BAD1C2;
+    margin-bottom: 20px;
+}
 .dropdow_item a:hover{
   font-weight: bold;
   color: var(--colorhover);
@@ -294,7 +305,7 @@ li{
     animation: float 5s infinite;
   }
 
-  th {
+  .table-fill th {
     color:#D5DDE5;;
     background:#1b1e24;
     border-bottom:4px solid #9ea7af;
@@ -307,16 +318,16 @@ li{
     vertical-align:middle;
   }
 
-  th:first-child {
+ .table-fill th:first-child {
     border-top-left-radius:0px;
   }
 
-  th:last-child {
+ .table-fill th:last-child {
     border-top-right-radius:3px;
     border-right:none;
   }
 
-  tr {
+ .table-fill tr {
     border-top: 1px solid #C1C3D1;
     border-bottom: 1px solid #C1C3D1;
     color:#666B85;
@@ -324,7 +335,7 @@ li{
     font-weight:normal;
     text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
   }
-tr:hover td {
+.table-fill tr:hover td {
     background:#4E5066;
     color:#FFFFFF;
     border-top: 1px solid #22262e;
@@ -332,32 +343,32 @@ tr:hover td {
 
 .tr-active td{
   background:#4E5066;
-  color:#FFFFFF;
+  color:#0000;
   border-top: 1px solid #22262e;
 }
 
-  tr:first-child {
+ .table-fill tr:first-child {
     border-top:none;
   }
 
-  tr:last-child {
+ .table-fill tr:last-child {
     border-bottom:none;
   }
 
 
-  tr:nth-child(odd):hover td {
+ .table-fill tr:nth-child(odd):hover td {
     background:#4E5066;
   }
 
-  tr:last-child td:first-child {
+ .table-fill tr:last-child td:first-child {
     border-bottom-left-radius:3px;
   }
 
-  tr:last-child td:last-child {
+ .table-fill tr:last-child td:last-child {
     border-bottom-right-radius:3px;
   }
 
-  td {
+ .table-fill td {
     background:#FFFFFF;
     padding:15px;
     text-align:left;
@@ -368,31 +379,31 @@ tr:hover td {
     border-right: 1px solid #C1C3D1;
   }
 
-  td:last-child {
+ .table-fill td:last-child {
     border-right: 0px;
   }
 
-  th.text-left {
+ .table-fill th.text-left {
     text-align: left;
   }
 
-  th.text-center {
+ .table-fill th.text-center {
     text-align: center;
   }
 
-  th.text-right {
+ .table-fill th.text-right {
     text-align: right;
   }
 
-  td.text-left {
+ .table-fill td.text-left {
     text-align: left;
   }
 
-  td.text-center {
+ .table-fill td.text-center {
     text-align: center;
   }
 
-  td.text-right {
+ .table-fill td.text-right {
     text-align: right;
   }
   .table_body{
@@ -983,3 +994,668 @@ tr:hover td {
    max-height: 400px;
    transition-duration: 500ms;
  }
+ .container_user{
+    display: flex;
+    padding: 100px 30px;
+    flex-direction: row;
+ }
+ .user_left_inner ul li a{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    cursor: pointer;
+    color: #080808;
+ }
+ .user_left_inner ul li span{
+    margin-right: 10px;
+    position: relative;
+ }
+ .user_left_inner ul li{
+    padding: 10px 0;
+ }
+ .notification_user{
+    position: absolute;
+    font-size: 14px;
+    color: rgb(233, 69, 96);
+ }
+ .container_user{
+    background: rgb(246, 249, 252);
+ }
+ #notification{
+    display: flex;
+ }
+ #resetpass{
+    display: flex;
+ }
+ #userprofile{
+    display: flex;
+ }
+ #historybill{
+    display: flex;
+ }
+ .active_user{
+     color: rgb(233, 69, 96) !important;
+ }
+ .talbe_oder th{
+    font-size: 14px;
+ }
+ .talbe_oder tbody tr{
+    font-size: 13px;
+ }
+ .user_bill_thumbnail{
+    width: 20%;
+ }
+ .user_bill_thumbail_inner{
+    width: 100%;
+ }
+ .user_bill_thumbail_inner img{
+    max-width: 100%;
+        min-width: 60px;
+ }
+ .user_bill_child_right{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+ }
+ .user_bill_item{
+    padding: 0 3px;
+ }
+ .user_bill_child_right_total{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+ }
+ .td_user_item{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+ }
+ .talbe_oder tbody tr td{
+    word-break: break-all;
+    text-align: center;
+ }
+ .talbe_oder tbody tr td{
+    border: 1px solid black;
+    /* border: 1px solid white;
+  border-collapse: collapse;
+  background-color: #96D4D4; */
+    /* border: 1px solid black;
+    border-bottom:  1px solid;
+    border-top:  1px solid #141414; */
+ }
+ .talbe_oder thead tr th{
+    /* border: 1px solid white;
+  border-collapse: collapse;
+  background-color: #96D4D4; */
+    border: 1px solid black;
+    /* border-bottom:  1px solid;
+    border-top:  1px solid #141414; */
+ }
+.idBill{
+    width: 5%;
+ }
+ .NameBill{
+    width: 10%;
+ }
+ .TotalBill{
+    width: 15%;
+ }
+ .StatusBill{
+    width: 10%;
+ }
+ .ItemBill{
+    width: 40%;
+ }
+ .user_bill_item2{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+ }
+.user_left{
+    width: 30%;
+    padding-right: 50px;
+}
+.user_right{
+    width: 100%;
+    background-color: #fff;
+    padding: 30px 30px;
+}
+.user_right_inner{
+    width: 100%;
+}
+.form_item_left img{
+    border-radius: 50%;
+}
+.form_item_left span{
+    cursor: pointer;
+}
+.user_profile_form_item{
+    display: flex;
+    flex-direction: row;
+}
+.field_item{
+    width: 100%;
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-between;
+}
+.title_profile{
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+.field_item2{
+    width: 100%;
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-between;
+}
+.field_item2 input{
+    width: 60%;
+    height: 35px;
+}
+.field_item2 select{
+    width: 60%;
+    height: 35px;
+}
+.field_item2 label{
+    width: 20%;
+}
+.field_item input{
+    width: 60%;
+    height: 35px;
+}
+.field_item select{
+    width: 60%;
+    height: 35px;
+}
+.field_item label{
+    width: 20%;
+}
+.user_profile{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.tittle_staff{
+    padding-bottom: 40px;
+    font-size: 24px;
+}
+.form_item_right{
+    width: 100%;
+    padding: 30px 30px;
+}
+.field_item_btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+.field_item_btn button{
+    height: 35px;
+}
+.alert-primary{
+    font-size: 16px;
+    width: 100%;
+    color: #379237;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #BAD1C2;
+    margin-bottom: 20px;
+}
+.alert-danger{
+    font-size: 16px;
+    width: 100%;
+    color: #CC3636;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #BAD1C2;
+    margin-bottom: 20px;
+}
+.bill_info_item{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    padding: 10px 0;
+}
+.bill_info_item span{
+    margin-right: 10px;
+}
+
+.back_order_button button{
+    font-family: inherit;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    outline: 0;
+    line-height: 30px;
+    letter-spacing: .15em;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    margin: 0;
+    -webkit-transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    -moz-transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    font-size: 14px;
+    color: #fff;
+    background-color: #CC3636;
+    border: 2px solid transparent;
+    padding: 7px 46px;
+    cursor: pointer;
+    z-index: 3;
+    border-radius: 0;
+}
+.back_order_button button a{
+    color: #fff;
+}
+/* table css new */
+.table_oder{
+           border-collapse: collapse;
+    word-break: break-all;
+    border-spacing: 1;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    text-indent: initial;
+    border-spacing: 2px;
+    font-family:'Mali', cursive !important;
+}
+
+.table_oder thead tr {
+
+    height: 60px;
+    background: #36304a !important;
+    font-family:'Mali', cursive !important;
+}
+.pagination {
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.search_order{
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+}
+.inputSearchOrder{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.inputSearchOrder input{
+    height: 40px;
+    width: 60%;
+}
+.inputSearchOrder select{
+        height: 40px;
+        width: 35%;
+}
+.subSearchOrder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+.subSearchOrder span{
+    font-size:30px;
+    cursor:pointer;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    font-size: 14px;
+    cursor: pointer;
+}
+.pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+}
+.table100-head th {
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset;
+    font-family:'Mali', cursive !important;
+}
+.column1 {
+    width: 180px;
+
+}
+.table_oder td, table th {
+    text-align: left;
+font-size: 14px;
+    color: gray;
+    line-height: 1.2;
+    font-weight: unset;
+    border-bottom: 1px solid #f2f2f2;
+padding: 0;
+text-align: left;
+ vertical-align: inherit;
+ font-weight: 100;
+ font-size: 14px;
+text-shadow: none;
+border-right: none;
+font-family:'Mali', cursive !important;
+}
+.table_oder tr:nth-child(odd):hover td {
+    background: #fff;
+}
+
+ .table_oder tr:hover td {
+    background: #fff;
+    color: gray!important;
+        border-top: none;
+}
+.table_oder tbody tr {
+    height: 50px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 5px 12px -12px rgb(0 0 0 / 29%);
+    -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 5px 12px -12px rgb(0 0 0 / 29%);
+}
+.table_oder tbody tr {
+
+    font-size: 15px;
+    color: gray;
+    line-height: 1.2;
+    font-weight: unset;
+    /* border-bottom: 1px solid #f2f2f2; */
+    margin-bottom: 1rem;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+.child_table{
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: #fff;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+.child_table tbody tr {
+    font-size: 14px;
+    color: gray;
+    line-height: 1.2;
+    font-weight: unset;
+    border-bottom: 1px solid #f2f2f2;
+}
+.column1{
+   width:10%;
+}
+.column2{
+   width:6%;
+   padding-left: 7px !important;
+}
+.column3{
+   width:15%;
+}
+.column4{
+   width:40%;
+   word-break: break-all;
+}
+.column5{
+    width:13%;
+}
+.column6{
+    width:3%;
+}
+.column7{
+    width:13%;
+}
+td .column7{
+    color:red;
+}
+.table100-head th .column4{
+    padding-left:10px;
+}
+.column0_child{
+    width:15%;
+}
+.column1_child{
+    width:45%;
+}
+.column2_child{
+    width:10%;
+}
+.column3_child{
+    width:30%;
+}
+.column_details1{
+    width:50%;
+}
+.column_details2{
+    width:20%;
+}
+.column_details3{
+    width:30%;
+}
+/* .child_table tbody tr {
+    background-color: #f5f5f5;
+}
+.table_oder tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+} */
+/* end css table */
+/* end profile user */
+
+
+/* Order details*/
+.cart_out {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 50px;
+}
+.payment_out_inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 0 70px;
+}
+.title_checkout {
+    margin: 8px 0 25px;
+    font-size: 24px;
+    line-height: 36px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.title_checkout {
+    margin: 8px 0 25px;
+    font-size: 24px;
+    line-height: 36px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family:'Mali', cursive !important;
+}
+.bill-des-item{
+    font-family:'Mali', cursive !important;
+}
+.bill_info_item {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    padding: 10px 0;
+    font-family:'Mali', cursive !important;
+}
+.bill_info_item span {
+    margin-right: 10px;
+    font-family:'Mali', cursive !important;
+}
+.table_checkout {
+    width: 100%;
+    margin-bottom: 40px;
+        font-size: 15px;
+    font-family:'Mali', cursive !important;
+}
+.table_checkout table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    vertical-align: middle;
+    width: 100%;
+        font-size: 15px;
+    font-family:'Mali', cursive !important;
+}
+.table_checkout table tr {
+    border: 0;
+    border-bottom: 1px solid #e1e1e1;
+        font-size: 15px;
+    font-family:'Mali', cursive !important;
+}
+.table_checkout table thead tr .product-name {
+    font-weight: 700;
+    font-size: 16px;
+        font-size: 15px;
+    font-family:'Mali', cursive !important;
+}
+
+.product-name {
+     width: 70%;
+     padding: 14px 0;
+     text-align: left;
+     vertical-align: middle;
+     font-weight: 200;
+     font-size: 15px;
+     color: #929292;
+         font-size: 15px;
+     font-family:'Mali', cursive !important;
+ }
+ .order-total th {
+     padding: 14px 0;
+     text-align: left;
+     vertical-align: middle;
+         font-size: 15px;
+     font-family:'Mali', cursive !important;
+     color: #929292;
+ }
+.cart-subtotal th {
+    padding: 14px 0;
+    font-family:'Mali', cursive !important;
+}
+.cart-subtotal td span{
+    padding: 14px 0;
+        font-size: 15px;
+    font-family:'Mali', cursive !important;
+}
+.cart-subtotal td strong{
+    padding: 14px 0;
+        font-size: 15px;
+    font-family:'Mali', cursive !important;
+}
+ .product-name td{
+      width: 70%;
+      padding: 14px 0;
+      text-align: left;
+      vertical-align: middle;
+      font-family:'Mali', cursive !important;
+      font-weight: 200;
+          font-size: 15px;
+      font-size: 15px;
+      color: #929292;
+  }
+.back_order_button button a {
+    font-size: 15px;
+    color: #fff;
+    font-family:'Mali', cursive !important;
+}
+.back_order_button button {
+    font-family: inherit;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    outline: 0;
+    line-height: 30px;
+    letter-spacing: .15em;
+    font-family:'Mali', cursive !important;
+        font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    margin: 0;
+    -webkit-transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    -moz-transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out;
+    font-size: 14px;
+    color: #fff;
+    background-color: #CC3636;
+    border: 2px solid transparent;
+    padding: 7px 46px;
+    cursor: pointer;
+    z-index: 3;
+    border-radius: 0;
+}
+.updateOrder{
+height: 30px;
+    font-size: 15px;
+    font-family: 'Mali', cursive !important;
+}
+.alert-primary {
+    font-size: 16px;
+    width: 100%;
+    color: #379237;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #BAD1C2;
+    margin-bottom: 20px;
+}
+.back_order_button a{
+    text-decoration: none;
+        color: #fff;
+}
+.span_upload{
+  width: 20%;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: dashed;
+    border-radius: 15px;
+    /* margin: auto; */
+    margin-bottom: 30px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.span_upload span{
+  font-size: 70px;
+}
+.table_checkout table thead tr .product-name {
+    font-weight: 700;
+    font-size: 16px;
+    font-family:'Mali', cursive !important;
+}
+.bill_info{
+font-size: 16px;
+    font-family:'Mali', cursive !important;
+}
+.updateOrder{
+    height: 30px;
+    font-size: 15px;
+    font-family:'Mali', cursive !important;
+}

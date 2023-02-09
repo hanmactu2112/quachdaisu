@@ -53,7 +53,7 @@ public class SecurityConfig {
 //                )
                 .formLogin((form) -> form
                         .loginPage("/admin/login")
-                        .permitAll().failureUrl("/admin/login?error=true").defaultSuccessUrl("/admin", true).usernameParameter("email")
+                        .permitAll().failureUrl("/admin/login-error").defaultSuccessUrl("/default",true).usernameParameter("email")
                         .passwordParameter("password")
                 ).authenticationProvider(authenticationProvider1())
                 .logout((logout) -> logout.permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
@@ -67,7 +67,7 @@ public class SecurityConfig {
     }
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/images/**","/templates","/templates/**","/resources/**","/styles/**","/static/**","/resources/adminImages/**","/adminImages/**");
+        return (web) -> web.ignoring().antMatchers("/images/**","/slider","/slider/**","/templates","/templates/**","/resources/**","/styles/**","/static/**","/resources/adminImages/**","/adminImages/**");
     }
 
 

@@ -58,47 +58,99 @@
             <div class="tittle_staff">
               Lịch sử đơn hàng
             </div>
+            <div class="alert-primary" role="alert" th:text="${success}" th:if="${success}">Thành công</div>
+            <div class="alert-danger" role="alert" th:text="${error}" th:if="${error}">Thất bại</div>
             <div class="notification_user_des">
-              <table class="talbe_oder">
+<!--              <table class="talbe_oder">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                  <th class="idBill">Id</th>-->
+<!--                  <th class="NameBill">Người nhận</th>-->
+<!--                  <th class="NameBill">Ngày đặt</th>-->
+<!--                  <th class="ItemBill">Sản phẩm</th>-->
+<!--                  <th class="TotalBill">Tổng</th>-->
+<!--                  <th class="StatusBill">Trạng thái</th>-->
+<!--                  <th class="StatusBill"></th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr th:each = "hoadon,item:${hoadons}">-->
+<!--                  <td th:text = "${hoadon.id}"></td>-->
+<!--                  <td th:text = "${hoadon.nguoiNhan}">Quách Đại Sự</td>-->
+<!--                  <td th:text = "${hoadon.ngayTao}" >03/02/2023</td>-->
+<!--                  <td>-->
+<!--                    <div class="td_user_item" th:each = "sanpham,item:${hoadon.sanPhamHoaDons}">-->
+<!--                      <div class="user_bill_thumbnail">-->
+<!--                        <div class="user_bill_thumbail_inner">-->
+<!--                          <img th:src="${sanpham.images}" alt="">-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="user_bill_item2">-->
+<!--                        <div class="user_bill_child_right">-->
+<!--                          <div class="user_bill_item_name" th:text = "${sanpham.tenSp}">Iphone 14</div>-->
+<!--                          <div class="user_bill_item">x</div>-->
+<!--                          <div class="user_bill_item" th:text = "${sanpham.soLuong}">3</div>-->
+<!--                        </div>-->
+<!--                        <div class="user_bill_child_right_total">-->
+<!--                          <div class="user_bill_item"> = </div>-->
+<!--                          <div class="user_bill_item" th:text = "${sanpham.tong}">24.000.000đ</div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </td>-->
+<!--                  <td th:text = "${hoadon.tongtien}">30.000.000 đ</td>-->
+<!--                  <td th:text = "${hoadon.tinhTrang}">Đang xử lý...</td>-->
+<!--                  <td><a th:href="@{'/bill-details/'}+${hoadon.id}">Xem chi tiết</a></td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--              </table>-->
+              <table class="table_oder">
                 <thead>
-                <tr>
-                  <th class="idBill">Id</th>
-                  <th class="NameBill">Người nhận</th>
-                  <th class="NameBill">Ngày đặt</th>
-                  <th class="ItemBill">Sản phẩm</th>
-                  <th class="TotalBill">Tổng</th>
-                  <th class="StatusBill">Trạng thái</th>
-                  <th class="StatusBill"></th>
+                <tr class="table100-head">
+                  <th class="column2">ID</th>
+                  <th class="column3">Người nhận</th>
+                  <th class="column1">Ngày đặt</th>
+                  <th class="column4" style="padding-left:25px;">Sản phẩm</th>
+                  <th class="column5">Tổng tiền</th>
+                  <th class="column7"><span class="material-symbols-outlined">
+                  shopping_cart_checkout
+                  </span></th>
+                  <th class="column6"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each = "hoadon,item:${hoadons}">
-                  <td th:text = "${hoadon.id}"></td>
-                  <td th:text = "${hoadon.nguoiNhan}">Quách Đại Sự</td>
-                  <td th:text = "${hoadon.ngayTao}" >03/02/2023</td>
-                  <td>
-                    <div class="td_user_item" th:each = "sanpham,item:${hoadon.sanPhamHoaDons}">
-                      <div class="user_bill_thumbnail">
-                        <div class="user_bill_thumbail_inner">
-                          <img th:src="${sanpham.images}" alt="">
-                        </div>
-                      </div>
-                      <div class="user_bill_item2">
-                        <div class="user_bill_child_right">
-                          <div class="user_bill_item_name" th:text = "${sanpham.tenSp}">Iphone 14</div>
-                          <div class="user_bill_item">x</div>
-                          <div class="user_bill_item" th:text = "${sanpham.soLuong}">3</div>
-                        </div>
-                        <div class="user_bill_child_right_total">
-                          <div class="user_bill_item"> = </div>
-                          <div class="user_bill_item" th:text = "${sanpham.tong}">24.000.000đ</div>
-                        </div>
-                      </div>
-                    </div>
+                  <td class="column2" th:text = "${hoadon.id}">200398</td>
+                  <td class="column3" th:text = "${hoadon.nguoiNhan}">iPhone X 64Gb Grey</td>
+                  <td class="column1" th:text = "${hoadon.ngayTao}">2017-09-29 01:22</td>
+                  <td class="column4">
+                    <table class="child_table">
+                      <tbody>
+                      <tr th:each = "sanpham,item:${hoadon.sanPhamHoaDons}">
+                        <td class="column0_child">
+                              <div class="user_bill_thumbail_inner">
+                              <img th:src="${sanpham.images}" alt="">
+                              </div>
+
+                        </td>
+                        <td th:text = "${sanpham.tenSp}" class="column1_child">
+                          iPhone X 64Gb Grey
+                        </td>
+                        <td th:text = "${'×&nbsp;'+sanpham.soLuong}" class="column2_child">
+                          x 3
+                        </td>
+                        <td th:text = "${sanpham.tong}" class="column3_child">
+                          30.000.000
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </td>
-                  <td th:text = "${hoadon.tongtien}">30.000.000 đ</td>
-                  <td th:text = "${hoadon.tinhTrang}">Đang xử lý...</td>
-                  <td><a href="#">Xem chi tiết</a></td>
+                  <td class="column5" th:text = "${hoadon.tongtien}">1</td>
+                  <td th:text = "${hoadon.tinhTrang}" class="column7">Đang xử lý...</td>
+                  <td class="column6"><a th:href="@{'/bill-details/'}+${hoadon.id}"><span class="material-symbols-outlined">
+visibility
+</span></a></td>
                 </tr>
                 </tbody>
               </table>

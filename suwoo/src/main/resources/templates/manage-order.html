@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Google Web Fonts -->
+    <title>Quản lý đơn hàng</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+    <div th:replace="/header :: header"></div>
+    <div class="content_body">
+        <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+            <div th:replace="/menu :: menu"></div>
+        </div>
+        <div class="bg_body" id="bgbody">
+            <div class="add_product_body">
+                <div class="add_product_out">
+                    <div class="category_body_inner" id="main">
+                        <div class="user_profile" id="historybill">
+                            <div class="tittle_staff">
+                                Lịch sử đơn hàng
+                            </div>
+                            <form th:action = "@{/admin/manage-order}" method="get" id="formOrderSearch">
+                                <div class="search_order">
+                                    <div class="inputSearchOrder">
+                                        <input id="inputSearch" type="text" name="key" placeholder="Nhập mã đơn hàng cần tìm...">
+                                        <select class="optionMenu" id="optionMenu" name="status" >
+                                            <option disabled selected value>Tình trạng đơn hàng</option>
+                                            <option value="Chờ xác nhận">Chờ xác nhận</option>
+                                            <option value="Đã hủy">Đã hủy</option>
+                                            <option value="Đang xử lý">Đang xử lý</option>
+                                            <option value="Đang giao hàng">Đang giao hàng</option>
+                                            <option value="Giao hàng thành công">Giao hàng thành công</option>
+                                            <option value="Giao hàng thất bại">Giao hàng thất bại</option>
+                                        </select>
+                                    </div>
+                                    <div class="subSearchOrder">
+                                        <a th:attr="onclick=|subSearchOrder()|"><span class="material-symbols-outlined">
+                                      search
+                                    </span></a>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <div class="alert-primary" role="alert" th:text="${success}" th:if="${success}">Thành công</div>
+                            <div class="alert-danger" role="alert" th:text="${error}" th:if="${error}">Thất bại</div>
+                            <div class="notification_user_des">
+
+                                <table class="table_oder">
+                                    <thead>
+                                    <tr class="table100-head">
+                                        <th class="column2">ID</th>
+                                        <th class="column3">Người nhận</th>
+                                        <th class="column1">Ngày đặt</th>
+                                        <th class="column4" style="padding-left:25px;">Sản phẩm</th>
+                                        <th class="column5">Tổng tiền</th>
+                                        <th class="column7"><span class="material-symbols-outlined">shopping_cart_checkout</span></th>
+                                        <th class="column6"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each = "hoadon,item:${hoadons}">
+                                        <td class="column2" th:text = "${hoadon.id}">200398</td>
+                                        <td class="column3" th:text = "${hoadon.nguoiNhan}">iPhone X 64Gb Grey</td>
+                                        <td class="column1" th:text = "${hoadon.ngayTao}">2017-09-29 01:22</td>
+                                        <td class="column4">
+                                            <table class="child_table">
+                                                <tbody>
+                                                <tr th:each = "sanpham,item:${hoadon.sanPhamHoaDons}">
+                                                    <td class="column0_child">
+                                                        <div class="user_bill_thumbail_inner">
+                                                            <img th:src="${sanpham.images}" alt="">
+                                                        </div>
+
+                                                    </td>
+                                                    <td th:text = "${sanpham.tenSp}" class="column1_child">
+                                                        iPhone X 64Gb Grey
+                                                    </td>
+                                                    <td th:text = "${'×&nbsp;'+sanpham.soLuong}" class="column2_child">
+                                                        x 3
+                                                    </td>
+                                                    <td th:text = "${sanpham.tong}" class="column3_child">
+                                                        30.000.000
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="column5" th:text = "${hoadon.tongtien}">1</td>
+                                        <td th:text = "${hoadon.tinhTrang}" class="column7">Đang xử lý...</td>
+                                        <td class="column6"><a th:href="@{'/admin/manage-order-details/'}+${hoadon.id}"><span class="material-symbols-outlined">visibility</span></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination">
+                                <a th:if="${currentPage >1}" th:attr="onclick=|linkpage('${currentPage - 1}')|">&laquo;</a>
+                                <div th:if = "${totalPages>0}" th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                    <a  th:classappend = "${currentPage == i} ? 'active':''" th:attr="onclick=|linkpage('${i}')|">[[${i}]]</a>
+                                </div>
+                                <a th:if="${currentPage < totalPages}" th:attr="onclick=|linkpage('${currentPage + 1}')|">&raquo;</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+        function linkpage(page){
+      console.log(page);
+      var urlPage = window.location.href;
+      var utlBase = '';
+      var urlParram = '';
+      let start = 0;
+      for(let i = 0; i < urlPage.length-1; i++){
+        if(urlPage.charAt(i) =='?'){
+          start = i;
+          break;
+        }
+      }
+      if(start > 0){
+        utlBase = urlPage.substring(0,start);
+        urlParram = urlPage.substring(start,urlPage.length);
+      }else {
+        utlBase = urlPage;
+      }
+      console.log(page);
+      if(utlBase.charAt(utlBase.length-2) =='/' && (utlBase.charAt(utlBase.length-1) >= '0' && utlBase.charAt(utlBase.length-1) <= '9')){
+        utlBase = utlBase.substring(0, utlBase.length-1)+ page;
+      }
+      else{
+        utlBase += '/'+ page;
+      }
+      var newUrl = utlBase + urlParram;
+      window.location.href = newUrl;
+    }
+        function myFunction1() {
+            document.getElementById('datepicker').type = 'date';
+        }
+        function myFunction4() {
+            document.getElementById('ngayKt').type = 'date';
+        }
+        function myFunction2() {
+            document.getElementById("imgupload").click();
+        }
+        function openPage(pageName, elmnt) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("product_body_inner");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+
+            }
+
+            // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+                tablinks[i].style.color = "white";
+            }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+
+            // Add the specific color to the button used to open the tab content
+            elmnt.style.backgroundColor = "#e6e6e6";
+            elmnt.style.color = "#0d0d0d";
+        }
+        function subSearchOrder(){
+            document.getElementById("formOrderSearch").submit();
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+    </script>
+</body>
+
+</html>

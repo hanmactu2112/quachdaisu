@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+          rel="stylesheet">
+  <!-- Google Web Fonts -->
+  <title>Thêm slider</title>
+  <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+</head>
+
+<body>
+<div class="wraper">
+  <div th:replace="/header :: header"></div>
+  <div class="content_body">
+    <div class="menu" id="sideBar" style="transition-duration: 400ms;">
+      <div th:replace="/menu :: menu"></div>
+    </div>
+    <div class="bg_body" id="bgbody">
+      <div class="add_product_body">
+        <div class="add_product_out">
+          <div class="tittle_addProduct">
+            Thêm slider
+          </div>
+          <div class="alert-primary" role="alert" th:text="${success}" th:if="${success}">Thành công</div>
+          <div class="alert-danger" role="alert" th:text="${error}" th:if="${error}">Thất bại</div>
+          <div class="category_body_inner" id="main">
+            <form th:action = "@{/admin/addSlider}" method="POST"enctype="multipart/form-data" id="formSlider">
+
+              <div class="product_field">
+
+                <label class="label_product" >Ảnh slider</label>
+                <input type="file" id="files" class="input_product" hidden name="url" accept="image/png, image/jpeg">
+                <div class="span_upload" th:attr="onclick=|myFunction2()|">
+                                        <span class="material-symbols-outlined">
+                                            upload_file
+                                            </span>
+                </div>
+                <output id="result">
+                </output>
+              </div>
+
+              <div class="product_field">
+                <label class="label_product" >Nội dung</label>
+                <input type="text" class="input_product"  name="content" placeholder="Nội dung">
+              </div>
+
+
+            </form>
+            <div class="button_subpro staff_flex">
+              <button th:attr="onclick=|submitFormSlider()|">Lưu</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+        function myFunction() {
+            console.log(document.getElementById("sideBar").style.width);
+            if (document.getElementById("sideBar").style.width === "0px") {
+                document.getElementById("sideBar").style.width = "15%";
+                document.getElementById("logo").style.width = "15%";
+                document.getElementById("bgbody").style.width = "85%";
+                document.getElementById("navbar_main").style.width = "85%";
+
+            }
+            else {
+                document.getElementById("sideBar").style.width = 0;
+                document.getElementById("logo").style.width = 0;
+                document.getElementById("bgbody").style.width = "100%";
+                document.getElementById("navbar_main").style.width = "100%";
+            }
+
+        }
+        function submitFormSlider(){
+          var img = document.getElementsByClassName("thumbnail");
+          //or however you get a handle to the IMG
+          var width = img[0].naturalHeight;
+          var height = img[0].naturalWidth;
+          console.log('width: '+ width);
+          console.log('height: '+height);
+              if((height>=500&&height<=700)&&(width>=400&&width<=500)&& height>=width) {
+                document.getElementById('formSlider').submit();
+              }
+              else {
+                confirm("Kích thước ảnh trong khoảng 500x400 đến 700x500 ");
+              }
+        }
+        function myFunction1() {
+            document.getElementById('datepicker').type = 'date';
+        }
+        function myFunction4() {
+            document.getElementById('ngayKt').type = 'date';
+        }
+        function myFunction2() {
+            document.getElementById("files").click();
+        }
+        function openPage(pageName, elmnt) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("product_body_inner");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+
+            }
+
+            // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+                tablinks[i].style.color = "white";
+            }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+
+            // Add the specific color to the button used to open the tab content
+            elmnt.style.backgroundColor = "#e6e6e6";
+            elmnt.style.color = "#0d0d0d";
+        }
+
+    </script>
+<script th:src="@{/styles/script.js}"></script>
+</body>
+
+</html>

@@ -17,4 +17,16 @@ public class HoaDonServiceImpl implements HoaDonService{
         Pageable pageable = PageRequest.of(pageNo-1,pageSize);
         return hoaDonRepository.findAllHDByUser(id,pageable);
     }
+
+    @Override
+    public Page<HoaDon> findHD(int pageNo, int pageSize, String key, String status) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        if((key!=null&&!key.equals("")) && (status!=null&&!status.equals(""))){
+            return hoaDonRepository.findAllHD(key,status,pageable);
+        } else if ((key==null||key.equals("")) && (status!=null&&!status.equals(""))) {
+            return hoaDonRepository.findAllHDByStatus(status,pageable);
+        } else if ((key!=null&&!key.equals("")) && (status==null)) {
+            return hoaDonRepository.findAllHD(key,pageable);
+        } else return hoaDonRepository.findAllHD(pageable);
+    }
 }

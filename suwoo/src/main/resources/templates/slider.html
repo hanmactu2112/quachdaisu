@@ -21,18 +21,22 @@
 
           <div class="slider_wrapper">
             <div class="slider_main2" id="slider_main2">
-              <div class="slider_item_inner">
-                <div class="slider_title">SamSung S22</div>
-                <img class="imgSlider" id="img1"src="http://localhost:8080/slider/galaxy-s22-ultra-black-10-removebg-preview.png" alt="">
+              <div class="slider_item_inner" th:each = "slider,item:${sliders}">
+                <div class="slider_title" th:text="${slider.content}"></div>
+                <img class="imgSlider" th:id="'img' + ${item.index+1}" th:src="${'/slider/'+slider.url}" alt="">
               </div>
-              <div class="slider_item_inner">
-                <div class="slider_title">SamSung S22</div>
-                <img class="imgSlider" src="http://localhost:8080/slider/galaxy-s22-removebg-preview.png" alt="">
-              </div>
-              <div class="slider_item_inner">
-                <div class="slider_title">Iphone 14</div>
-                <img class="imgSlider" src="http://localhost:8080/slider/iphone14removebg.png" alt="">
-              </div>
+<!--              <div class="slider_item_inner">-->
+<!--                <div class="slider_title">SamSung S22</div>-->
+<!--                <img class="imgSlider" id="img1"src="http://localhost:8080/slider/galaxy-s22-ultra-black-10-removebg-preview.png" alt="">-->
+<!--              </div>-->
+<!--              <div class="slider_item_inner">-->
+<!--                <div class="slider_title">SamSung S22</div>-->
+<!--                <img class="imgSlider" src="http://localhost:8080/slider/galaxy-s22-removebg-preview.png" alt="">-->
+<!--              </div>-->
+<!--              <div class="slider_item_inner">-->
+<!--                <div class="slider_title">Iphone 14</div>-->
+<!--                <img class="imgSlider" src="http://localhost:8080/slider/iphone14removebg.png" alt="">-->
+<!--              </div>-->
             </div>
           </div>
           <div class="back_slider hover">

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styleClient.css}" />
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/Logo1.png}">
+    <title>Đăng ký</title>
+</head>
+<body>
+<div class="navbar_login">
+    <div class="navbar_login_inner">
+        <a th:href="@{/home}"><img class="imgLogo" src="http://localhost:8080/images/Logo1.png" alt="logo"></a>
+    </div>
+</div>
+<div class="container">
+    <div class="form_login">
+        <div class="form_login_inner">
+            <div class="form_main">
+                <form th:action="@{/register}" method="post" th:object="${nguoiDung}">
+                    <div class="title_login">
+                        <div class="title_head">
+                            Tạo tài khoản
+                        </div>
+                        <div class="title_child">
+                            Vui lòng điền đầy đủ thông tin
+                        </div>
+                        <div class="alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+                    </div>
+
+                    <div class="input_login">
+                        <label>Họ tên</label>
+                        <input class="input_item_login" type="text" name="name" th:field="*{name}" placeholder="Nguyễn Văn A">
+                        <p style="color:red;font-size:12px;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                    </div>
+                    <div class="input_login">
+                        <label>Email</label>
+                        <input class="input_item_login" type="text" name="email" th:field="*{email}" placeholder="exmple@gmail.com">
+                        <p style="color:red;font-size:12px;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                    </div>
+                    <div class="input_login">
+                        <label>Mật khẩu</label>
+                        <input class="input_item_login" type="password" name="matKhau" th:field="*{matKhau}" placeholder="********">
+                        <p style="color:red;font-size:12px;" th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}"></p>
+                    </div>
+                    <div class="input_login">
+                        <label>Xác nhận mật khẩu</label>
+                        <input class="input_item_login" type="password" name="matKhau2"  placeholder="********">
+                        <p style="color:red;font-size:12px;" th:if="${xacnhan}" th:text="${xacnhan}"></p>
+                    </div>
+                    <div class="input_register">
+                        <div class="input_register_item">
+                            <label>Giới tính</label>
+                            <select class="select_register" th:value="*{gioiTinh}" name="gioiTinh" th:field="*{gioiTinh}">
+                                <option value="1">Nam</option>
+                                <option value="0">Nữ</option>
+                                <p style="color:red;font-size:12px;" th:if="${#fields.hasErrors('gioiTinh')}" th:errors="*{gioiTinh}"></p>
+                            </select>
+                        </div>
+                        <div class="input_register_item">
+                            <label>Ngày sinh</label>
+                            <input class="input_item_login" type="date" name="ngaySinh" th:field="*{ngaySinh}">
+                            <p style="color:red;font-size:12px;" th:if="${#fields.hasErrors('ngaySinh')}" th:errors="*{ngaySinh}"></p>
+                        </div>
+                    </div>
+                    <div class="input_login">
+                        <label>Địa chỉ</label>
+                        <input class="input_item_login" type="text" name="diaChi" th:field="*{diaChi}" placeholder="Nhập địa chỉ của bạn">
+                        <p style="color:red;font-size:12px;" th:if="${#fields.hasErrors('diaChi')}" th:errors="*{diaChi}"></p>
+                    </div>
+                    <div class="input_login">
+                        <label>Số điện thoại</label>
+                        <input class="input_item_login" type="text" name="sdt" th:field="*{sdt}" placeholder="+84**********">
+                        <p style="color:red;font-size:12px;" th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}"></p>
+                    </div>
+                    <button type="submit" class="btn_login">Tạo tài khoản</button>
+                </form>
+                <div class="link_register">
+                    <p>Bạn đã có tài khoản?</p>
+                    <a th:href="@{/login}">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

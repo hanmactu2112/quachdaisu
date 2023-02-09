@@ -30,6 +30,8 @@
                             <div class="cart_title">
                                 Giỏ hàng
                             </div>
+                            <div class="alert-primary" role="alert" th:text="${success}" th:if="${success}">Thành công</div>
+                            <div class="alert-danger" role="alert" th:text="${error}" th:if="${error}">Thất bại</div>
                             <h4 style="color:red;margin-bottom:20px;" th:if = "${giohangsps==null}"  th:text = "${giohangsps!=null}?'Bạn chưa có sản phẩm nào trong giỏ hàng!!!':'false'" ></h4>
                             <form th:action="@{/updateCart}" id="formCart" method="POST">
                                 <div th:each = "giohangsp,item:${giohangs.gioHangSanPhamDTOS}">

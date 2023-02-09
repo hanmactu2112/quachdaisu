@@ -5,22 +5,21 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ptit.suwoo.Dto.KhachDTO;
 import ptit.suwoo.Dto.laptopDto.LaptopDTO;
-import ptit.suwoo.Dto.laptopDto.SanPhamJPQL;
-import ptit.suwoo.Repository.GioHangSanPhamRepository;
-import ptit.suwoo.Repository.NguoiDungRepository;
+import ptit.suwoo.Repository.*;
 import ptit.suwoo.SanPhamService.DienThoaiService;
 import ptit.suwoo.SanPhamService.LaptopService;
 import ptit.suwoo.SanPhamService.SanPhamService;
-import ptit.suwoo.model.Category;
-import ptit.suwoo.model.DienThoai;
-import ptit.suwoo.model.NguoiDung;
-import ptit.suwoo.model.SanPham;
+import ptit.suwoo.model.*;
+import ptit.suwoo.model.giohang.GioHang;
 import ptit.suwoo.model.laptopmodel.Laptop;
 import ptit.suwoo.sanphamRepository.DienThoaiRepository;
 import ptit.suwoo.sanphamRepository.LaptopRepository;
@@ -29,6 +28,9 @@ import ptit.suwoo.sanphamdto.DienThoaiDto;
 import ptit.suwoo.sanphamdto.SanPhamDto;
 import ptit.suwoo.service.CategoryService;
 
+import javax.validation.Valid;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -45,19 +47,37 @@ public class HomeController {
     @Autowired
     LaptopRepository laptopRepository;
     @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+    @Autowired
+    private KhachHangRepository khachHangRepository;
+    @Autowired
     LaptopService laptopService;
+    @Autowired
+    GioHangRepository gioHangRepository;
     @Autowired
     SanphamRepository2 sanphamRepository2;
     @Autowired
     GioHangSanPhamRepository gioHangSanPhamRepository;
     @Autowired
     NguoiDungRepository nguoiDungRepository;
+    @Autowired
+    SliderRepository sliderRepository;
     @GetMapping("/login")
     public String login(){
         return "loginClient";
     }
+    @GetMapping("/login-error")
+    public String loginFail(RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("error","Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại");
+        return "redirect:/login";
+    }
     @GetMapping({"/home","/"})
     public String index(Model model){
+        List<Slider> sliders = sliderRepository.findSlider();
         List<SanPhamDto> listFS = new ArrayList<>();
         List<DienThoai> listSpFs = sanPhamService.searhFlashSale();
         for(DienThoai a:listSpFs){
@@ -91,7 +111,7 @@ public class HomeController {
         model.addAttribute("categories",categories);
         model.addAttribute("dienthoais",dienThoaiDtos);
         model.addAttribute("laptops",laptopDTOS);
-
+        model.addAttribute("sliders",sliders);
         model.addAttribute("flashsales",listFS);
         return "index";
     }
@@ -102,6 +122,10 @@ public class HomeController {
             return "redirect:/productLtDetailsClient/"+id;
         }
         else return "redirect:/home";
+    }
+    @GetMapping("/category/search/{id}")
+    public String findAllProductCategory(@PathVariable String id,Model model){
+        return searchProducts("",id,model);
     }
     @GetMapping("/searchProducts")
     public String searchProducts(@RequestParam("valueSearch")String searchText,@RequestParam("category") String categoryId,Model model){
@@ -452,5 +476,63 @@ public class HomeController {
             arr.add(a[i]);
         }
         ds.add(arr);
+    }
+    @GetMapping("/register")
+    public String register(Model model){
+        model.addAttribute("nguoiDung",new KhachDTO());
+        return "registerClient";
+    }
+    @PostMapping("/register")
+    public String registerKh(@Valid @ModelAttribute("nguoiDung")KhachDTO nguoiDung,BindingResult bindingResult, Errors error, @RequestParam("matKhau2")String matkhau2, Model model,  RedirectAttributes redirectAttributes){
+        System.err.println("Mat khau1: "+nguoiDung.getMatKhau());
+        System.err.println("Mat khau1: "+matkhau2);
+        if (error.hasErrors()){
+            System.out.println("error"+error.getFieldErrors("ngaySinh"));
+            return "registerClient";
+        }
+        else if (!nguoiDung.getMatKhau().equals(matkhau2)){
+            System.out.println("cai nafy chay vao");
+            redirectAttributes.addFlashAttribute("xacnhan","Mật khẩu không trùng khớp");
+            return "redirect:/register";
+        }
+        else {
+            System.out.println("vao dang kyo");
+            Optional<KhachHang> kh = khachHangRepository.findKhByEmail(nguoiDung.getEmail());
+            if (!kh.isPresent()) {
+                Date date = Date.valueOf(LocalDate.now());
+                KhachHang khachHang = nguoiDung.convertToEntity();
+                khachHang.setNgayDangKy(date.toString());
+                khachHang.setMatKhau(bCryptPasswordEncoder.encode(nguoiDung.getMatKhau()));
+                String[] words = nguoiDung.getName().split("\\s+");
+                String s2="";
+                System.out.println(words[1]);
+                for(String w : words){
+                    for(int i=0;i<w.length();i++){
+                        if(i==0) s2 += w.toUpperCase().charAt(i);
+                        else s2+=w.toLowerCase().charAt(i);
+                    }
+                    s2+=" ";
+                }
+                khachHang.setName(s2.trim());
+                khachHangRepository.save(khachHang);
+
+                NguoiDung nd = nguoiDungRepository.findByEmail(khachHang.getEmail());
+                Optional<Role> r = roleRepository.findById(2);
+                UserRole ur = new UserRole();
+                ur.setIdRole(r.get());
+                ur.setIdUser(nd);
+                userRoleRepository.save(ur);
+                Optional<KhachHang> khachHang1 = khachHangRepository.findKhByEmail(khachHang.getEmail());
+                if (khachHang1.isPresent()){
+                    GioHang gh  = new GioHang();
+                    gh.setKhachHang(khachHang1.get());
+                    gioHangRepository.save(gh);
+                }
+                return "redirect:/login";
+            }else {
+                redirectAttributes.addFlashAttribute("error","Email đã tồn tại vui lòng nhập lại.");
+                return "redirect:/register";
+            }
+        }
     }
 }

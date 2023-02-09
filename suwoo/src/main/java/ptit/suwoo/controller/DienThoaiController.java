@@ -294,9 +294,9 @@ public class DienThoaiController {
         try {
             dienThoaiService.deleteDTById(id);
         } catch (SQLException e) {
-            redirectAttributes.addFlashAttribute("error","Sản phẩm không còn tồn tại !!!");
+            redirectAttributes.addFlashAttribute("error", "Sản phẩm không còn tồn tại !!!");
         }
-        redirectAttributes.addFlashAttribute("success","Xóa sản phẩm thành công !!!");
+        redirectAttributes.addFlashAttribute("success", "Xóa sản phẩm thành công !!!");
         return "redirect:/admin/managerProductDT";
     }
     @GetMapping("/admin/editProductDT/{id}")
